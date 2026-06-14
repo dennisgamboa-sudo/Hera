@@ -1,872 +1,331 @@
 <!DOCTYPE html>
-<html lang="es">
+<html manifest="app.manifest">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<title>EYEHERA · Control Center</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EYEHERA Control">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230a0a0a' width='180' height='180'/><text x='90' y='95' font-size='80' fill='%23c9a96a' text-anchor='middle' font-family='serif' font-weight='bold'>H</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230a0a0a' width='180' height='180'/><text x='90' y='95' font-size='80' fill='%23c9a96a' text-anchor='middle' font-family='serif' font-weight='bold'>H</text></svg>">
+<title>EYEHERA Control Center</title>
 <style>
-  :root{
-    --bg:#0a0a0a; --bg2:#141414; --bg3:#1c1c1c; --line:#262626;
-    --txt:#f2f2f2; --dim:#8a8a8a; --dimmer:#5a5a5a;
-    --gold:#c9a96a; --gold2:#e3c896;
-    --green:#5cc88f; --red:#e06a5c; --amber:#e0b15c; --blue:#6a9ce0;
-    --radius:16px;
-  }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.45}
-  body{padding-bottom:88px;max-width:680px;margin:0 auto;min-height:100vh}
-  h1,h2,h3{font-weight:600;letter-spacing:-.01em}
-  a{color:var(--gold)}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-  input,select,textarea{font-family:inherit;font-size:16px;background:var(--bg3);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:11px 13px;width:100%}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
-  textarea{resize:vertical;min-height:70px;line-height:1.5}
-  label{display:block;font-size:12px;color:var(--dim);margin:0 0 5px 2px;text-transform:uppercase;letter-spacing:.06em}
-
-  /* Header */
-  header{padding:22px 18px 8px;display:flex;align-items:center;justify-content:space-between}
-  .logo{display:flex;align-items:center;gap:11px}
-  .logo .mark{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:15px;letter-spacing:1px;color:var(--gold2);background:radial-gradient(circle at 30% 30%,#1c1c1c,#0a0a0a)}
-  .logo .t1{font-size:15px;font-weight:700;letter-spacing:1.5px}
-  .logo .t2{font-size:10px;color:var(--dim);letter-spacing:2px;text-transform:uppercase}
-  .hbtns{display:flex;gap:8px}
-  .icon-btn{width:38px;height:38px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:17px}
-
-  /* Views */
-  .view{display:none;padding:8px 16px 20px;animation:fade .25s ease}
-  .view.active{display:block}
-  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .section-title{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin:22px 4px 10px;font-weight:600}
-
-  /* Cards */
-  .card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px}
-  .card.tap{cursor:pointer;transition:transform .1s}
-  .card.tap:active{transform:scale(.985)}
-
-  /* Stat grid */
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
-  .stat .v{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-  .stat .l{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
-  .stat .delta{font-size:12px;margin-top:6px;font-weight:600}
-  .delta.up{color:var(--green)} .delta.down{color:var(--red)} .delta.flat{color:var(--dimmer)}
-
-  /* Progress */
-  .prog-wrap{margin-top:10px}
-  .prog-bar{height:9px;background:var(--bg3);border-radius:6px;overflow:hidden}
-  .prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:6px;transition:width .5s}
-  .prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:7px}
-
-  /* Recommendations */
-  .rec{display:flex;gap:12px;padding:13px;border-radius:12px;background:var(--bg3);margin-bottom:9px;align-items:flex-start;border-left:3px solid var(--dimmer)}
-  .rec.crit{border-left-color:var(--red)} .rec.warn{border-left-color:var(--amber)}
-  .rec.good{border-left-color:var(--green)} .rec.info{border-left-color:var(--blue)}
-  .rec .ic{font-size:18px;flex-shrink:0;margin-top:1px}
-  .rec .body{flex:1}
-  .rec .rt{font-weight:600;font-size:14px}
-  .rec .rd{font-size:13px;color:var(--dim);margin-top:2px}
-
-  /* Buttons */
-  .btn{display:block;width:100%;text-align:center;padding:14px;border-radius:12px;font-weight:600;font-size:15px;background:var(--gold);color:#1a1408;margin-top:8px}
-  .btn:active{opacity:.85}
-  .btn.ghost{background:var(--bg3);color:var(--txt);border:1px solid var(--line)}
-  .btn.danger{background:transparent;color:var(--red);border:1px solid var(--red)}
-  .btn-row{display:flex;gap:10px}
-  .btn-row .btn{margin-top:8px}
-  .btn.sm{padding:9px 14px;font-size:13px;width:auto;display:inline-block}
-
-  /* List items */
-  .li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .li:last-child{border-bottom:none}
-  .li .grow{flex:1;min-width:0}
-  .li .name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .li .sub{font-size:12px;color:var(--dim)}
-  .pill{font-size:10px;padding:3px 8px;border-radius:20px;background:var(--bg3);color:var(--dim);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
-  .pill.y{background:rgba(92,200,143,.15);color:var(--green)}
-  .pill.p{background:rgba(224,177,92,.15);color:var(--amber)}
-  .pill.n{background:rgba(224,106,92,.12);color:var(--red)}
-
-  .empty{text-align:center;color:var(--dimmer);padding:34px 16px;font-size:14px}
-
-  /* Tabs (bottom nav) */
-  nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;max-width:680px;margin:0 auto;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
-  nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;color:var(--dimmer);font-size:10px;letter-spacing:.03em}
-  nav button.active{color:var(--gold)}
-  nav button .ni{font-size:20px}
-
-  /* Modal */
-  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:50;display:none;align-items:flex-end;justify-content:center}
-  .modal-bg.open{display:flex}
-  .modal{background:var(--bg2);border:1px solid var(--line);border-top-left-radius:22px;border-top-right-radius:22px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;padding:20px 18px calc(28px + env(safe-area-inset-bottom));animation:slideup .3s ease}
-  @keyframes slideup{from{transform:translateY(100%)}to{transform:none}}
-  .modal h2{font-size:19px;margin-bottom:16px}
-  .modal .grab{width:38px;height:4px;background:var(--line);border-radius:3px;margin:0 auto 16px}
-  .fld{margin-bottom:14px}
-
-  /* template block */
-  .tpl{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-  .tpl .th{font-size:13px;font-weight:600;color:var(--gold2);margin-bottom:7px}
-  .tpl .tx{font-size:13px;color:var(--dim);white-space:pre-wrap;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-  .copy-btn{font-size:11px;color:var(--gold);margin-top:9px;display:inline-flex;align-items:center;gap:4px}
-
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .muted{color:var(--dim);font-size:13px}
-  .center{text-align:center}
-  .mini{font-size:11px;color:var(--dimmer);text-align:center;margin-top:14px;line-height:1.6}
-  .chip{display:inline-block;font-size:11px;padding:4px 10px;border-radius:20px;background:var(--bg3);color:var(--dim);margin:0 5px 5px 0}
-  .chip.on{background:var(--gold);color:#1a1408}
-  .spark{display:flex;align-items:flex-end;gap:3px;height:46px;margin-top:10px}
-  .spark .b{flex:1;background:var(--gold);border-radius:3px 3px 0 0;min-height:3px;opacity:.55}
-  .spark .b.last{opacity:1}
-  .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--gold);color:#1a1408;padding:11px 20px;border-radius:30px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
-  .toast.show{opacity:1}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+html, body { height: 100%; width: 100%; overflow: hidden; }
+body { background: #0a0a0a; color: #f2f2f2; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; display: flex; flex-direction: column; }
+.content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; max-width: 680px; margin: 0 auto; width: 100%; }
+header { padding: 20px 0 10px 0; border-bottom: 1px solid #262626; margin-bottom: 15px; }
+h1 { font-size: 24px; margin-bottom: 2px; }
+.subtitle { color: #8a8a8a; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.card { background: #141414; border: 1px solid #262626; border-radius: 12px; padding: 16px; margin: 12px 0; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #262626; }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { color: #8a8a8a; font-size: 13px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin: 8px 0; -webkit-appearance: none; appearance: none; }
+.btn-gold { background: #c9a96a; color: #1a1408; }
+.btn-dark { background: #262626; color: #f2f2f2; }
+.btn:active { opacity: 0.8; }
+input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; background: #1c1c1c; border: 1px solid #262626; color: #f2f2f2; border-radius: 8px; font-family: inherit; font-size: 16px; -webkit-appearance: none; appearance: none; }
+label { display: block; font-size: 12px; color: #8a8a8a; margin: 12px 0 5px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.section-title { font-size: 12px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; margin: 20px 0 10px 0; font-weight: 600; }
+.tab { display: none; }
+.tab.active { display: block; }
+.modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 999; align-items: flex-end; justify-content: center; }
+.modal.open { display: flex; }
+.modal-content { background: #141414; width: 100%; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; border-radius: 20px 20px 0 0; }
+.modal-content h2 { margin-bottom: 15px; }
+nav { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background: #0a0a0a; border-top: 1px solid #262626; display: flex; max-width: 680px; margin: 0 auto; padding-bottom: env(safe-area-inset-bottom); }
+nav button { flex: 1; padding: 12px 4px; background: none; border: none; color: #8a8a8a; font-size: 12px; cursor: pointer; -webkit-appearance: none; appearance: none; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+nav button.active { color: #c9a96a; }
+.nav-icon { font-size: 18px; }
+.empty { text-align: center; color: #5a5a5a; padding: 30px 20px; }
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #c9a96a; color: #1a1408; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; opacity: 0; transition: opacity 0.2s; z-index: 9999; pointer-events: none; }
+.toast.show { opacity: 1; }
+.list-item { padding: 12px 0; border-bottom: 1px solid #262626; display: flex; justify-content: space-between; align-items: center; }
+.list-item:last-child { border-bottom: none; }
+.list-item-content { flex: 1; }
+.list-item-title { font-weight: 600; font-size: 14px; }
+.list-item-sub { font-size: 12px; color: #8a8a8a; margin-top: 2px; }
+.btn-delete { background: none; border: none; color: #e06a5c; font-size: 18px; cursor: pointer; padding: 4px 8px; }
 </style>
 </head>
 <body>
-
+<div class="content">
 <header>
-  <div class="logo">
-    <div class="mark">H</div>
-    <div>
-      <div class="t1">EYEHERA</div>
-      <div class="t2">Control Center</div>
-    </div>
-  </div>
-  <div class="hbtns">
-    <button class="icon-btn" onclick="openReminders()" title="Recordatorios">🔔</button>
-    <button class="icon-btn" onclick="openData()" title="Datos">⚙︎</button>
-  </div>
+<h1>👁 EYEHERA</h1>
+<div class="subtitle">Control Center</div>
 </header>
 
-<!-- ============ HOY ============ -->
-<div class="view active" id="v-today">
-  <div class="card" style="background:linear-gradient(135deg,#1c1812,#0f0f0f);border-color:#33291a">
-    <div style="font-size:12px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase">Hoy · <span id="todayDate"></span></div>
-    <div id="phaseLabel" style="font-size:22px;font-weight:700;margin-top:4px">—</div>
-    <div class="muted" id="phaseSub" style="margin-top:2px">—</div>
-  </div>
-
-  <div class="section-title">Qué hacer ahora</div>
-  <div id="recList"></div>
-
-  <div class="section-title">Acciones rápidas</div>
-  <div class="btn-row">
-    <button class="btn" onclick="openLog()">+ Registrar día</button>
-    <button class="btn ghost" onclick="go('content');openPost()">+ Plan de post</button>
-  </div>
-
-  <div class="section-title">Esta semana</div>
-  <div class="card" id="weekCard"></div>
+<div id="tab-home" class="tab active">
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Seguidores</div>
+<div class="stat-value" id="stat-followers">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Vistas (30d)</div>
+<div class="stat-value" id="stat-views">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Engagement</div>
+<div class="stat-value" id="stat-engagement">0%</div>
+</div>
 </div>
 
-<!-- ============ MÉTRICAS ============ -->
-<div class="view" id="v-metrics">
-  <div class="section-title">Estado actual</div>
-  <div class="stat-grid">
-    <div class="stat"><div class="v" id="mFollowers">0</div><div class="l">Seguidores</div><div class="delta flat" id="mFollowersD">—</div></div>
-    <div class="stat"><div class="v" id="mViews">0</div><div class="l">Vistas 30d</div><div class="delta flat" id="mViewsD">—</div></div>
-    <div class="stat"><div class="v" id="mEng">0%</div><div class="l">Engagement</div><div class="delta flat" id="mEngD">—</div></div>
-    <div class="stat"><div class="v" id="mSaves">0</div><div class="l">Saves último</div><div class="delta flat" id="mSavesD">—</div></div>
-  </div>
-
-  <div class="section-title">Meta: seguidores</div>
-  <div class="card">
-    <div class="prog-wrap">
-      <div class="prog-bar"><div class="prog-fill" id="goalFill" style="width:0%"></div></div>
-      <div class="prog-meta"><span id="goalNow">0</span><span id="goalTarget">10,000</span></div>
-    </div>
-    <div class="muted center" id="goalMsg" style="margin-top:12px">—</div>
-  </div>
-
-  <div class="section-title">Tendencia de seguidores</div>
-  <div class="card">
-    <div class="spark" id="spark"><div class="empty" style="padding:14px">Registra varios días para ver la tendencia</div></div>
-    <div class="muted center" id="trendMsg" style="margin-top:10px"></div>
-  </div>
-
-  <div class="section-title">Historial</div>
-  <div class="card" id="logHistory"><div class="empty">Aún no hay registros. Toca "+ Registrar día".</div></div>
-  <button class="btn" onclick="openLog()" style="margin-top:4px">+ Registrar día</button>
+<div class="section-title">Acciones rápidas</div>
+<button class="btn btn-gold" onclick="openModal('log-modal')">+ Registrar día</button>
+<button class="btn btn-dark" onclick="openModal('post-modal')">+ Nuevo post</button>
+<button class="btn btn-dark" onclick="openModal('creator-modal')">+ Creador</button>
 </div>
 
-<!-- ============ CONTENIDO ============ -->
-<div class="view" id="v-content">
-  <div class="section-title">Ritmo recomendado</div>
-  <div class="card" id="cadenceCard"></div>
-
-  <div class="section-title">Posts planificados</div>
-  <div id="postList"></div>
-  <button class="btn" onclick="openPost()">+ Nuevo post</button>
-
-  <div class="section-title">Tus mejores formatos</div>
-  <div class="card" id="bestFormat"><div class="muted">Registra posts publicados con sus vistas para descubrir qué funciona.</div></div>
+<div id="tab-tracker" class="tab">
+<div class="section-title">Historial de registros</div>
+<div id="logs-list" class="card"></div>
 </div>
 
-<!-- ============ COMUNIDAD ============ -->
-<div class="view" id="v-community">
-  <div class="section-title">Engagement de hoy</div>
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div style="font-size:30px;font-weight:700"><span id="todayEng">0</span><span style="font-size:16px;color:var(--dim)"> / 5</span></div>
-        <div class="muted">cuentas comentadas hoy</div>
-      </div>
-      <button class="btn sm" onclick="addEngToday()">+1 comentario</button>
-    </div>
-    <div class="prog-wrap" style="margin-top:12px"><div class="prog-bar"><div class="prog-fill" id="engFill" style="width:0%"></div></div></div>
-  </div>
-
-  <div class="section-title">Tus creadores (<span id="creatorCount">0</span>/100)</div>
-  <div id="creatorList"></div>
-  <button class="btn" onclick="openCreator()">+ Añadir creador</button>
+<div id="tab-posts" class="tab">
+<div class="section-title">Mis posts</div>
+<div id="posts-list" class="card"></div>
 </div>
 
-<!-- ============ TEMPLATES ============ -->
-<div class="view" id="v-templates">
-  <div class="section-title">Captions LUCKY / Film</div>
-  <div id="capTpls"></div>
-  <div class="section-title">Comentarios para creadores</div>
-  <div id="comTpls"></div>
-  <div class="mini">Toca cualquier plantilla para copiarla. Edita el @ y el detalle antes de publicar.</div>
+<div id="tab-creators" class="tab">
+<div class="section-title">Creadores (<span id="creator-count">0</span>/100)</div>
+<div id="creators-list" class="card"></div>
 </div>
 
-<!-- ============ NAV ============ -->
+<div id="tab-settings" class="tab">
+<div class="section-title">Datos y respaldo</div>
+<div class="card">
+<button class="btn btn-dark" onclick="exportData()">⬇ Exportar datos</button>
+<button class="btn btn-dark" onclick="document.getElementById('import-file').click()">⬆ Importar datos</button>
+<input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+<button class="btn btn-gold" onclick="loadSeedData()">✦ Cargar datos iniciales</button>
+</div>
+</div>
+</div>
+
 <nav>
-  <button class="active" data-v="today" onclick="go('today')"><span class="ni">◎</span>Hoy</button>
-  <button data-v="metrics" onclick="go('metrics')"><span class="ni">📈</span>Métricas</button>
-  <button data-v="content" onclick="go('content')"><span class="ni">🎬</span>Contenido</button>
-  <button data-v="community" onclick="go('community')"><span class="ni">👥</span>Comunidad</button>
-  <button data-v="templates" onclick="go('templates')"><span class="ni">✎</span>Plantillas</button>
+<button class="active" onclick="switchTab(0)"><span class="nav-icon">◎</span><span>Hoy</span></button>
+<button onclick="switchTab(1)"><span class="nav-icon">📈</span><span>Tracker</span></button>
+<button onclick="switchTab(2)"><span class="nav-icon">🎬</span><span>Posts</span></button>
+<button onclick="switchTab(3)"><span class="nav-icon">👥</span><span>Creators</span></button>
+<button onclick="switchTab(4)"><span class="nav-icon">⚙️</span><span>Datos</span></button>
 </nav>
 
-<!-- ============ MODALS ============ -->
-<div class="modal-bg" id="modal">
-  <div class="modal" id="modalContent"></div>
+<!-- LOG MODAL -->
+<div id="log-modal" class="modal">
+<div class="modal-content">
+<h2>Registrar día</h2>
+<label>Fecha</label>
+<input type="date" id="log-date">
+<label>Seguidores</label>
+<input type="number" id="log-followers" placeholder="22">
+<label>Vistas (30 días)</label>
+<input type="number" id="log-views" placeholder="9597">
+<label>Engagement %</label>
+<input type="number" step="0.1" id="log-engagement" placeholder="6.2">
+<label>Comentarios</label>
+<input type="number" id="log-comments" placeholder="0">
+<label>Nota (opcional)</label>
+<input id="log-note" placeholder="Publiqué reel">
+<button class="btn btn-gold" onclick="saveLog()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('log-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- POST MODAL -->
+<div id="post-modal" class="modal">
+<div class="modal-content">
+<h2>Nuevo post</h2>
+<label>Título</label>
+<input id="post-title" placeholder="LUCKY — reel">
+<label>Tipo</label>
+<select id="post-type">
+<option value="reel">🎬 Reel</option>
+<option value="image">📷 Imagen</option>
+<option value="carousel">🖼 Carrusel</option>
+</select>
+<label>Fecha</label>
+<input type="date" id="post-date">
+<label>Vistas</label>
+<input type="number" id="post-views" placeholder="326">
+<label>Saves</label>
+<input type="number" id="post-saves" placeholder="0">
+<label>Comentarios</label>
+<input type="number" id="post-comments" placeholder="0">
+<button class="btn btn-gold" onclick="savePost()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('post-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- CREATOR MODAL -->
+<div id="creator-modal" class="modal">
+<div class="modal-content">
+<h2>Añadir creador</h2>
+<label>@usuario</label>
+<input id="creator-handle" placeholder="@mattsoria">
+<label>Nicho</label>
+<select id="creator-niche">
+<option>Fotógrafo conceptual</option>
+<option>Curador / editorial</option>
+<option>Cineasta</option>
+<option>Arte surreal</option>
+<option>Moda menswear</option>
+<option>Otro</option>
+</select>
+<label>Seguidores (aprox)</label>
+<input type="number" id="creator-followers" placeholder="15000">
+<button class="btn btn-gold" onclick="saveCreator()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('creator-modal')">Cancelar</button>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ============================================================
-   EYEHERA Control Center — todo local, sin servidor.
-   Datos en localStorage. Exportable a JSON.
-   ============================================================ */
+const KEY = 'eyehera_data_v2';
+let DATA = { logs: [], posts: [], creators: [] };
 
-const KEY = 'eyehera_v1';
-const GOAL = 10000;            // meta de seguidores (90 días)
-const ENG_TARGET = 5;          // comentarios diarios objetivo
-const POST_GAP_WARN = 4;       // días sin postear antes de avisar
-
-const defaultState = {
-  start: '2026-05-26',
-  logs: [],          // {date, followers, views, engagement, comments, saves, responded, note}
-  posts: [],         // {id, title, type, date, status, views, saves, comments, caption}
-  creators: [],      // {id, handle, niche, followers, lastComment, response}
-  engLog: {},        // { 'YYYY-MM-DD': count }
-  seeded: false,     // si ya se cargaron datos iniciales
-  reminders: {       // horarios de la rutina diaria (HH:MM)
-    enabled: false,
-    publish: '09:00',
-    respond: '11:00',
-    engage:  '17:00',
-    logday:  '20:00',
-  },
-};
-
-let S = load();
-
-function load(){
-  try{
-    const raw = localStorage.getItem(KEY);
-    if(raw) return Object.assign(JSON.parse(JSON.stringify(defaultState)), JSON.parse(raw));
-  }catch(e){}
-  return JSON.parse(JSON.stringify(defaultState));
+function load() {
+  try { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : DATA; } catch(e) { return DATA; }
 }
-function save(){ localStorage.setItem(KEY, JSON.stringify(S)); }
 
-/* ---------- helpers ---------- */
-const $ = id => document.getElementById(id);
-const todayStr = () => new Date().toISOString().slice(0,10);
-const fmt = n => (n||0).toLocaleString('en-US');
-function daysBetween(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
-function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),1600); }
-function lastLog(){ return S.logs.length ? S.logs[S.logs.length-1] : null; }
-function prevLog(){ return S.logs.length>1 ? S.logs[S.logs.length-2] : null; }
-function sortLogs(){ S.logs.sort((a,b)=>a.date<b.date?-1:1); }
-
-/* ---------- navigation ---------- */
-function go(v){
-  document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
-  $('v-'+v).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active', b.dataset.v===v));
-  window.scrollTo(0,0);
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(DATA)); } catch(e) {}
   render();
 }
 
-/* ============================================================
-   RECOMMENDATION ENGINE — el cerebro de la app
-   Analiza tus datos y dice qué hacer / qué falta / qué mejorar
-   ============================================================ */
-function recommendations(){
-  const recs = [];
-  const L = lastLog();
-  const P = prevLog();
-  const today = todayStr();
-
-  // 1. ¿Registraste hoy?
-  const loggedToday = L && L.date === today;
-  if(!loggedToday){
-    recs.push({lvl:'info', ic:'📝', t:'Registra el día de hoy', d:'Toca "+ Registrar día" para anotar seguidores, vistas y saves. Sin datos no hay estrategia.'});
-  }
-
-  // 2. ¿Hace cuánto no posteas?
-  const published = S.posts.filter(p=>p.status==='published' && p.date).sort((a,b)=>a.date<b.date?1:-1);
-  if(published.length){
-    const gap = daysBetween(published[0].date, today);
-    if(gap >= POST_GAP_WARN){
-      recs.push({lvl:'crit', ic:'🔴', t:`${gap} días sin publicar`, d:'El algoritmo premia la constancia. Publica un reel hoy o mañana 9 AM para no perder alcance.'});
-    } else if(gap >= 2){
-      recs.push({lvl:'warn', ic:'🎬', t:'Toca planear el próximo post', d:`Tu último post fue hace ${gap} días. Mantén 2 reels + 1 imagen por semana.`});
-    }
-  } else {
-    recs.push({lvl:'warn', ic:'🎬', t:'Planifica tu primer post aquí', d:'Añade tus posts en la pestaña Contenido para que la app rastree qué formato funciona mejor.'});
-  }
-
-  // 3. Engagement de comunidad hoy
-  const engToday = S.engLog[today] || 0;
-  if(engToday < ENG_TARGET){
-    const left = ENG_TARGET - engToday;
-    recs.push({lvl: engToday===0?'warn':'info', ic:'👥', t:`Faltan ${left} comentarios hoy`, d:`Comenta en ${left} creador(es) más de tu lista. Comentarios genuinos = relaciones = colaboraciones.`});
-  } else {
-    recs.push({lvl:'good', ic:'✅', t:'Engagement diario completo', d:'Ya comentaste en 5 cuentas hoy. Eso es construir comunidad real.'});
-  }
-
-  // 4. Análisis de engagement rate
-  if(L && L.engagement != null){
-    if(L.engagement < 3){
-      recs.push({lvl:'crit', ic:'⚠️', t:`Engagement bajo (${L.engagement}%)`, d:'Mejora los captions: añade una pregunta al final. Revisa si el contenido es tan fuerte como crees.'});
-    } else if(L.engagement >= 6){
-      recs.push({lvl:'good', ic:'🔥', t:`Engagement fuerte (${L.engagement}%)`, d:'El algoritmo te está amplificando. Replica el formato del último post que funcionó.'});
-    }
-  }
-
-  // 5. Saves (señal de calidad)
-  if(L && L.saves != null && L.views){
-    const saveRate = (L.saves / Math.max(1,L.views) * 100);
-    if(saveRate >= 5){
-      recs.push({lvl:'good', ic:'⭐', t:'Tasa de saves alta', d:'La gente guarda tu contenido = Instagram lo lee como premium. Haz más de esto.'});
-    }
-  }
-
-  // 6. Tasa de respuesta a comentarios
-  if(L && L.responded === false && L.comments > 0){
-    recs.push({lvl:'warn', ic:'💬', t:'Responde tus comentarios', d:`Tienes ${L.comments} comentarios sin responder. Responde el 100% en las primeras 2 horas.`});
-  }
-
-  // 7. Crecimiento de seguidores
-  if(L && P){
-    const diff = L.followers - P.followers;
-    const dd = Math.max(1, daysBetween(P.date, L.date));
-    const perDay = diff/dd;
-    if(perDay <= 0 && S.logs.length>=4){
-      recs.push({lvl:'warn', ic:'📉', t:'Crecimiento estancado', d:'Sube el engagement con comunidad (más comentarios) y prueba un nuevo formato. El estancamiento se rompe con red, no con más posts iguales.'});
-    } else if(perDay >= 5){
-      recs.push({lvl:'good', ic:'🚀', t:`+${perDay.toFixed(1)} seguidores/día`, d:'Buen ritmo. A este paso vas en camino. Mantén la constancia.'});
-    }
-  }
-
-  // 8. Lista de creadores
-  if(S.creators.length < 100){
-    const need = 100 - S.creators.length;
-    if(S.creators.length < 20){
-      recs.push({lvl:'info', ic:'📋', t:`Construye tu lista (${S.creators.length}/100)`, d:`Añade ${Math.min(need,20)} creadores más en Comunidad: fotógrafos conceptuales, curadores, cineastas.`});
-    }
-  }
-
-  // 9. Si todo va bien
-  if(recs.filter(r=>r.lvl==='crit'||r.lvl==='warn').length===0){
-    recs.unshift({lvl:'good', ic:'👁', t:'Vas bien. Mantén el ritmo.', d:'Sin alertas hoy. Publica con calidad, responde comentarios, comenta 5 cuentas. La constancia compone.'});
-  }
-
-  // ordenar por prioridad
-  const order={crit:0,warn:1,info:2,good:3};
-  recs.sort((a,b)=>order[a.lvl]-order[b.lvl]);
-  return recs;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
 }
 
-/* ---------- phase logic ---------- */
-function currentPhase(){
-  const d = daysBetween(S.start, todayStr());
-  if(d < 30) return {label:'Fase 1 · Fundación', sub:`Día ${Math.max(1,d+1)} de 90 · construye audiencia y lenguaje visual`, n:1};
-  if(d < 60) return {label:'Fase 1 · Fundación', sub:`Día ${d+1} de 90 · sube engagement, inicia DMs a curadores`, n:1};
-  if(d < 90) return {label:'Fase 1 · Recta final', sub:`Día ${d+1} de 90 · ejecuta colaboraciones, cierra tu primer pico`, n:1};
-  if(d < 180) return {label:'Fase 2 · Monetización', sub:`Día ${d+1} · partnerships + licencias`, n:2};
-  return {label:'Fase 3 · Escala', sub:`Día ${d+1} · posicionamiento premium`, n:3};
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function switchTab(n) {
+  document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === n));
+  const tabs = document.querySelectorAll('.tab');
+  if (tabs[n]) tabs[n].classList.add('active');
 }
 
-/* ============================================================
-   RENDER
-   ============================================================ */
-function render(){
-  // header date
-  $('todayDate').textContent = new Date().toLocaleDateString('es',{day:'numeric',month:'short'});
-  const ph = currentPhase();
-  $('phaseLabel').textContent = ph.label;
-  $('phaseSub').textContent = ph.sub;
-
-  renderRecs();
-  renderWeek();
-  renderMetrics();
-  renderContent();
-  renderCommunity();
-  renderTemplates();
-}
-
-function renderRecs(){
-  const recs = recommendations();
-  $('recList').innerHTML = recs.map(r=>`
-    <div class="rec ${r.lvl}">
-      <div class="ic">${r.ic}</div>
-      <div class="body"><div class="rt">${r.t}</div><div class="rd">${r.d}</div></div>
-    </div>`).join('');
-}
-
-function renderWeek(){
-  const today = todayStr();
-  const pubThisWeek = S.posts.filter(p=>p.status==='published' && p.date && daysBetween(p.date,today)<7).length;
-  const reelsWeek = S.posts.filter(p=>p.status==='published' && p.type==='reel' && p.date && daysBetween(p.date,today)<7).length;
-  // engagement this week
-  let engWeek=0; for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);engWeek+=(S.engLog[d.toISOString().slice(0,10)]||0);}
-  $('weekCard').innerHTML = `
-    <div class="li"><div class="grow"><div class="name">Reels publicados</div><div class="sub">Meta: 2 / semana</div></div><span class="pill ${reelsWeek>=2?'y':'p'}">${reelsWeek}/2</span></div>
-    <div class="li"><div class="grow"><div class="name">Posts totales</div><div class="sub">Meta: 3 / semana</div></div><span class="pill ${pubThisWeek>=3?'y':'p'}">${pubThisWeek}/3</span></div>
-    <div class="li"><div class="grow"><div class="name">Comentarios a creadores</div><div class="sub">Meta: 25 / semana</div></div><span class="pill ${engWeek>=25?'y':'p'}">${engWeek}/25</span></div>`;
-}
-
-function renderMetrics(){
-  const L = lastLog(), P = prevLog();
-  $('mFollowers').textContent = L ? fmt(L.followers) : '0';
-  $('mViews').textContent = L ? fmt(L.views) : '0';
-  $('mEng').textContent = L && L.engagement!=null ? L.engagement+'%' : '—';
-  $('mSaves').textContent = L && L.saves!=null ? fmt(L.saves) : '0';
-
-  setDelta('mFollowersD', L&&P? L.followers-P.followers : null);
-  setDelta('mViewsD', L&&P? L.views-P.views : null);
-  setDelta('mEngD', L&&P&&L.engagement!=null&&P.engagement!=null? +(L.engagement-P.engagement).toFixed(1) : null, '%');
-  setDelta('mSavesD', L&&P&&L.saves!=null&&P.saves!=null? L.saves-P.saves : null);
-
-  // goal
-  const now = L? L.followers : 0;
-  const pct = Math.min(100, now/GOAL*100);
-  $('goalFill').style.width = pct+'%';
-  $('goalNow').textContent = fmt(now);
-  $('goalTarget').textContent = fmt(GOAL);
-  const left = GOAL-now;
-  const daysLeft = Math.max(0, 90 - daysBetween(S.start, todayStr()));
-  $('goalMsg').textContent = now>=GOAL ? '🎉 ¡Meta alcanzada!' : `Faltan ${fmt(left)} seguidores · ${daysLeft} días en la fase. Necesitas ~${Math.ceil(left/Math.max(1,daysLeft))}/día.`;
-
-  // sparkline
-  renderSpark();
-
-  // history
-  if(!S.logs.length){
-    $('logHistory').innerHTML = '<div class="empty">Aún no hay registros. Toca "+ Registrar día".</div>';
-  } else {
-    $('logHistory').innerHTML = [...S.logs].reverse().slice(0,30).map(l=>`
-      <div class="li">
-        <div class="grow">
-          <div class="name">${new Date(l.date).toLocaleDateString('es',{day:'numeric',month:'short'})} · ${fmt(l.followers)} seg.</div>
-          <div class="sub">${fmt(l.views)} vistas · ${l.engagement!=null?l.engagement+'% eng':'—'} · ${fmt(l.saves||0)} saves${l.note?' · '+l.note:''}</div>
-        </div>
-        <button class="pill" onclick="delLog('${l.date}')">✕</button>
-      </div>`).join('');
-  }
-}
-function setDelta(id, val, suf=''){
-  const e=$(id); if(val==null){e.className='delta flat';e.textContent='—';return;}
-  if(val>0){e.className='delta up';e.textContent='▲ '+fmt(val)+suf;}
-  else if(val<0){e.className='delta down';e.textContent='▼ '+fmt(Math.abs(val))+suf;}
-  else {e.className='delta flat';e.textContent='– 0'+suf;}
-}
-function renderSpark(){
-  const sp=$('spark');
-  if(S.logs.length<2){return;}
-  const data=S.logs.slice(-14).map(l=>l.followers);
-  const max=Math.max(...data,1);
-  sp.innerHTML = data.map((v,i)=>`<div class="b ${i===data.length-1?'last':''}" style="height:${Math.max(3,v/max*100)}%"></div>`).join('');
-  const first=data[0], last=data[data.length-1];
-  const g=last-first;
-  $('trendMsg').textContent = g>=0? `+${fmt(g)} seguidores en los últimos ${data.length} registros` : `${fmt(g)} en los últimos ${data.length} registros`;
-}
-
-function renderContent(){
-  const today=todayStr();
-  let reelsWeek=S.posts.filter(p=>p.status==='published'&&p.type==='reel'&&p.date&&daysBetween(p.date,today)<7).length;
-  $('cadenceCard').innerHTML = `
-    <div class="muted" style="margin-bottom:10px">Instagram recomienda para tu cuenta:</div>
-    <div class="li"><div class="grow"><div class="name">2 reels / semana</div><div class="sub">9:00 AM · máxima prioridad de algoritmo</div></div><span class="pill ${reelsWeek>=2?'y':'p'}">${reelsWeek}/2</span></div>
-    <div class="li"><div class="grow"><div class="name">1 imagen / semana</div><div class="sub">6:00 PM · refuerzo de portafolio</div></div><span class="pill">—</span></div>`;
-
-  // posts
-  const list=$('postList');
-  if(!S.posts.length){ list.innerHTML='<div class="card"><div class="empty">Sin posts planificados. Toca "+ Nuevo post".</div></div>'; }
-  else{
-    list.innerHTML=[...S.posts].sort((a,b)=>(b.date||'')<(a.date||'')?-1:1).map(p=>`
-      <div class="card tap" onclick="openPost('${p.id}')">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="grow">
-            <div class="name" style="font-size:15px">${esc(p.title||'(sin título)')}</div>
-            <div class="sub">${p.type==='reel'?'🎬 Reel':p.type==='carousel'?'🖼 Carrusel':'📷 Imagen'} · ${p.date?new Date(p.date).toLocaleDateString('es',{day:'numeric',month:'short'}):'sin fecha'}</div>
-          </div>
-          <span class="pill ${p.status==='published'?'y':p.status==='ready'?'p':''}">${p.status==='published'?'Publicado':p.status==='ready'?'Listo':'Idea'}</span>
-        </div>
-        ${p.status==='published'&&p.views?`<div class="sub" style="margin-top:8px">👁 ${fmt(p.views)} vistas · ${fmt(p.saves||0)} saves · ${fmt(p.comments||0)} comentarios</div>`:''}
-      </div>`).join('');
-  }
-
-  // best format
-  const pub=S.posts.filter(p=>p.status==='published'&&p.views);
-  if(pub.length>=2){
-    const byType={};
-    pub.forEach(p=>{byType[p.type]=byType[p.type]||{n:0,v:0};byType[p.type].n++;byType[p.type].v+=p.views;});
-    const rows=Object.entries(byType).map(([t,o])=>({t,avg:Math.round(o.v/o.n),n:o.n})).sort((a,b)=>b.avg-a.avg);
-    const top=pub.slice().sort((a,b)=>b.views-a.views)[0];
-    $('bestFormat').innerHTML = rows.map(r=>`<div class="li"><div class="grow"><div class="name">${r.t==='reel'?'🎬 Reels':r.t==='carousel'?'🖼 Carruseles':'📷 Imágenes'}</div><div class="sub">${r.n} posts</div></div><span class="pill y">${fmt(r.avg)} prom.</span></div>`).join('')
-      + `<div class="muted" style="margin-top:12px">⭐ Tu mejor post: <b>${esc(top.title)}</b> con ${fmt(top.views)} vistas. Replica este formato.</div>`;
-  } else {
-    $('bestFormat').innerHTML='<div class="muted">Registra al menos 2 posts publicados con vistas para descubrir tu mejor formato.</div>';
-  }
-}
-
-function renderCommunity(){
-  const today=todayStr();
-  const eng=S.engLog[today]||0;
-  $('todayEng').textContent=eng;
-  $('engFill').style.width=Math.min(100,eng/ENG_TARGET*100)+'%';
-  $('creatorCount').textContent=S.creators.length;
-  const list=$('creatorList');
-  if(!S.creators.length){ list.innerHTML='<div class="card"><div class="empty">Lista vacía. Añade fotógrafos conceptuales, curadores, cineastas.</div></div>'; }
-  else{
-    list.innerHTML=[...S.creators].sort((a,b)=>(a.lastComment||'')<(b.lastComment||'')?-1:1).map(c=>`
-      <div class="card tap" onclick="openCreator('${c.id}')">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="grow">
-            <div class="name">${esc(c.handle)}</div>
-            <div class="sub">${esc(c.niche||'—')}${c.followers?' · '+fmt(c.followers)+' seg':''}${c.lastComment?' · últ: '+new Date(c.lastComment).toLocaleDateString('es',{day:'numeric',month:'short'}):''}</div>
-          </div>
-          <span class="pill ${c.response==='yes'?'y':c.response==='pending'?'p':c.response==='no'?'n':''}">${c.response==='yes'?'Respondió':c.response==='pending'?'Esperando':c.response==='no'?'Sin resp.':'Nuevo'}</span>
-        </div>
-      </div>`).join('');
-  }
-}
-
-const CAPTIONS=[
-  {h:'LUCKY · Reel principal', t:`the frame collapses into a moment.\nthe moment becomes a feeling.\nthe feeling becomes luck.\n\ni built LUCKY after months of obsession with chance,\ncontrol, and where cinematography becomes destiny.\n\nwhat happens when you stop directing and start witnessing?\n\n👁 A Film by HERA\n\n#theeyeofhera #filmmaking #cinematography #visualstorytelling #shortfilm #a24style #filmpoetry #conceptualcinema`},
-  {h:'Retrato fuerte · Imagen', t:`in the frame, you become the landscape.\nthe landscape becomes you.\n\nwhat story do you see? 👁\n\n#theeyeofhera #portraiture #surrealart #cinematicfashion #a24style`},
-  {h:'Detrás del proceso', t:`the process is the portrait.\nmonths of obsession in a single frame.\n\nwhat's the throughline you see?\n\n#theeyeofhera #behindthescenes #artdirection #filmmaking`},
-];
-const COMMENTS=[
-  {h:'Técnico + conceptual', t:`@____\n\nthe way you use negative space here — it's exactly\nthe language i'm building in LUCKY.\n\nhow much did you plan that staging vs discover it editing?`},
-  {h:'Vulnerable / proceso', t:`@____\n\nspent months chasing what you did effortlessly here.\nthis frame has the restraint that makes cinematography art.\n\nwhat's your starting point — concept or visual?`},
-  {h:'Lenguaje visual', t:`@____\n\nyour color grading is the A24 sensibility i'm obsessed with.\nrestraining on dialogue lets the image speak.\n\nwho influenced this approach?`},
-  {h:'Comunidad / colab', t:`@____\n\nthis work deserves a wider community. building something\nsimilar at @theeyeofhera — conceptual direction + uncompromising visuals.\n\nworth following each other's journey?`},
-];
-function renderTemplates(){
-  $('capTpls').innerHTML=CAPTIONS.map((c,i)=>tplHTML(c,'cap'+i)).join('');
-  $('comTpls').innerHTML=COMMENTS.map((c,i)=>tplHTML(c,'com'+i)).join('');
-}
-function tplHTML(c,id){return `<div class="tpl"><div class="th">${c.h}</div><div class="tx" id="tpl_${id}">${esc(c.t)}</div><button class="copy-btn" onclick="copyTpl('${id}')">⧉ Copiar</button></div>`;}
-function copyTpl(id){const t=$('tpl_'+id).textContent;navigator.clipboard?.writeText(t).then(()=>toast('Copiado ✓'),()=>toast('Copia manual'));}
-
-function esc(s){return (s==null?'':String(s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-
-/* ============================================================
-   MODALS
-   ============================================================ */
-function showModal(html){ $('modalContent').innerHTML='<div class="grab"></div>'+html; $('modal').classList.add('open'); }
-function closeModal(){ $('modal').classList.remove('open'); }
-$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
-
-/* --- log a day --- */
-function openLog(){
-  const L=lastLog();
-  showModal(`
-    <h2>Registrar día</h2>
-    <div class="fld"><label>Fecha</label><input type="date" id="f_date" value="${todayStr()}"></div>
-    <div class="row2">
-      <div class="fld"><label>Seguidores</label><input type="number" id="f_fol" inputmode="numeric" value="${L?L.followers:''}" placeholder="22"></div>
-      <div class="fld"><label>Vistas 30d</label><input type="number" id="f_views" inputmode="numeric" value="${L?L.views:''}" placeholder="9597"></div>
-    </div>
-    <div class="row2">
-      <div class="fld"><label>Engagement %</label><input type="number" step="0.1" id="f_eng" inputmode="decimal" placeholder="6.2"></div>
-      <div class="fld"><label>Saves último post</label><input type="number" id="f_saves" inputmode="numeric" placeholder="40"></div>
-    </div>
-    <div class="fld"><label>Comentarios recibidos</label><input type="number" id="f_com" inputmode="numeric" placeholder="0"></div>
-    <div class="fld"><label>¿Respondiste todos los comentarios?</label>
-      <select id="f_resp"><option value="">—</option><option value="yes">Sí, el 100%</option><option value="no">Aún no</option></select></div>
-    <div class="fld"><label>Nota (opcional)</label><input id="f_note" placeholder="Publiqué LUCKY reel"></div>
-    <button class="btn" onclick="saveLog()">Guardar</button>
-    <button class="btn ghost" onclick="closeModal()">Cancelar</button>`);
-}
-function saveLog(){
-  const date=$('f_date').value||todayStr();
-  const entry={
+function saveLog() {
+  const date = document.getElementById('log-date').value || new Date().toISOString().split('T')[0];
+  DATA.logs.push({
     date,
-    followers:+($('f_fol').value||0),
-    views:+($('f_views').value||0),
-    engagement:$('f_eng').value!==''?+$('f_eng').value:null,
-    saves:$('f_saves').value!==''?+$('f_saves').value:null,
-    comments:$('f_com').value!==''?+$('f_com').value:0,
-    responded:$('f_resp').value===''?null:($('f_resp').value==='yes'),
-    note:$('f_note').value.trim(),
-  };
-  S.logs=S.logs.filter(l=>l.date!==date);
-  S.logs.push(entry); sortLogs(); save(); closeModal(); render(); toast('Día guardado ✓');
+    followers: +document.getElementById('log-followers').value || 0,
+    views: +document.getElementById('log-views').value || 0,
+    engagement: +document.getElementById('log-engagement').value || 0,
+    comments: +document.getElementById('log-comments').value || 0,
+    note: document.getElementById('log-note').value
+  });
+  DATA.logs.sort((a, b) => b.date.localeCompare(a.date));
+  save();
+  closeModal('log-modal');
+  document.getElementById('log-date').value = '';
+  document.getElementById('log-followers').value = '';
+  document.getElementById('log-views').value = '';
+  document.getElementById('log-engagement').value = '';
+  document.getElementById('log-comments').value = '';
+  document.getElementById('log-note').value = '';
+  toast('✓ Día registrado');
 }
-function delLog(date){ if(!confirm('¿Borrar este registro?'))return; S.logs=S.logs.filter(l=>l.date!==date); save(); render(); }
 
-/* --- post --- */
-function openPost(id){
-  const p = id? S.posts.find(x=>x.id===id) : null;
-  showModal(`
-    <h2>${p?'Editar post':'Nuevo post'}</h2>
-    <div class="fld"><label>Título / concepto</label><input id="p_title" value="${p?esc(p.title):''}" placeholder="LUCKY — reel principal"></div>
-    <div class="row2">
-      <div class="fld"><label>Tipo</label><select id="p_type">
-        <option value="reel" ${p&&p.type==='reel'?'selected':''}>🎬 Reel</option>
-        <option value="image" ${p&&p.type==='image'?'selected':''}>📷 Imagen</option>
-        <option value="carousel" ${p&&p.type==='carousel'?'selected':''}>🖼 Carrusel</option>
-      </select></div>
-      <div class="fld"><label>Estado</label><select id="p_status">
-        <option value="idea" ${p&&p.status==='idea'?'selected':''}>Idea</option>
-        <option value="ready" ${p&&p.status==='ready'?'selected':''}>Listo</option>
-        <option value="published" ${p&&p.status==='published'?'selected':''}>Publicado</option>
-      </select></div>
-    </div>
-    <div class="fld"><label>Fecha (publicación)</label><input type="date" id="p_date" value="${p&&p.date?p.date:todayStr()}"></div>
-    <div class="row3">
-      <div class="fld"><label>Vistas</label><input type="number" id="p_views" value="${p&&p.views?p.views:''}" placeholder="326"></div>
-      <div class="fld"><label>Saves</label><input type="number" id="p_saves" value="${p&&p.saves?p.saves:''}" placeholder="40"></div>
-      <div class="fld"><label>Coment.</label><input type="number" id="p_com" value="${p&&p.comments?p.comments:''}" placeholder="12"></div>
-    </div>
-    <div class="fld"><label>Caption / notas</label><textarea id="p_cap" placeholder="Pega aquí tu caption...">${p?esc(p.caption||''):''}</textarea></div>
-    <button class="btn" onclick="savePost('${id||''}')">Guardar</button>
-    ${p?`<button class="btn danger" onclick="delPost('${p.id}')">Eliminar post</button>`:''}
-    <button class="btn ghost" onclick="closeModal()">Cancelar</button>`);
+function savePost() {
+  DATA.posts.push({
+    id: Date.now(),
+    title: document.getElementById('post-title').value,
+    type: document.getElementById('post-type').value,
+    date: document.getElementById('post-date').value,
+    views: +document.getElementById('post-views').value || 0,
+    saves: +document.getElementById('post-saves').value || 0,
+    comments: +document.getElementById('post-comments').value || 0
+  });
+  save();
+  closeModal('post-modal');
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-views').value = '';
+  document.getElementById('post-saves').value = '';
+  document.getElementById('post-comments').value = '';
+  toast('✓ Post guardado');
 }
-function savePost(id){
-  const data={
-    title:$('p_title').value.trim(),
-    type:$('p_type').value,
-    status:$('p_status').value,
-    date:$('p_date').value,
-    views:+($('p_views').value||0),
-    saves:+($('p_saves').value||0),
-    comments:+($('p_com').value||0),
-    caption:$('p_cap').value,
-  };
-  if(id){ const p=S.posts.find(x=>x.id===id); Object.assign(p,data); }
-  else { data.id='p'+Date.now(); S.posts.push(data); }
-  save(); closeModal(); render(); toast('Post guardado ✓');
-}
-function delPost(id){ if(!confirm('¿Eliminar post?'))return; S.posts=S.posts.filter(p=>p.id!==id); save(); closeModal(); render(); }
 
-/* --- creator --- */
-function openCreator(id){
-  const c = id? S.creators.find(x=>x.id===id) : null;
-  showModal(`
-    <h2>${c?'Editar creador':'Añadir creador'}</h2>
-    <div class="fld"><label>@usuario</label><input id="c_handle" value="${c?esc(c.handle):''}" placeholder="@nombre"></div>
-    <div class="fld"><label>Nicho</label><select id="c_niche">
-      ${['Fotógrafo conceptual','Curador / editorial','Cineasta','Arte surreal','Moda menswear','Otro'].map(n=>`<option ${c&&c.niche===n?'selected':''}>${n}</option>`).join('')}
-    </select></div>
-    <div class="fld"><label>Seguidores (aprox)</label><input type="number" id="c_fol" value="${c&&c.followers?c.followers:''}" placeholder="15000"></div>
-    <div class="row2">
-      <div class="fld"><label>Último comentario</label><input type="date" id="c_last" value="${c&&c.lastComment?c.lastComment:''}"></div>
-      <div class="fld"><label>¿Respondió?</label><select id="c_resp">
-        <option value="" ${c&&!c.response?'selected':''}>Nuevo</option>
-        <option value="pending" ${c&&c.response==='pending'?'selected':''}>Esperando</option>
-        <option value="yes" ${c&&c.response==='yes'?'selected':''}>Sí</option>
-        <option value="no" ${c&&c.response==='no'?'selected':''}>No</option>
-      </select></div>
-    </div>
-    <button class="btn" onclick="saveCreator('${id||''}')">Guardar</button>
-    ${c?`<button class="btn danger" onclick="delCreator('${c.id}')">Eliminar</button>`:''}
-    <button class="btn ghost" onclick="closeModal()">Cancelar</button>`);
+function saveCreator() {
+  const h = document.getElementById('creator-handle').value;
+  if (!h) { toast('Pon @usuario'); return; }
+  DATA.creators.push({
+    id: Date.now(),
+    handle: h,
+    niche: document.getElementById('creator-niche').value,
+    followers: +document.getElementById('creator-followers').value || 0
+  });
+  save();
+  closeModal('creator-modal');
+  document.getElementById('creator-handle').value = '';
+  document.getElementById('creator-followers').value = '';
+  toast('✓ Creador guardado');
 }
-function saveCreator(id){
-  let h=$('c_handle').value.trim(); if(h&&!h.startsWith('@'))h='@'+h;
-  const data={handle:h,niche:$('c_niche').value,followers:+($('c_fol').value||0),lastComment:$('c_last').value,response:$('c_resp').value};
-  if(!data.handle){toast('Pon un @usuario');return;}
-  if(id){const c=S.creators.find(x=>x.id===id);Object.assign(c,data);}
-  else{data.id='c'+Date.now();S.creators.push(data);}
-  save(); closeModal(); render(); toast('Creador guardado ✓');
-}
-function delCreator(id){ if(!confirm('¿Eliminar creador?'))return; S.creators=S.creators.filter(c=>c.id!==id); save(); closeModal(); render(); }
 
-function addEngToday(){ const t=todayStr(); S.engLog[t]=(S.engLog[t]||0)+1; save(); render(); toast('Comentario registrado ✓'); }
+function deleteLog(date) { DATA.logs = DATA.logs.filter(l => l.date !== date); save(); }
+function deletePost(id) { DATA.posts = DATA.posts.filter(p => p.id !== id); save(); }
+function deleteCreator(id) { DATA.creators = DATA.creators.filter(c => c.id !== id); save(); }
 
-/* --- data / settings --- */
-function openData(){
-  showModal(`
-    <h2>Datos y respaldo</h2>
-    <p class="muted" style="margin-bottom:14px">Todo se guarda solo en este dispositivo. Exporta un respaldo regularmente para no perder nada.</p>
-    <button class="btn" onclick="loadSeed()">✦ Cargar datos iniciales (posts + creadores)</button>
-    <p class="mini" style="text-align:left;margin:6px 2px 16px">Carga tus 6 posts publicados, el baseline (22 seg · 9,597 vistas) y ~40 creadores sugeridos. No borra lo que ya tengas.</p>
-    <button class="btn ghost" onclick="exportData()">⬇ Exportar respaldo (JSON)</button>
-    <button class="btn ghost" onclick="document.getElementById('importFile').click()">⬆ Importar respaldo</button>
-    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <div class="fld" style="margin-top:18px"><label>Fecha de inicio del plan</label><input type="date" id="s_start" value="${S.start}" onchange="S.start=this.value;save();render()"></div>
-    <button class="btn danger" style="margin-top:18px" onclick="resetData()">Borrar todos los datos</button>
-    <button class="btn ghost" onclick="closeModal()">Cerrar</button>
-    <div class="mini">EYEHERA Control Center · v1 · 100% local</div>`);
+function exportData() {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eyehera-backup.json';
+  a.click();
+  toast('✓ Descargado');
 }
-function exportData(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='eyehera-backup-'+todayStr()+'.json';a.click();
-  toast('Respaldo descargado ✓');
-}
-function importData(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{try{S=Object.assign(JSON.parse(JSON.stringify(defaultState)),JSON.parse(r.result));save();closeModal();render();toast('Datos importados ✓');}catch(err){toast('Archivo inválido');}};
+
+function importData(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { try { DATA = JSON.parse(r.result); save(); toast('✓ Datos importados'); } catch { toast('Error: archivo inválido'); } };
   r.readAsText(f);
 }
-function resetData(){ if(!confirm('Esto borra TODO. ¿Seguro?'))return; if(!confirm('Última confirmación. ¿Borrar todo?'))return; localStorage.removeItem(KEY); S=load(); closeModal(); render(); toast('Datos borrados'); }
 
-/* ============================================================
-   DATOS INICIALES (de tu cuenta real y tu lista de creadores)
-   ============================================================ */
-const SEED = {
-  baseline: { date: todayStr(), followers:22, views:9597, engagement:null, saves:null, comments:0, responded:null, note:'Baseline — datos actuales de la cuenta' },
-  posts: [
-    {title:'LUCKY — portada/reel', type:'reel', status:'published', date:'2026-06-10', views:326, saves:0, comments:0, caption:'A Film by HERA'},
-    {title:'Caballo / polvo — reel', type:'reel', status:'published', date:'2026-06-06', views:202, saves:0, comments:0, caption:''},
-    {title:'Retrato en roca (torso)', type:'image', status:'published', date:'2026-05-30', views:5725, saves:0, comments:0, caption:'Top performer ⭐'},
-    {title:'Retrato húmedo — close up', type:'carousel', status:'published', date:'2026-05-28', views:0, saves:0, comments:0, caption:''},
-    {title:'Silueta caballo / atardecer', type:'reel', status:'published', date:'2026-05-27', views:0, saves:0, comments:0, caption:''},
-    {title:'Camisa blanca / corbata roja', type:'reel', status:'published', date:'2026-05-26', views:0, saves:0, comments:0, caption:''},
-  ],
-  // Lista inicial de tu documento. Verifica cada cuenta en Instagram antes de comentar.
-  creators: [
-    ['@mattsoria','Fotógrafo conceptual'],['@brandon_breault','Fotógrafo conceptual'],['@soren_blakemiller','Fotógrafo conceptual'],
-    ['@lucidhoto','Fotógrafo conceptual'],['@brandonli_photography','Fotógrafo conceptual'],['@matthewlloydsmith','Fotógrafo conceptual'],
-    ['@javierflores.photo','Fotógrafo conceptual'],['@davidhunterphoto','Fotógrafo conceptual'],['@paulmsardelis','Fotógrafo conceptual'],
-    ['@oliverstrauss','Fotógrafo conceptual'],
-    ['@thisiscoelevated','Curador / editorial'],['@artconcept__','Curador / editorial'],['@visualfashionart','Curador / editorial'],
-    ['@conceptualcreative','Curador / editorial'],['@editorialfashion.concept','Curador / editorial'],['@fashionconceptart','Curador / editorial'],
-    ['@darkaesthetic_','Curador / editorial'],['@editorialfashionmag','Curador / editorial'],['@fashionvisuals.','Curador / editorial'],
-    ['@moodboard.inspo','Curador / editorial'],
-    ['@a24','Cineasta'],['@arthouse.cinema','Cineasta'],['@cinematic.visuals','Cineasta'],['@filmfashion_','Cineasta'],
-    ['@cinephile.aesthetics','Cineasta'],['@slowcinema','Cineasta'],['@filmpoetry_','Cineasta'],['@cinematography.daily','Cineasta'],
-    ['@darkcinema','Cineasta'],
-    ['@surrealart.daily','Arte surreal'],['@digitalart.collective','Arte surreal'],['@conceptualart_','Arte surreal'],
-    ['@darkestheticart','Arte surreal'],['@surrealism.art','Arte surreal'],['@artconceptual','Arte surreal'],['@visualstorytelling','Arte surreal'],
-    ['@menstyle.blog','Moda menswear'],['@mensfashionjournal','Moda menswear'],['@malefashionaddict','Moda menswear'],
-    ['@mensgrooming.tips','Moda menswear'],['@thepacman82','Moda menswear'],
-  ],
-};
-function loadSeed(){
-  if(S.seeded && !confirm('Ya cargaste los datos iniciales. ¿Cargarlos otra vez? (no borra lo que tengas, solo añade los que falten)')) return;
-  // baseline log si no hay ninguno ese día
-  if(!S.logs.some(l=>l.date===SEED.baseline.date)){ S.logs.push({...SEED.baseline}); sortLogs(); }
-  // posts (evita duplicar por título)
-  SEED.posts.forEach(p=>{ if(!S.posts.some(x=>x.title===p.title)) S.posts.push({...p, id:'p'+Date.now()+Math.random().toString(36).slice(2,6)}); });
-  // creators (evita duplicar por handle)
-  SEED.creators.forEach(([h,n])=>{ if(!S.creators.some(c=>c.handle===h)) S.creators.push({id:'c'+Date.now()+Math.random().toString(36).slice(2,6), handle:h, niche:n, followers:0, lastComment:'', response:''}); });
-  S.seeded=true; save(); closeModal(); render(); toast('Datos iniciales cargados ✓');
+function loadSeedData() {
+  if (confirm('¿Cargar datos iniciales? (22 seg, 9,597 vistas)')) {
+    const today = new Date().toISOString().split('T')[0];
+    DATA.logs.push({ date: today, followers: 22, views: 9597, engagement: 0, comments: 0, note: 'Baseline' });
+    ['@mattsoria', '@brandon_breault', '@soren_blakemiller', '@lucidhoto', '@brandonli_photography', '@matthewlloydsmith', '@javierflores.photo', '@davidhunterphoto', '@paulmsardelis', '@oliverstrauss'].forEach(h => {
+      DATA.creators.push({ id: Date.now() + Math.random(), handle: h, niche: 'Fotógrafo conceptual', followers: 0 });
+    });
+    save();
+    toast('✓ Datos iniciales cargados');
+  }
 }
 
-/* ============================================================
-   RECORDATORIOS / ALARMAS
-   - Notificaciones del navegador (mientras la app está abierta)
-   - Descarga de alarmas al calendario del teléfono (.ics) = lo fiable
-   ============================================================ */
-const REM_DEFS = [
-  {key:'publish', emoji:'🔴', label:'Publicar post', desc:'Sube tu reel del día'},
-  {key:'respond', emoji:'💬', label:'Responder comentarios', desc:'Contesta el 100%'},
-  {key:'engage',  emoji:'👥', label:'Comentar 5 creadores', desc:'Construye comunidad'},
-  {key:'logday',  emoji:'📝', label:'Registrar el día', desc:'Anota tus métricas'},
-];
-function openReminders(){
-  const r=S.reminders;
-  const notifState = (typeof Notification!=='undefined') ? Notification.permission : 'unsupported';
-  showModal(`
-    <h2>Recordatorios diarios</h2>
-    <p class="muted" style="margin-bottom:14px">Define tu rutina. Dos formas de recibir alarmas:</p>
-    ${REM_DEFS.map(d=>`
-      <div class="fld">
-        <label>${d.emoji} ${d.label} — <span style="text-transform:none;color:var(--dimmer)">${d.desc}</span></label>
-        <input type="time" id="rem_${d.key}" value="${r[d.key]}">
-      </div>`).join('')}
-    <button class="btn" onclick="saveReminders()">Guardar horarios</button>
+function render() {
+  const last = DATA.logs[0];
+  document.getElementById('stat-followers').textContent = last ? last.followers : 0;
+  document.getElementById('stat-views').textContent = last ? last.views : 0;
+  document.getElementById('stat-engagement').textContent = (last ? last.engagement : 0) + '%';
+  document.getElementById('creator-count').textContent = DATA.creators.length;
 
-    <div class="section-title" style="margin-top:22px">📅 Alarmas en tu teléfono (recomendado)</div>
-    <p class="muted" style="margin-bottom:10px">Descarga las alarmas a tu calendario. Suenan aunque la app esté cerrada. Se repiten cada día.</p>
-    <button class="btn ghost" onclick="downloadICS()">⬇ Descargar alarmas (.ics)</button>
+  const logsHtml = DATA.logs.length ? DATA.logs.map(l => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${l.date}</div><div class="list-item-sub">${l.followers} seg · ${l.views} views · ${l.engagement}% eng</div></div><button class="btn-delete" onclick="deleteLog('${l.date}')">✕</button></div>`).join('') : '<div class="empty">Sin registros</div>';
+  document.getElementById('logs-list').innerHTML = logsHtml;
 
-    <div class="section-title" style="margin-top:22px">🔔 Notificaciones del navegador</div>
-    <p class="muted" style="margin-bottom:10px">Avisos mientras tengas la app abierta hoy. Estado: <b>${notifState==='granted'?'activadas':notifState==='denied'?'bloqueadas':notifState==='unsupported'?'no soportadas':'sin activar'}</b>.</p>
-    <button class="btn ghost" onclick="enableNotifs()">Activar avisos de hoy</button>
+  const postsHtml = DATA.posts.length ? DATA.posts.map(p => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${p.title}</div><div class="list-item-sub">${p.type} · ${p.date} · ${p.views} views</div></div><button class="btn-delete" onclick="deletePost(${p.id})">✕</button></div>`).join('') : '<div class="empty">Sin posts</div>';
+  document.getElementById('posts-list').innerHTML = postsHtml;
 
-    <button class="btn ghost" onclick="closeModal()" style="margin-top:18px">Cerrar</button>`);
-}
-function saveReminders(){
-  REM_DEFS.forEach(d=>{ S.reminders[d.key]=$('rem_'+d.key).value || S.reminders[d.key]; });
-  save(); toast('Horarios guardados ✓');
-  if(Notification && Notification.permission==='granted') scheduleTodayNotifs();
-}
-function enableNotifs(){
-  if(typeof Notification==='undefined'){toast('Tu navegador no soporta avisos');return;}
-  Notification.requestPermission().then(p=>{
-    if(p==='granted'){ S.reminders.enabled=true; save(); scheduleTodayNotifs(); toast('Avisos activados ✓'); }
-    else toast('Permiso denegado');
-  });
-}
-let _notifTimers=[];
-function scheduleTodayNotifs(){
-  _notifTimers.forEach(t=>clearTimeout(t)); _notifTimers=[];
-  const now=new Date();
-  REM_DEFS.forEach(d=>{
-    const [h,m]=S.reminders[d.key].split(':').map(Number);
-    const when=new Date(); when.setHours(h,m,0,0);
-    const delay=when-now;
-    if(delay>0 && delay<86400000){
-      _notifTimers.push(setTimeout(()=>{ try{new Notification('EYEHERA · '+d.label,{body:d.desc});}catch(e){} }, delay));
-    }
-  });
-}
-function pad(n){return String(n).padStart(2,'0');}
-function downloadICS(){
-  const r=S.reminders;
-  let ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//EYEHERA//Control Center//ES\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:EYEHERA - Rutina diaria\r\n';
-  REM_DEFS.forEach((d,i)=>{
-    const [h,m]=r[d.key].split(':');
-    const today=new Date(); const dt=`${today.getFullYear()}${pad(today.getMonth()+1)}${pad(today.getDate())}T${h}${m}00`;
-    ics+='BEGIN:VEVENT\r\n';
-    ics+=`UID:eyehera-${d.key}-${Date.now()}@control.local\r\n`;
-    ics+=`DTSTART:${dt}\r\nDURATION:PT15M\r\n`;
-    ics+='RRULE:FREQ=DAILY\r\n';
-    ics+=`SUMMARY:${d.emoji} EYEHERA - ${d.label}\r\n`;
-    ics+=`DESCRIPTION:${d.desc}\r\n`;
-    ics+='BEGIN:VALARM\r\nTRIGGER:-PT0M\r\nACTION:DISPLAY\r\n';
-    ics+=`DESCRIPTION:EYEHERA - ${d.label}\r\nEND:VALARM\r\n`;
-    ics+='END:VEVENT\r\n';
-  });
-  ics+='END:VCALENDAR\r\n';
-  const blob=new Blob([ics],{type:'text/calendar'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download='eyehera-rutina.ics'; a.click();
-  toast('Alarmas descargadas ✓ Ábrelas para añadirlas');
+  const creatorsHtml = DATA.creators.length ? DATA.creators.map(c => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${c.handle}</div><div class="list-item-sub">${c.niche}</div></div><button class="btn-delete" onclick="deleteCreator(${c.id})">✕</button></div>`).join('') : '<div class="empty">Sin creadores</div>';
+  document.getElementById('creators-list').innerHTML = creatorsHtml;
 }
 
-/* init */
-if(S.reminders && S.reminders.enabled && typeof Notification!=='undefined' && Notification.permission==='granted') scheduleTodayNotifs();
+// Init
+DATA = load();
+document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
 render();
 </script>
 </body>
