@@ -39,8 +39,6 @@ export async function checkDiffusionAPI(): Promise<{ ok: boolean; verdict: strin
 /**
  * Procesa la imagen con el modelo de difusión.
  * Arranca la predicción y hace polling al estado hasta terminar.
- * Endpoints relativos → funciona igual en Vercel (producción) que en
- * `vercel dev` / proxy local. Devuelve la URL pública del resultado.
  */
 export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionParams = {}): Promise<string> {
   // 1) Arrancar la predicción
