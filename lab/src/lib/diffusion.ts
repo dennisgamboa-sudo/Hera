@@ -93,8 +93,19 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   const [origBmp, resBmp] = await Promise.all([loadBitmap(originalDataUrl), loadBitmap(resultUrl)])
 
   // Trabajar a la resolución del resultado (2x), con tope de ~8MP por memoria móvil.
-  let W = resBmp.width
-  let H = resBmp.height
+  // El modelo puede devolver la imagen con RELLENO negro (padding de tiles)
+  // abajo/derecha. El lienzo final SIEMPRE respeta el aspecto de la ORIGINAL,
+  // y del resultado solo se toma la región superior-izquierda equivalente.
+  const targetAR = origBmp.width / origBmp.height
+  let srcW = resBmp.width
+  let srcH = Math.round(resBmp.width / targetAR)
+  if (srcH > resBmp.height) {
+    srcH = resBmp.height
+    srcW = Math.round(resBmp.height * targetAR)
+  }
+
+  let W = srcW
+  let H = srcH
   const MAX_PIXELS = 8_000_000
   if (W * H > MAX_PIXELS) {
     const k = Math.sqrt(MAX_PIXELS / (W * H))
@@ -102,18 +113,18 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
     H = Math.round(H * k)
   }
 
-  const draw = (bmp: ImageBitmap) => {
+  const draw = (bmp: ImageBitmap, cropW: number, cropH: number) => {
     const c = document.createElement('canvas')
     c.width = W
     c.height = H
     const ctx = c.getContext('2d')!
     ctx.imageSmoothingQuality = 'high'
-    ctx.drawImage(bmp, 0, 0, W, H)
+    ctx.drawImage(bmp, 0, 0, cropW, cropH, 0, 0, W, H)
     return { canvas: c, ctx, data: ctx.getImageData(0, 0, W, H) }
   }
 
-  const orig = draw(origBmp)
-  const res = draw(resBmp)
+  const orig = draw(origBmp, origBmp.width, origBmp.height)
+  const res = draw(resBmp, srcW, srcH)
   origBmp.close()
   resBmp.close()
 
@@ -229,8 +240,11 @@ export async function saveDiffusionImage(resultUrl: string, filename = 'hera-rea
 
   const file = new File([jpegBlob], filename, { type: 'image/jpeg' })
 
-  // iOS/Android: hoja nativa de compartir → "Guardar imagen" va directo a Fotos.
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+  // SOLO en móvil/tablet: hoja nativa de compartir → "Guardar imagen" va a Fotos.
+  // En escritorio (Mac/PC) la hoja no permite descargar → descarga directa clásica.
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && /Mac/i.test(navigator.userAgent))
+  if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
     try {
       await navigator.share({ files: [file] })
       return
