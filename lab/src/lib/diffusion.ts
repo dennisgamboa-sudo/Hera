@@ -1,6 +1,6 @@
 /** Etiqueta visible de versión — sube el número en cada cambio para poder
  *  verificar de un vistazo qué build está desplegado. */
-export const BUILD_TAG = 'v2.4'
+export const BUILD_TAG = 'v2.5'
 
 /** Diagnóstico del último injerto (medidas reales de cada paso) — se muestra
  *  bajo el resultado para poder ver con números qué pasó. */
@@ -175,10 +175,12 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   // SOFT-CLIP: deja pasar la micro-textura (amplitud baja: poros, grano) y
   // bloquea los trazos estructurales (amplitud alta: cejas, bordes, líneas).
   // Así el injerto NUNCA dibuja rasgos — solo aporta piel.
+  // OJO: `blurred` va empaquetado RGB (3 por píxel) y o/r van RGBA (4 por
+  // píxel) — se recorren con índices separados (i para RGBA, p para RGB).
   const T = 8
-  for (let i = 0; i < n; i += 4) {
+  for (let i = 0, p = 0; i < n; i += 4, p += 3) {
     for (let c = 0; c < 3; c++) {
-      const d = r[i + c] - blurred[i + c]
+      const d = r[i + c] - blurred[p + c]
       o[i + c] = o[i + c] + strength * (d / (1 + Math.abs(d) / T))
     }
     // alpha se queda como está
