@@ -1,6 +1,10 @@
 /** Etiqueta visible de versión — sube el número en cada cambio para poder
  *  verificar de un vistazo qué build está desplegado. */
-export const BUILD_TAG = 'v2.3'
+export const BUILD_TAG = 'v2.4'
+
+/** Diagnóstico del último injerto (medidas reales de cada paso) — se muestra
+ *  bajo el resultado para poder ver con números qué pasó. */
+export let lastGraftInfo = ''
 
 export interface DiffusionResponse {
   resultUrl: string
@@ -138,6 +142,7 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
 
   let W = srcW
   let H = Math.round(srcW / (obox.w / obox.h))
+  lastGraftInfo = `orig ${origBmp.width}×${origBmp.height} (útil ${obox.w}×${obox.h}) · IA ${resBmp.width}×${resBmp.height} (útil ${srcW}×${srcH})`
   const MAX_PIXELS = 8_000_000
   if (W * H > MAX_PIXELS) {
     const k = Math.sqrt(MAX_PIXELS / (W * H))
@@ -179,6 +184,7 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
     // alpha se queda como está
   }
   orig.ctx.putImageData(orig.data, 0, 0)
+  lastGraftInfo += ` · salida ${W}×${H} · injerto ✓`
   return orig.canvas.toDataURL('image/jpeg', 0.95)
 }
 

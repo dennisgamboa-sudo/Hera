@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import { Loader2, X, Eye, Sparkles, Wand2, Download } from 'lucide-react'
 import { Button } from './ui/button'
-import { callDiffusionAPI, checkDiffusionAPI, saveDiffusionImage, BUILD_TAG, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
+import { callDiffusionAPI, checkDiffusionAPI, saveDiffusionImage, lastGraftInfo, BUILD_TAG, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
 
 interface DiffusionProcessorProps {
   sourceImage: string
@@ -279,6 +279,9 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
                   <Eye className="w-3.5 h-3.5 inline mr-1" />
                   Mantén pulsado para comparar
                 </button>
+                {lastGraftInfo && (
+                  <p className="text-[9px] font-mono text-gray-600 text-center mt-2 break-words">{lastGraftInfo}</p>
+                )}
               </div>
 
               <div className="flex flex-col gap-2 pt-2">
