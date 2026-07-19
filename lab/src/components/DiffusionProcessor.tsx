@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import { Loader2, X, Eye, Sparkles, Wand2, Download } from 'lucide-react'
 import { Button } from './ui/button'
-import { callDiffusionAPI, checkDiffusionAPI, saveDiffusionImage, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
+import { callDiffusionAPI, checkDiffusionAPI, saveDiffusionImage, BUILD_TAG, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
 
 interface DiffusionProcessorProps {
   sourceImage: string
@@ -113,7 +113,8 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
             {health === null ? '…' : health.ok ? '✅' : '⛔'}
           </span>
           <span className="break-words">
-            {health === null ? 'Comprobando conexión IA…' : health.verdict}
+            {health === null ? 'Comprobando conexión IA…' : health.verdict}{' '}
+            <span className="opacity-50">· build {BUILD_TAG}</span>
           </span>
         </div>
 

@@ -1,3 +1,7 @@
+/** Etiqueta visible de versión — sube el número en cada cambio para poder
+ *  verificar de un vistazo qué build está desplegado. */
+export const BUILD_TAG = 'v2.2'
+
 export interface DiffusionResponse {
   resultUrl: string
 }
@@ -92,20 +96,16 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
 async function graftTexture(originalDataUrl: string, resultUrl: string, strength: number): Promise<string> {
   const [origBmp, resBmp] = await Promise.all([loadBitmap(originalDataUrl), loadBitmap(resultUrl)])
 
-  // Trabajar a la resolución del resultado (2x), con tope de ~8MP por memoria móvil.
-  // El modelo puede devolver la imagen con RELLENO negro (padding de tiles)
-  // abajo/derecha. El lienzo final SIEMPRE respeta el aspecto de la ORIGINAL,
-  // y del resultado solo se toma la región superior-izquierda equivalente.
-  const targetAR = origBmp.width / origBmp.height
-  let srcW = resBmp.width
-  let srcH = Math.round(resBmp.width / targetAR)
-  if (srcH > resBmp.height) {
-    srcH = resBmp.height
-    srcW = Math.round(resBmp.height * targetAR)
-  }
+  // El modelo puede devolver RELLENO negro (padding de tiles) abajo/derecha.
+  // 1) Detectamos la caja real de contenido escaneando filas/columnas negras.
+  // 2) El lienzo final SIEMPRE tiene el aspecto de la ORIGINAL, y el contenido
+  //    del resultado se mapea entero sobre él (si vino comprimido, se restaura).
+  const content = detectContentBox(resBmp)
+  const srcW = content.w
+  const srcH = content.h
 
   let W = srcW
-  let H = srcH
+  let H = Math.round(srcW / (origBmp.width / origBmp.height))
   const MAX_PIXELS = 8_000_000
   if (W * H > MAX_PIXELS) {
     const k = Math.sqrt(MAX_PIXELS / (W * H))
@@ -148,6 +148,49 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   }
   orig.ctx.putImageData(orig.data, 0, 0)
   return orig.canvas.toDataURL('image/jpeg', 0.95)
+}
+
+/**
+ * Detecta la caja real de contenido del resultado: escanea (a baja resolución)
+ * filas desde abajo y columnas desde la derecha que sean uniformemente negras
+ * (relleno del modelo) y devuelve el ancho/alto útiles en píxeles del bitmap.
+ */
+function detectContentBox(bmp: ImageBitmap): { w: number; h: number } {
+  const SAMPLE = 160
+  const sw = SAMPLE
+  const sh = Math.max(16, Math.round((bmp.height / bmp.width) * SAMPLE))
+  const c = document.createElement('canvas')
+  c.width = sw
+  c.height = sh
+  const ctx = c.getContext('2d')!
+  ctx.drawImage(bmp, 0, 0, sw, sh)
+  const d = ctx.getImageData(0, 0, sw, sh).data
+  const BLACK = 12 // umbral: por debajo es relleno, el grano real supera esto
+
+  const rowIsBlack = (y: number) => {
+    for (let x = 0; x < sw; x += 2) {
+      const i = (y * sw + x) * 4
+      if (d[i] > BLACK || d[i + 1] > BLACK || d[i + 2] > BLACK) return false
+    }
+    return true
+  }
+  const colIsBlack = (x: number) => {
+    for (let y = 0; y < sh; y += 2) {
+      const i = (y * sw + x) * 4
+      if (d[i] > BLACK || d[i + 1] > BLACK || d[i + 2] > BLACK) return false
+    }
+    return true
+  }
+
+  let bottom = sh
+  while (bottom > sh * 0.5 && rowIsBlack(bottom - 1)) bottom--
+  let right = sw
+  while (right > sw * 0.5 && colIsBlack(right - 1)) right--
+
+  return {
+    w: Math.round((right / sw) * bmp.width),
+    h: Math.round((bottom / sh) * bmp.height),
+  }
 }
 
 async function loadBitmap(url: string): Promise<ImageBitmap> {
