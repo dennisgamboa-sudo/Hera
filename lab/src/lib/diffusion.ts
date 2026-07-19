@@ -1,6 +1,6 @@
 /** Etiqueta visible de versión — sube el número en cada cambio para poder
  *  verificar de un vistazo qué build está desplegado. */
-export const BUILD_TAG = 'v2.2'
+export const BUILD_TAG = 'v2.3'
 
 export interface DiffusionResponse {
   resultUrl: string
@@ -51,11 +51,15 @@ export async function checkDiffusionAPI(): Promise<{ ok: boolean; verdict: strin
  * Devuelve un data-URL JPG listo para mostrar y guardar.
  */
 export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionParams = {}): Promise<string> {
+  // 0) Sanear la entrada: si la imagen trae franjas de relleno negro (p. ej.
+  //    resultados antiguos re-subidos o capturas), se recortan ANTES de todo.
+  const cleanSource = await trimPadding(imageDataUrl)
+
   // 1) Arrancar la predicción
   const startRes = await fetch('/api/diffuse-start', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ imageDataUrl, ...params }),
+    body: JSON.stringify({ imageDataUrl: cleanSource, ...params }),
   })
   const startData = await startRes.json().catch(() => ({}))
   // El servidor devuelve el error REAL de Replicate en el campo `error`.
@@ -83,7 +87,33 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
   // 3) Injerto de textura: identidad garantizada. NUNCA devolvemos la imagen
   //    cruda de la IA (repinta la cara) — si el injerto falla, es un error.
   const strength = params.textureStrength ?? 0.8
-  return graftTexture(imageDataUrl, remoteUrl, strength)
+  return graftTexture(cleanSource, remoteUrl, strength)
+}
+
+/**
+ * Recorta franjas de relleno negro (abajo/derecha) de una imagen si las tiene.
+ * Si la imagen está limpia, la devuelve tal cual.
+ */
+async function trimPadding(dataUrl: string): Promise<string> {
+  try {
+    const bmp = await loadBitmap(dataUrl)
+    const box = detectContentBox(bmp)
+    const cleanW = box.w >= bmp.width * 0.98
+    const cleanH = box.h >= bmp.height * 0.98
+    if (cleanW && cleanH) {
+      bmp.close()
+      return dataUrl
+    }
+    const c = document.createElement('canvas')
+    c.width = box.w
+    c.height = box.h
+    const ctx = c.getContext('2d')!
+    ctx.drawImage(bmp, 0, 0, box.w, box.h, 0, 0, box.w, box.h)
+    bmp.close()
+    return c.toDataURL('image/jpeg', 0.92)
+  } catch {
+    return dataUrl
+  }
 }
 
 /**
@@ -103,9 +133,11 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   const content = detectContentBox(resBmp)
   const srcW = content.w
   const srcH = content.h
+  // Doble seguro: si la original también trajera relleno, se recorta aquí.
+  const obox = detectContentBox(origBmp)
 
   let W = srcW
-  let H = Math.round(srcW / (origBmp.width / origBmp.height))
+  let H = Math.round(srcW / (obox.w / obox.h))
   const MAX_PIXELS = 8_000_000
   if (W * H > MAX_PIXELS) {
     const k = Math.sqrt(MAX_PIXELS / (W * H))
@@ -123,7 +155,7 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
     return { canvas: c, ctx, data: ctx.getImageData(0, 0, W, H) }
   }
 
-  const orig = draw(origBmp, origBmp.width, origBmp.height)
+  const orig = draw(origBmp, obox.w, obox.h)
   const res = draw(resBmp, srcW, srcH)
   origBmp.close()
   resBmp.close()
