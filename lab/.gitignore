@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# Server secrets & deps
+server/.env.local
+server/node_modules/
+.env.local
