@@ -10,7 +10,7 @@ export interface DiffusionParams {
   scaleFactor?: 2 | 4
   prompt?: string
   negativePrompt?: string
-  /** 0–1 · cuánta micro-textura de la IA se injerta sobre la foto ORIGINAL (cliente). */
+  /** 0–1.2 · cuánta micro-textura de la IA se injerta sobre la foto ORIGINAL (cliente). */
   textureStrength?: number
 }
 
@@ -18,8 +18,7 @@ export interface DiffusionParams {
  *  ARQUITECTURA "INJERTO": la IA genera una versión con micro-textura rica,
  *  pero NO usamos su imagen — solo extraemos su detalle fino (alta frecuencia)
  *  y lo injertamos sobre los píxeles ORIGINALES. La cara, la luz y el grano
- *  de la foto original quedan intactos por construcción: es matemáticamente
- *  imposible que cambie la identidad. textureStrength controla el injerto. */
+ *  de la foto original quedan intactos por construcción. */
 export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string; hint: string }> = {
   subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.5 },
   balanced: { label: 'EQUILIBRADO', hint: 'Poros y definición real (recomendado)', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.8 },
@@ -78,7 +77,7 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
 
   // 3) Injerto de textura: identidad garantizada. Si algo falla (p. ej. CORS),
   //    devolvemos el resultado crudo de la IA como plan B.
-  const strength = params.textureStrength ?? 0.65
+  const strength = params.textureStrength ?? 0.8
   try {
     return await graftTexture(imageDataUrl, remoteUrl, strength)
   } catch (err) {
@@ -89,10 +88,10 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
 
 /**
  * INJERTO DE MICRO-TEXTURA (frequency graft, técnica de retoque editorial):
- *   salida = original + strength × (resultadoIA − blur(resultadoIA))
+ *   salida = original + strength × filtro(resultadoIA − blur(resultadoIA))
  * La estructura, el color, la luz y la CARA vienen al 100% de la original;
- * de la IA solo se toma el detalle de alta frecuencia (poros, pestañas,
- * tejido, hierba). Así se obtiene el "detalle Magnific" sin cambiar la persona.
+ * de la IA solo se toma el detalle de alta frecuencia, y además filtrado
+ * para que pasen poros/grano pero nunca trazos (cejas, bordes, líneas).
  */
 async function graftTexture(originalDataUrl: string, resultUrl: string, strength: number): Promise<string> {
   const [origBmp, resBmp] = await Promise.all([loadBitmap(originalDataUrl), loadBitmap(resultUrl)])
