@@ -1,6 +1,6 @@
 /** Etiqueta visible de versión — sube el número en cada cambio para poder
  *  verificar de un vistazo qué build está desplegado. */
-export const BUILD_TAG = 'v2.5'
+export const BUILD_TAG = 'v3.0'
 
 /** Diagnóstico del último injerto (medidas reales de cada paso) — se muestra
  *  bajo el resultado para poder ver con números qué pasó. */
@@ -29,9 +29,9 @@ export interface DiffusionParams {
  *  de la foto original quedan intactos por construcción: es matemáticamente
  *  imposible que cambie la identidad. textureStrength controla el injerto. */
 export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string; hint: string }> = {
-  subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.5 },
-  balanced: { label: 'EQUILIBRADO', hint: 'Poros y definición real (recomendado)', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.8 },
-  strong: { label: 'FUERTE', hint: 'Máxima textura · cara 100% intacta', creativity: 0.35, resemblance: 1.2, dynamic: 5, scaleFactor: 2, textureStrength: 1.1 },
+  subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.4, resemblance: 1.2, dynamic: 4, scaleFactor: 2, textureStrength: 0.55 },
+  balanced: { label: 'EQUILIBRADO', hint: 'Poros y grano real (recomendado)', creativity: 0.55, resemblance: 1.0, dynamic: 5, scaleFactor: 2, textureStrength: 0.85 },
+  strong: { label: 'FUERTE', hint: 'Piel de grado dermatológico', creativity: 0.7, resemblance: 0.9, dynamic: 5, scaleFactor: 2, textureStrength: 1.15 },
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -143,7 +143,9 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   let W = srcW
   let H = Math.round(srcW / (obox.w / obox.h))
   lastGraftInfo = `orig ${origBmp.width}×${origBmp.height} (útil ${obox.w}×${obox.h}) · IA ${resBmp.width}×${resBmp.height} (útil ${srcW}×${srcH})`
-  const MAX_PIXELS = 8_000_000
+  // v3: subimos el tope a ~14MP para conservar la textura fina del 2x de Clarity
+  // (antes 8MP la recortaba). Sigue seguro para memoria móvil.
+  const MAX_PIXELS = 14_000_000
   if (W * H > MAX_PIXELS) {
     const k = Math.sqrt(MAX_PIXELS / (W * H))
     W = Math.round(W * k)
@@ -187,7 +189,7 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   }
   orig.ctx.putImageData(orig.data, 0, 0)
   lastGraftInfo += ` · salida ${W}×${H} · injerto ✓`
-  return orig.canvas.toDataURL('image/jpeg', 0.95)
+  return orig.canvas.toDataURL('image/jpeg', 0.98)
 }
 
 /**
@@ -317,7 +319,7 @@ export async function saveDiffusionImage(resultUrl: string, filename = 'hera-rea
     ctx.drawImage(bitmap, 0, 0)
     bitmap.close()
     jpegBlob = await new Promise<Blob>((resolve, reject) => {
-      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('No se pudo convertir a JPG'))), 'image/jpeg', 0.95)
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('No se pudo convertir a JPG'))), 'image/jpeg', 0.98)
     })
   }
 

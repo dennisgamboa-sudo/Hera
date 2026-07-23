@@ -161,7 +161,7 @@ export async function processImage(dataUrl: string, stage: StageId, intensity = 
   if (idx <= 0) return dataUrl
 
   const img = await loadImage(dataUrl)
-  const MAX = 1080
+  const MAX = 1350
   let w = img.width, h = img.height
   if (w > MAX || h > MAX) {
     const scale = MAX / Math.max(w, h)
@@ -181,5 +181,5 @@ export async function processImage(dataUrl: string, stage: StageId, intensity = 
   if (idx >= 4) applyFinal(data, w, h, k)
 
   ctx.putImageData(imageData, 0, 0)
-  return canvas.toDataURL('image/jpeg', 0.9)
+  return canvas.toDataURL('image/jpeg', 0.94)
 }

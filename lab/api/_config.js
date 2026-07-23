@@ -9,17 +9,20 @@ export const MODEL_URL = 'https://api.replicate.com/v1/models/philz1337x/clarity
 export const PREDICTIONS_URL = 'https://api.replicate.com/v1/predictions'
 export const FALLBACK_VERSION = 'dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e'
 
+// v3 "Motor de Realismo": subimos creativity y pasos porque el graft del
+// cliente descarta la ESTRUCTURA de Clarity y solo se queda con el poro/grano.
+// Podemos ser agresivos con la textura sin riesgo de que cambie la cara.
 export const MAGNIFIC_STYLE = {
   prompt:
-    'masterpiece, best quality, highres, raw photo, realistic skin texture, visible pores, fine facial hair, natural skin imperfections, sharp focus, 8k, professional photography',
+    'ultra realistic macro skin detail, visible pores, fine vellus facial hair, natural skin texture with subtle imperfections and freckles, dermatology-grade epidermis, raw analog film photograph, tack-sharp focus, 8k, editorial fashion photography',
   negative_prompt:
-    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, 3d render, cgi, illustration, painting, cartoon, oversaturated',
+    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, soft focus, 3d render, cgi, illustration, painting, cartoon, oversaturated, beauty retouch',
   scale_factor: 2,
-  dynamic: 6,
-  creativity: 0.3,
-  resemblance: 1.2,
+  dynamic: 5,
+  creativity: 0.55,
+  resemblance: 1.0,
   sharpen: 0,
-  num_inference_steps: 18,
+  num_inference_steps: 28,
 }
 
 /** Construye el objeto `input` de Replicate fusionando la receta con overrides del cliente. */

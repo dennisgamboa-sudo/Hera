@@ -26,7 +26,7 @@ import { CarouselStudio } from './components/CarouselStudio'
 import { ResultSheet } from './components/ResultSheet'
 import { DiffusionProcessor } from './components/DiffusionProcessor'
 import { Button } from './components/ui/button'
-import { Post, loadPosts, savePosts, newId } from './lib/storage'
+import { Post, loadPosts, savePosts, newId, compressDataUrl } from './lib/storage'
 import { processImage, StageId } from './lib/engines'
 import { DeliverItem } from './lib/download'
 
@@ -634,11 +634,13 @@ export default function App() {
         {diffusionSource && (
           <DiffusionProcessor
             sourceImage={diffusionSource}
-            onSuccess={(resultUrl) => {
+            onSuccess={async (resultUrl) => {
+              // El feed guarda una copia ligera (localStorage); la descarga usa full-res.
+              const feedImage = await compressDataUrl(resultUrl)
               handleAdd([{
                 id: newId(),
                 type: 'image',
-                image: resultUrl,
+                image: feedImage,
                 status: 'draft',
                 caption: 'AI Enhanced — Skin Realism',
               }])

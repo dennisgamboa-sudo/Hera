@@ -187,7 +187,7 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
                 <Wand2 className="w-4 h-4 mr-2" /> GENERAR REALISMO
               </Button>
               <p className="text-[10px] text-gray-600 text-center">
-                Tarda ~30–60s · coste aprox. $0.015 por imagen
+                Tarda ~40–70s · coste aprox. $0.02 por imagen
               </p>
             </motion.div>
           )}

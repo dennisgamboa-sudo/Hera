@@ -14,16 +14,18 @@ const FALLBACK_VERSION = 'dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a
 const KEY = process.env.REPLICATE_API_KEY || process.env.REPLICATE_API_TOKEN
 
 const MAGNIFIC_STYLE = {
+  // v3 "Motor de Realismo": creativity y pasos altos porque el graft del cliente
+  // descarta la estructura de Clarity y solo toma el poro/grano → cara intacta.
   prompt:
-    'masterpiece, best quality, highres, raw photo, realistic skin texture, visible pores, natural skin, sharp focus, 8k, professional photography',
+    'ultra realistic macro skin detail, visible pores, fine vellus facial hair, natural skin texture with subtle imperfections and freckles, dermatology-grade epidermis, raw analog film photograph, tack-sharp focus, 8k, editorial fashion photography',
   negative_prompt:
-    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, 3d render, cgi, illustration, cartoon',
+    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, soft focus, 3d render, cgi, illustration, painting, cartoon, oversaturated, beauty retouch',
   scale_factor: 2,
-  dynamic: 6,
-  creativity: 0.3,
-  resemblance: 1.2,
+  dynamic: 5,
+  creativity: 0.55,
+  resemblance: 1.0,
   sharpen: 0,
-  num_inference_steps: 18,
+  num_inference_steps: 28,
 }
 
 function buildInput(body) {
