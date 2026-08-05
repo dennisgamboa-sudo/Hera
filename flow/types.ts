@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * HERA SKIN LAB — types + prompts v4.0
+ * HERA SKIN LAB — types + prompts v5.0
  * ============================================================================
  *
  * REGLAS DE PROMPT QUE NO SE ROMPEN (cada una se rompió antes y arruinó la foto):
@@ -38,6 +38,8 @@ export interface TexturePreset {
   /** Valores recomendados para el motor de injerto */
   intensity: number
   clarity: number
+  /** Acabado de cámara: grano, hombro, aberración, viñeteo, esquinas */
+  optical: number
   prompt: string
 }
 
@@ -53,6 +55,7 @@ export const PRESETS: TexturePreset[] = [
     icon: 'face',
     intensity: 0.85,
     clarity: 0.25,
+    optical: 0.55,
     prompt:
       `${FRAME_LOCK} Re-render the skin with real photographic texture: visible pores, ` +
       `fine vellus hair, freckles and moles, uneven skin tone, natural sebaceous sheen, ` +
@@ -65,6 +68,7 @@ export const PRESETS: TexturePreset[] = [
     icon: 'blur_on',
     intensity: 1.05,
     clarity: 0.3,
+    optical: 0.65,
     prompt:
       `${FRAME_LOCK} Skin texture macro photography quality: deep open pores, ` +
       `individual vellus hairs, dermal micro-relief, freckles, capillaries, ` +
@@ -78,6 +82,7 @@ export const PRESETS: TexturePreset[] = [
     icon: 'texture',
     intensity: 0.8,
     clarity: 0.28,
+    optical: 0.45,
     prompt:
       `${FRAME_LOCK} Re-render every surface with authentic material micro-texture: ` +
       `fibre, grain, scratches, dust, weave and imperfection appropriate to each material. ` +
@@ -125,7 +130,9 @@ export type ProcessingStep =
   | 'Extrayendo micro-textura'
   | 'Verificando fidelidad por zonas'
   | 'Injertando en la foto real'
+  | 'Corrigiendo deriva local'
   | 'Reconstruyendo anatomía'
+  | 'Acabado de cámara'
 
 export interface SourceImage {
   base64: string

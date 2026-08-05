@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * HERA SKIN LAB — App v4.0
+ * HERA SKIN LAB — App v5.0
  * ============================================================================
  * Versión SIMPLIFICADA a propósito. Se ha quitado todo lo que degradaba la
  * imagen y se ha dejado únicamente lo que produce el resultado bueno:
@@ -55,6 +55,7 @@ export default function App() {
   const [preset, setPreset] = useState<TexturePreset>(PRESETS[0])
   const [intensity, setIntensity] = useState(PRESETS[0].intensity)
   const [clarity, setClarity] = useState(PRESETS[0].clarity)
+  const [optical, setOptical] = useState(PRESETS[0].optical)
   const [step, setStep] = useState<ProcessingStep>('Generando textura')
   const [report, setReport] = useState('')
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'done'>('idle')
@@ -82,6 +83,7 @@ export default function App() {
     setPreset(p)
     setIntensity(p.intensity)
     setClarity(p.clarity)
+    setOptical(p.optical)
   }
 
   const handleSelect = async () => {
@@ -131,6 +133,7 @@ export default function App() {
         {
           intensity,
           clarity,
+          opticalFinish: optical,
           preserveFocus: true,
           maskDataUrl: state.mask,
           structureRepair: state.structureRepair && !!state.mask,
@@ -156,7 +159,7 @@ export default function App() {
       await Flow.save({
         base64: state.processed.split(',')[1],
         mimeType: 'image/jpeg',
-        name: 'HERA_SKIN_V4',
+        name: 'HERA_SKIN_V5',
       })
       setSaveStatus('done')
       setTimeout(() => setSaveStatus('idle'), 2000)
@@ -178,7 +181,7 @@ export default function App() {
               Hera Skin Lab
             </h1>
             <span className="text-[7px] font-mono text-white/30 uppercase tracking-[4px]">
-              Aligned Frequency Graft v4.0
+              Aligned Frequency Graft v5.0
             </span>
           </div>
 
@@ -313,6 +316,21 @@ export default function App() {
                   onChange={setClarity}
                   idealValue={preset.clarity}
                 />
+                <RangeSlider
+                  label="Acabado de cámara"
+                  value={optical}
+                  min={0}
+                  max={1}
+                  step={0.05}
+                  formatValue={(v: number) => `${(v * 100).toFixed(0)}%`}
+                  onChange={setOptical}
+                  idealValue={preset.optical}
+                />
+                <p className="text-[8px] text-white/25 leading-relaxed -mt-2">
+                  Grano por exposición, hombro de altas luces, aberración
+                  cromática, viñeteo y caída de resolución en esquinas. Es lo que
+                  borra el rastro de render.
+                </p>
               </div>
 
               <PillButton
