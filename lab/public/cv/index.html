@@ -159,6 +159,9 @@ html[data-v="ai"] [data-only]:not([data-only~="ai"]){display:none!important}
 h1{margin:0;font:900 39px/.88 var(--f-display);font-stretch:125%;letter-spacing:-.012em;text-transform:uppercase}
 h1 .dot{display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:50%;background:var(--red)}
 .role{margin:9px 0 0;font:600 9.4px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.now{margin:2.2mm 0 0;font-size:9.6px;line-height:1.3;color:var(--ink)}
+.now b{margin-right:2mm;font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--red);vertical-align:1px}
+.now i{font-style:normal;color:var(--ink-3)}
 .contact{list-style:none;margin:0;padding:0;text-align:right;font-size:10px;line-height:1.72;color:var(--ink-2)}
 .contact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
 .thesis{margin:3.8mm 0 0;max-width:155mm;font:italic 400 20px/1.2 var(--f-serif);letter-spacing:-.005em;text-wrap:balance}
@@ -168,47 +171,52 @@ h1 .dot{display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:
 
 .cols{display:grid;grid-template-columns:1fr 57mm;gap:7mm;margin-top:4mm;flex:1}
 .cols>*{min-width:0}
-section{margin-bottom:3.3mm}
+section{margin-bottom:2.8mm}
 h2{margin:0 0 2.5mm;display:flex;gap:8px;align-items:center;font:600 8px/1 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
 h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
 .cap{border-top:2px solid var(--ink);padding-top:2.4mm}
 .cap .k{font:600 7.6px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
-.cap h3{margin:1.5mm 0 1.1mm;font:700 12px/1.2 var(--f-display)}
+.cap h3{margin:1.2mm 0 .8mm;font:700 12px/1.2 var(--f-display)}
 .cap p{margin:0;font-size:9.3px;line-height:1.42;color:var(--ink-2)}
-.proof{margin:0;padding:0;list-style:none;display:grid;gap:2mm}
-.proof li{display:grid;grid-template-columns:3.6mm 1fr;font-size:9.8px;line-height:1.45}
-.proof li::before{content:"";width:4.5px;height:4.5px;background:var(--ink);transform:translateY(4.6px) rotate(45deg)}
-.proof b{font-weight:700}
-html[data-v="studio"] .p-skin{order:-2} html[data-v="studio"] .p-zara{order:-1}
-html[data-v="ai"] .p-skin{order:-1}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin:3.6mm 0 0;padding:0}
+.nums>div{border-top:2px solid var(--ink);padding-top:2mm;position:relative}
+.nums dt{font:900 23px/1 var(--f-display);font-stretch:80%;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nums dt small{font-size:15px;font-weight:600;color:var(--red);margin:0 .6mm}
+.nums dd{margin:1.4mm 0 0;font-size:8.8px;line-height:1.38;color:var(--ink-2)}
+.nums .tag{position:absolute;right:1mm;top:-4.4mm;font-size:12px;transform:rotate(-3deg)}
+html[data-v="studio"] .n-48{order:-3} html[data-v="studio"] .n-mkts{order:-2}
 .hand{font:400 13px/1 var(--f-hand);white-space:nowrap}
 .circle{position:relative;white-space:nowrap}
 .circle::after{content:"";position:absolute;inset:-3px -6px -2.5px -6px;border:1.3px solid var(--red);border-radius:11px 9px 12px 8px/9px 11px 8px 12px;transform:rotate(-1deg);pointer-events:none}
-.tools{display:grid;gap:2.2mm}
-.tool{display:grid;grid-template-columns:30mm 1fr;gap:3mm;padding-bottom:2.2mm;border-bottom:1px solid var(--rule)}
-.tool:last-child,html[data-v="studio"] .t-skin,html:not([data-v="studio"]):not([data-v="ai"]) .t-studio{border-bottom:0;padding-bottom:0}
+.xp{list-style:none;margin:0;padding:0;display:grid;gap:1.6mm}
+.xp li{display:grid;grid-template-columns:19mm 1fr;gap:2.4mm}
+.xp time{position:relative;padding-left:3mm;font:600 7.4px/1.75 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.xp time::before{content:"";position:absolute;left:0;top:1.15mm;width:1.6mm;height:1.6mm;border-radius:50%;border:1px solid var(--ink)}
+.xp .cur time{color:var(--red)}
+.xp .cur time::before{background:var(--red);border-color:var(--red)}
+.xp h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
+.xp h3 span{font-weight:400;color:var(--ink-2)}
+.xp p{margin:.3mm 0 0;font-size:9.1px;line-height:1.42;color:var(--ink-2)}
+.sub{margin:2.6mm 0 1.4mm;padding-top:2mm;border-top:1px dashed var(--rule);font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+dl.also{margin:0;display:grid;gap:.9mm}
+dl.also div{display:grid;grid-template-columns:30mm 1fr;gap:2.6mm;font-size:8.9px;line-height:1.38}
+dl.also dt{font-weight:700}
+dl.also dd{margin:0;color:var(--ink-2)}
+.what{margin:3.6mm 0 0}
+.what .caps{gap:6mm}
+.early{list-style:none;margin:0;padding:0;display:grid;gap:.9mm;font-size:8.9px;line-height:1.38;color:var(--ink-2)}
+.early b{font-weight:700;color:var(--ink)}
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm}
+html[data-v="ai"] .tools{grid-template-columns:repeat(3,1fr);gap:3.2mm}
+.tool{border-top:1px solid var(--ink);padding-top:1.8mm}
 .tool h3{margin:0;font:750 10.5px/1.25 var(--f-display)}
-.tool .u{display:block;margin-top:.8mm;font:500 8px/1.3 var(--f-mono);color:var(--blue);text-decoration:none;word-break:break-all}
-.tool p{margin:0;font-size:9.3px;line-height:1.42;color:var(--ink-2)}
-.tool .stk{margin-top:.8mm;font:500 7.6px/1.35 var(--f-mono);letter-spacing:.04em;color:var(--ink-3)}
+.tool .u{display:block;margin-top:.5mm;font:500 7.6px/1.3 var(--f-mono);color:var(--blue);text-decoration:none;overflow-wrap:break-word}
+.tool p{margin:1mm 0 0;font-size:8.9px;line-height:1.4;color:var(--ink-2)}
+.tool .stk{margin-top:.8mm;font:500 7.2px/1.35 var(--f-mono);letter-spacing:.04em;color:var(--ink-3)}
 .log{list-style:none;margin:3.2mm 0 0;padding:2.6mm 0 0;border-top:1px dashed var(--rule);display:grid;gap:1.4mm;font-size:9.3px;line-height:1.4;color:var(--ink-2)}
 .log li{display:grid;grid-template-columns:24mm 1fr;gap:3mm}
 .log time{font:600 7.8px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.line{list-style:none;margin:0;padding:0 0 0 4.4mm;position:relative;display:grid;gap:1.3mm}
-.line::before{content:"";position:absolute;left:1.05mm;top:1.6mm;bottom:1.6mm;width:1px;background:var(--ink)}
-.line li{position:relative}
-/* the studio version carries one more tool, so its main column runs a little tighter */
-html[data-v="studio"] .cols>div>section{margin-bottom:2.6mm}
-html[data-v="studio"] .line{gap:.9mm}
-.line li::before{content:"";position:absolute;left:-4.4mm;top:1.05mm;width:2.1mm;height:2.1mm;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
-.line li.cur::before{background:var(--red);border-color:var(--red)}
-.line h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
-.line h3 span{font-weight:400;color:var(--ink-2)}
-.line h3 em{margin-left:2mm;font:600 7.4px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--red);vertical-align:1px}
-.line p{margin:.3mm 0 0;font-size:9.1px;line-height:1.42;color:var(--ink-2)}
-.track{margin:2mm 0 0;padding:1.8mm 0 0 4.4mm;border-top:1px dashed var(--rule);font-size:9.1px;line-height:1.42;color:var(--ink-2)}
-.track b{margin-right:1.6mm;font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
 aside section{margin-bottom:4mm}
 .stance{background:rgb(44 105 198/.07);border-left:2px solid var(--blue);padding:3mm 3.2mm}
 .stance h2{color:var(--blue)}
@@ -217,6 +225,10 @@ aside section{margin-bottom:4mm}
 .tags{display:flex;flex-wrap:wrap;gap:1.1mm}
 .tags span{font-size:8.6px;line-height:1;padding:1.2mm 1.7mm;border:1px solid var(--rule)}
 dl.kv{margin:0;display:grid;gap:1.9mm}
+dl.stack{margin:0;display:grid;gap:1.5mm}
+dl.stack div{display:grid;grid-template-columns:10mm 1fr;gap:2mm}
+dl.stack dt{font:600 7.2px/1.6 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+dl.stack dd{margin:0;font-size:8.9px;line-height:1.4}
 dl.kv div{display:grid;gap:.4mm}
 dl.kv dt{font:600 7.6px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 dl.kv dd{margin:0;font-size:9.3px;line-height:1.4}
@@ -249,7 +261,8 @@ dl.books dt{font:italic 500 12px/1.1 var(--f-serif);letter-spacing:0;text-transf
   .thesis{font-size:20px}
   .cols{grid-template-columns:1fr}
   .caps{grid-template-columns:1fr}
-  .tool{grid-template-columns:1fr;gap:4px}
+  .tools,html[data-v="ai"] .tools,.nums{grid-template-columns:1fr 1fr}
+  .xp li{grid-template-columns:1fr;gap:2px}
   .log li{grid-template-columns:1fr;gap:2px}
   .foot{grid-template-columns:1fr;gap:12px}
   .foot-r{justify-items:start}
@@ -273,14 +286,14 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
 }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Denno Gamboa","alternateName":"Dennis Gamboa","jobTitle":"Creative Technologist","description":"Creative technologist for luxury image: AI-assisted campaign versioning, product-faithful retouching, skin-realism tooling and declared AI provenance.","email":"mailto:dennis.gamboa@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://heraaistudio.com/","sameAs":["https://heraskinlab.com/","https://hera-vercel.vercel.app/studio"],"worksFor":{"@type":"Organization","name":"HERA Studio","url":"https://heraaistudio.com/"},"knowsLanguage":["es","en"],"knowsAbout":["Generative AI image production","Retouching","Colour correction","Campaign versioning","Skin texture realism","Content provenance (C2PA)","EU AI Act Article 50","Prompt design","React","TypeScript","Fiction writing"]}
+{"@context":"https://schema.org","@type":"Person","name":"Denno Gamboa","alternateName":"Dennis Gamboa","jobTitle":"Creative Technologist","description":"Creative technologist for luxury image: AI-assisted campaign versioning, product-faithful retouching, skin-realism tooling and declared AI provenance.","email":"mailto:denno@heraaistudio.com","address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://heraaistudio.com/","sameAs":["https://heraskinlab.com/","https://hera-vercel.vercel.app/studio"],"worksFor":{"@type":"Organization","name":"HERA Studio","url":"https://heraaistudio.com/"},"knowsLanguage":["es","en"],"knowsAbout":["Generative AI image production","Retouching","Colour correction","Campaign versioning","Skin texture realism","Content provenance (C2PA)","EU AI Act Article 50","Prompt design","React","TypeScript","Fiction writing"]}
 </script>
 </head>
 <body>
 <div class="wrap">
 
   <div class="topbar screen-only">
-    <p class="todo" id="todo" hidden>Vista de trabajo · Datos pendientes en rojo: <b id="todoN">0</b>. Pásamelos y regenero los tres PDF. Este aviso desaparece solo cuando ya no queda ninguno.</p>
+    <p class="todo" id="todo" hidden>Vista de trabajo · Datos pendientes en rojo: <b id="todoN">0</b> (tu usuario de LinkedIn). Sin fecha todavía, y por eso fuera de la línea de tiempo: el inicio de HERA Studio, Inditex/Zara Woman, Mango, Carolina Herrera, Bymatallana, Phoenix y Nacho Ricci. Pásamelos y regenero los tres PDF.</p>
     <nav class="versions" aria-label="CV version">
       <span class="lbl">This CV, versioned for</span>
       <a href="#luxury" data-v="luxury">Luxury &amp; beauty</a>
@@ -382,7 +395,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
   </section>
 
   <main class="sheet" id="cv">
-    <div class="slug" aria-hidden="true"><span>Proof · Denno_Gamboa_CV</span><span id="slugV">Luxury &amp; beauty</span><span>2026-10-05</span><span>sRGB IEC61966-2.1</span><span class="red">AI declared · see passport</span></div>
+    <div class="slug" aria-hidden="true"><span>Proof · Denno_Gamboa_CV</span><span id="slugV">Luxury &amp; beauty</span><span>2026-10-06</span><span>sRGB IEC61966-2.1</span><span class="red">AI declared · see passport</span></div>
     <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i><i class="reg l"></i><i class="reg r"></i>
 
     <header class="head">
@@ -406,11 +419,19 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       <span data-only="ai">I know why generated images look fake, and I build the tools that fix it.</span>
     </p>
 
+    <dl class="nums" aria-label="In numbers">
+      <div class="n-lvmh" data-only="luxury studio"><dt><span class="circle">2 days</span></dt><dd>to deliver the test, final round of an LVMH maison pitch</dd></div>
+      <div class="n-skin"><dt>0.33<small>→</small>0.83</dt><dd>skin fidelity with HERA Skin Lab, measured on a test bench</dd><span class="hand red tag" data-only="luxury studio">real numbers</span></div>
+      <div class="n-65" data-only="ai"><dt>+65%</dt><dd>micro-texture reaching the photo, same bench</dd></div>
+      <div class="n-mkts" data-only="luxury studio"><dt>30+</dt><dd>markets served with product imagery at Inditex</dd></div>
+      <div class="n-48" data-only="luxury studio"><dt>48 h</dt><dd>from one approved master to every format, at HERA Studio</dd></div>
+      <div class="n-40" data-only="ai"><dt>40</dt><dd>AI answers audited per hotel: 10 questions × 4 assistants</dd></div>
+      <div class="n-3" data-only="ai"><dt>3</dt><dd>tools of my own, shipped and live on the web</dd></div>
+    </dl>
+
     <p class="brands"><span class="k">Worked with</span>Zara <i>·</i> Inditex <i>/</i> Mango <i>/</i> Carolina Herrera <i>/</i> Purificación García <i>/</i> Warner Bros. <i>/</i> Hogarth <i>·</i> WPP <i>/</i> Locco</p>
 
-    <div class="cols">
-      <div>
-        <section>
+    <section class="what">
           <h2>What I do</h2>
           <div class="caps">
             <div class="cap" data-only="luxury"><span class="k">Versioning</span><h3>One shoot, every format.</h3><p>A master you already own becomes every format, market and duration, without rebuilding the set.</p></div>
@@ -425,37 +446,60 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
             <div class="cap" data-only="ai"><span class="k">Tool building</span><h3>Shipped and live.</h3><p>Web apps on Vercel and Cloud Run that call Gemini and Replicate models, built with Claude Code under my direction.</p></div>
             <div class="cap" data-only="ai"><span class="k">Client side</span><h3>Luxury brief to live demo.</h3><p>I can sit with a brand committee and with engineers in the same week. Pitch-tested with an LVMH maison.</p></div>
           </div>
-        </section>
+    </section>
 
+    <div class="cols">
+      <div>
         <section>
-          <h2>Proof</h2>
-          <ul class="proof">
-            <li class="p-lvmh"><span><b>Final round of a competitive pitch for an LVMH maison</b> (Holiday 2026 campaign visuals): <span class="circle">test delivered in two days</span>, responsible-AI questions answered for the group’s committee.</span></li>
-            <li class="p-skin"><span><b>HERA Skin Lab, measured on a test bench:</b> fidelity 0.33 → 0.83, 65% more micro-texture, and under 0.4/255 levels of identity leak even when fed a different face. <span class="hand red">&larr; real bench numbers</span></span></li>
-            <li class="p-zara" data-only="luxury studio"><span><b>Zara Woman, Inditex:</b> photography, 3D and video published to the sites of 30+ markets. The same multi-market versioning HERA now runs with AI.</span></li>
+          <h2>Experience</h2>
+          <ol class="xp">
+            <li class="cur"><time>now</time><div><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span></h3>
+              <p>AI image production for luxury: campaign versioning, product-faithful retouching and a HERA Passport with every asset. Final round of an LVMH maison pitch for Holiday 2026.</p></div></li>
+            <li class="cur"><time datetime="2025-08">2025 – now</time><div><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span></h3>
+              <p>Photography, retouching and design for davidlocco.com, social and the Asia campaign.</p></div></li>
+            <li><time datetime="2018-06">2018 – 2025</time><div><h3>Freelance Retoucher &amp; Creative Director <span>· denno, Madrid</span></h3>
+              <p>Retouching, creative direction and grading for fashion and lifestyle brands.</p></div></li>
+            <li><time datetime="2024-08">2024 – 2025</time><div><h3>Creative Technologist, dual apprenticeship <span>· Hogarth (WPP), Madrid</span></h3>
+              <p>Generative AI brand content with Midjourney and ChatGPT, incl. the Toyota C-HR.</p></div></li>
+            <li><time datetime="2023-07">2023 – 2024</time><div><h3>Assistant Art Director <span>· Warner Bros. Entertainment</span></h3>
+              <p>Graphic design, concept sketches and illustration; logistics and purchasing.</p></div></li>
+          </ol>
+          <h4 class="sub">Earlier · retouch, colour and e-commerce image</h4>
+          <ul class="early">
+            <li><b>Inditex (Tempe), Zara Woman</b> · Alicante · online product manager: photography, 3D and video for 30+ markets, and an internal photo plan</li>
+            <li><b>Mango</b> · e-commerce retoucher</li>
+            <li><b>Carolina Herrera, Purificación García</b> · Ourense · creative image retoucher</li>
+            <li><b>Bymatallana Art Partner</b> · New York · colourist, internship</li>
+            <li><b>Phoenix Studio</b> · retouch and post-production</li>
+            <li><b>Nacho Ricci</b> · Buenos Aires · digital retoucher, then ran the creative team, until 2014</li>
           </ul>
         </section>
 
         <section>
           <h2>Built &amp; shipped</h2>
           <div class="tools">
-            <article class="tool" data-only="studio">
-              <div><h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a></div>
-              <div><p>One approved master, every format, delivered in 48 hours with a HERA Passport.</p><p class="stk">React · TypeScript · Vite · Replicate · Vercel</p></div>
+            <article class="tool t-studio" data-only="studio">
+              <h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a>
+              <p>One approved master, every format, delivered in 48 hours with a HERA Passport.</p><p class="stk">React · Vite · Replicate · Vercel</p>
             </article>
             <article class="tool t-skin">
-              <div><h3>HERA Skin Lab</h3><a class="u" href="https://heraskinlab.com/" target="_blank" rel="noopener">heraskinlab.com</a></div>
-              <div><p>Moves real skin texture from an AI pass onto the original photo without changing the face, and switches itself off wherever the model invented detail.<span data-only="luxury"> Tells you how much it changed. Never stores the photo.</span></p><p class="stk">Gemini image models · optical flow · TypeScript · Cloud Run</p></div>
+              <h3>HERA Skin Lab</h3><a class="u" href="https://heraskinlab.com/" target="_blank" rel="noopener">heraskinlab.com</a>
+              <p><span data-only="studio ai">Real skin texture from an AI pass, moved onto the original photo, face unchanged.</span><span data-only="luxury">Real skin from an AI pass onto the original, face unchanged. Tells you how much it changed; never stores the photo.</span></p><p class="stk">Gemini · optical flow · TypeScript · Cloud Run</p>
             </article>
-            <article class="tool t-studio screen-only" data-only="luxury ai">
-              <div><h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a></div>
-              <div><p>Campaign app: diffusion upscaling through serverless functions, a 1080×1350 carousel builder, scheduler and moodboard. Built for the iPhone first.</p><p class="stk">React · TypeScript · Vite · Replicate · Vercel</p></div>
+            <article class="tool t-studio" data-only="luxury ai">
+              <h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a>
+              <p>Campaign app: diffusion upscaling, carousel builder, scheduler and moodboard.</p><p class="stk">React · Vite · Replicate · Vercel</p>
             </article>
             <article class="tool" data-only="ai">
-              <div><h3>HERA AI Studio</h3><a class="u" href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></div>
-              <div><p>GEO for Madrid hotels: 10 guest questions × 4 assistants = 40 answers audited with sources, then fixed and re-measured monthly.</p><p class="stk">LLM evaluation · structured data · schema.org</p></div>
+              <h3>HERA AI Studio</h3><a class="u" href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a>
+              <p>GEO for Madrid hotels: AI answers audited with sources, then fixed and re-measured monthly.</p><p class="stk">LLM evaluation · schema.org</p>
             </article>
           </div>
+          <h4 class="sub">Also built</h4>
+          <dl class="also">
+            <div data-only="luxury studio"><dt>HERA AI Studio</dt><dd>Measures whether ChatGPT, Gemini, Claude and Perplexity recommend a Madrid hotel, then fixes what the hotel controls.</dd></div>
+            <div><dt>Claude agent skills</dt><dd>Image QA before delivery, bilingual manuscript editing, Instagram editorial kits.</dd></div>
+          </dl>
           <ol class="log screen-only" aria-label="Build log">
             <li><time>May 2026</time><span>EYEHERA: 90-day growth strategy and business model for the studio’s Instagram.</span></li>
             <li><time>Jun 2026</time><span>EYEHERA Control Center: a local-first app that turns Instagram metrics into the day’s plan, with calendar alarms.</span></li>
@@ -463,29 +507,6 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
             <li><time>Jul – Aug 2026</time><span>Skin Lab engine v4 to v5.1: auto-alignment, confidence map, local optical flow and a film-optics finish.</span></li>
             <li><time>Oct 2026</time><span>This CV: one source for the page, the reel and three PDFs.</span></li>
           </ol>
-        </section>
-
-        <section>
-          <h2>Experience · newest first</h2>
-          <ol class="line">
-            <li class="cur"><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span><em>now</em></h3>
-              <p>AI-assisted image production for luxury: campaign versioning, product-faithful retouching and the HERA Passport, a provenance record shipped with every asset.</p></li>
-            <li class="cur"><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span><em>now</em></h3>
-              <p>Photography, retouching and digital design for Locco’s website, social channels and campaigns, including its Asia campaign.</p></li>
-            <li><h3>Creative Technologist, apprenticeship <span>· Hogarth (WPP), Madrid</span></h3>
-              <p>Generative AI for brand content: visual narratives with Midjourney and ChatGPT, AI production workflows, generative visuals for the Toyota C-HR.</p></li>
-            <li><h3>Assistant Art Director <span>· Warner Bros. Entertainment, Madrid</span></h3>
-              <p>Graphic design for the art department, concept sketches and digital illustration; logistics and purchasing.</p></li>
-            <li><h3>E-commerce Retoucher <span>· Mango</span></h3></li>
-            <li><h3>Online Product Manager <span>· Inditex (Tempe), Zara Woman · Alicante</span></h3>
-              <p>Photography, 3D and video for the sites of 30+ markets, product-image analysis for e-commerce, and an internal photo plan so every department worked from quality images.</p></li>
-            <li><h3>Creative Image Retoucher <span>· Carolina Herrera, Purificación García · Ourense</span></h3></li>
-            <li><h3>Colourist, internship <span>· Bymatallana Art Partner, New York</span></h3></li>
-            <li><h3>Retouch and post-production <span>· Phoenix Studio</span></h3></li>
-            <li><h3>Digital Retoucher, then Coordinating Manager <span>· Nacho Ricci, Buenos Aires</span></h3>
-              <p>Retouched for photographers and designers, then ran the studio’s creative team, budget and production.</p></li>
-          </ol>
-          <p class="track"><b>Parallel track</b> denno, my freelance practice: retouch and creative direction for fashion and lifestyle brands, social and campaign content, photo and video grading.</p>
         </section>
       </div>
 
@@ -497,23 +518,18 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         </section>
 
         <section>
-          <h2>Also built</h2>
-          <dl class="kv">
-            <div data-only="luxury studio"><dt>HERA AI Studio · heraaistudio.com</dt><dd>Measures whether ChatGPT, Gemini, Claude and Perplexity recommend luxury hotels in Madrid, then fixes what’s in the hotel’s control.</dd></div>
-            <div><dt>Claude agent skills</dt><dd>Image QA before delivery, manuscript editing in English and Spanish, Instagram editorial kits and a daily project stand-up.</dd></div>
-          </dl>
-        </section>
-
-        <section>
           <h2>Stack</h2>
-          <div class="tags"><span>Photoshop</span><span>Lightroom</span><span>Midjourney</span><span>Gemini · Nano Banana</span><span>Google AI Studio</span><span>Google Flow</span><span>Replicate</span><span>ChatGPT</span><span>Claude Code</span><span>Figma Make</span><span>React</span><span>TypeScript</span><span>Vercel</span><span>Cloud Run</span><span>C2PA · Content Credentials</span></div>
+          <dl class="stack">
+            <div><dt>Image</dt><dd>Photoshop · Lightroom · Midjourney · grading</dd></div>
+            <div><dt>AI</dt><dd>Gemini · Nano Banana · AI Studio · Flow · Replicate · ChatGPT · Claude Code</dd></div>
+            <div><dt>Build</dt><dd>Figma Make · React · TypeScript · Vercel · Cloud Run · C2PA</dd></div>
+          </dl>
         </section>
 
         <section>
           <h2>Writing</h2>
           <dl class="kv books">
-            <div><dt>Golpe de estado</dt><dd>First novel, a literary thriller: three men run together every morning for forty-six days. In final revision.</dd></div>
-            <div><dt>The Receipt</dt><dd>Its fourth chapter, in English. On submission.</dd></div>
+            <div><dt>Golpe de estado</dt><dd>First novel, a literary thriller: three men run together every morning for forty-six days. In final revision; its fourth chapter, “The Receipt”, is on submission in English.</dd></div>
             <div><dt>Verde agua</dt><dd>Six-episode drama series. Bible complete.</dd></div>
           </dl>
           <p class="mini screen-only">The series opening started as voice notes I recorded while running in the Retiro.</p>
