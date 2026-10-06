@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Why AI skin looks like wax · Denno Gamboa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Kalam:wght@400&amp;display=swap">
+<style>
+/* LinkedIn document post: 1080×1350 slides, one proof sheet per signature. */
+:root{--stage:#E8E8E4;--paper:#FBFBF9;--ink:#121214;--ink-2:#45454B;--ink-3:#7C7C83;--red:#D2281E;--blue:#2C69C6}
+*{box-sizing:border-box}
+@page{size:1080px 1350px;margin:0}
+html,body{margin:0;background:var(--stage)}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--stage);color:var(--ink);font-family:"Archivo",Arial,sans-serif;break-after:page;padding:118px 64px 0}
+.crop{position:absolute;width:24px;height:24px;border:0 solid var(--ink-3)}
+.crop.a{top:20px;left:20px;border-top-width:1px;border-left-width:1px}
+.crop.b{top:20px;right:20px;border-top-width:1px;border-right-width:1px}
+.crop.c{bottom:20px;left:20px;border-bottom-width:1px;border-left-width:1px}
+.crop.d{bottom:20px;right:20px;border-bottom-width:1px;border-right-width:1px}
+.slug{position:absolute;top:44px;left:64px;right:64px;display:flex;justify-content:space-between;font:500 15px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.num{font:900 150px/.8 "Archivo",Arial,sans-serif;font-stretch:62%;color:var(--red);margin:0}
+h1,h2{margin:0;font-weight:850;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:96px;line-height:.95}
+h2{margin-top:22px;font-size:58px;line-height:1.02}
+canvas{display:block;width:952px;margin-top:34px;background:#111}
+.why{margin:34px 0 0;font-size:31px;line-height:1.36;color:var(--ink-2);max-width:930px}
+.fix{margin:26px 0 0;padding-top:20px;border-top:1.5px solid var(--ink);display:grid;grid-template-columns:150px 1fr;gap:16px;font-size:31px;line-height:1.32;font-weight:600}
+.fix b{font:600 16px/1.9 "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.note{position:absolute;margin:0;font:400 38px/1 "Kalam",cursive;white-space:nowrap}
+.by{position:absolute;left:64px;bottom:60px;margin:0;font:600 16px/1.5 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.sub{margin:30px 0 0;font-size:36px;line-height:1.3;color:var(--ink-2);max-width:900px}
+.metrics{display:grid;gap:30px;margin-top:56px}
+.metrics div{display:grid;grid-template-columns:520px 1fr;align-items:baseline;border-top:1.5px solid var(--ink);padding-top:18px}
+.metrics b{font:900 70px/1 "Archivo",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.metrics span{font:600 17px/1.4 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.url{margin:56px 0 0;font:900 64px/1 "Archivo",Arial,sans-serif;font-stretch:112%}
+</style>
+</head>
+<body>
+
+<section class="s" id="p1">
+  <div class="slug"><span>Denno Gamboa · HERA Skin Lab</span><span>01 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <h1>Why AI skin looks like wax.</h1>
+  <p class="sub">Six signatures that give a generated portrait away. Prompting fixes none of them.</p>
+  <canvas id="c0" width="952" height="560"></canvas>
+  <p class="note" style="right:72px;bottom:150px;color:var(--red);transform:rotate(-3deg)">swipe &rarr;</p>
+  <p class="by">Denno Gamboa · Creative Technologist · Madrid</p>
+</section>
+
+<section class="s" id="p2">
+  <div class="slug"><span>Signature 01 · channels</span><span>02 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">01</p>
+  <h2>The same detail in all three colour channels.</h2>
+  <canvas id="c1" width="952" height="500"></canvas>
+  <p class="why">In real skin, red light scatters under the surface, so the red channel carries less fine detail than the green. Generators make red, green and blue equally sharp, and the eye reads plastic with relief.</p>
+  <p class="fix"><b>The fix</b><span>Graft the detail per channel: red 0.62, green 1, blue 0.88.</span></p>
+</section>
+
+<section class="s" id="p3">
+  <div class="slug"><span>Signature 02 · pores</span><span>03 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">02</p>
+  <h2>Pores spaced evenly across the face.</h2>
+  <canvas id="c2" width="952" height="500"></canvas>
+  <p class="why">Real skin changes across the face: open pores on the T-zone, fine on the cheeks, vellus hair at the temples. Generated skin repeats one pattern everywhere.</p>
+  <p class="fix"><b>The fix</b><span>Vary the texture gain with a slow noise field across the face.</span></p>
+</section>
+
+<section class="s" id="p4">
+  <div class="slug"><span>Signature 03 · sharpness</span><span>04 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">03</p>
+  <h2>Sharp from corner to corner.</h2>
+  <canvas id="c3" width="952" height="500"></canvas>
+  <p class="why">No real lens resolves the corners like the centre. A frame that is equally sharp everywhere reads as a render.</p>
+  <p class="fix"><b>The fix</b><span>Fade the grafted detail radially toward the corners.</span></p>
+</section>
+
+<section class="s" id="p5">
+  <div class="slug"><span>Signature 04 · optics</span><span>05 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">04</p>
+  <h2>Perfect optics.</h2>
+  <canvas id="c4" width="952" height="500"></canvas>
+  <p class="why">Real lenses fringe colour on high-contrast edges and lose light in the corners. Generated images have neither.</p>
+  <p class="fix"><b>The fix</b><span>Sub-pixel lateral aberration (red magnifies, blue contracts) and corner falloff.</span></p>
+</section>
+
+<section class="s" id="p6">
+  <div class="slug"><span>Signature 05 · grain</span><span>06 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">05</p>
+  <h2>Flat grain.</h2>
+  <canvas id="c5" width="952" height="500"></canvas>
+  <p class="why">Real grain peaks in the midtones and disappears in pure black and blown highlights. The blue channel grains more than the red.</p>
+  <p class="fix"><b>The fix</b><span>Clustered grain, weighted by exposure and balanced per channel.</span></p>
+</section>
+
+<section class="s" id="p7">
+  <div class="slug"><span>Signature 06 · highlights</span><span>07 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <p class="num">06</p>
+  <h2>Highlights clipped flat.</h2>
+  <canvas id="c6" width="952" height="500"></canvas>
+  <p class="why">Film rolls the highlights off gradually. Generated images often cut them dead at white.</p>
+  <p class="fix"><b>The fix</b><span>A film-style shoulder on the highlights.</span></p>
+</section>
+
+<section class="s" id="p8">
+  <div class="slug"><span>Denno Gamboa · HERA Skin Lab</span><span>08 / 08</span></div>
+  <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+  <h1>All six are built into HERA Skin Lab.</h1>
+  <div class="metrics">
+    <div><b>0.33 → 0.83</b><span>fidelity to the original photo</span></div>
+    <div><b>+65%</b><span>micro-texture reaching the image</span></div>
+    <div><b>&lt;0.4/255</b><span>identity leak, even fed a different face</span></div>
+  </div>
+  <p class="sub" style="margin-top:28px">Measured on my test bench.</p>
+  <p class="url">heraskinlab.com</p>
+  <p class="note" style="left:64px;bottom:150px;color:var(--red);transform:rotate(-2deg)">open to creative technologist roles in luxury &amp; beauty</p>
+  <p class="by">Denno Gamboa · Creative Technologist · Madrid</p>
+</section>
+
+<script>
+document.fonts.load('600 15px "IBM Plex Mono"').then(() => document.fonts.ready).then(() => {
+  const cl = (x, a = 0, b = 1) => x < a ? a : x > b ? b : x;
+  function rng(s) { return () => { s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function vn(W, H, cell, r) {
+    const gw = Math.ceil(W / cell) + 2, gh = Math.ceil(H / cell) + 2, g = new Float32Array(gw * gh);
+    for (let i = 0; i < g.length; i++) g[i] = r();
+    const o = new Float32Array(W * H);
+    for (let y = 0; y < H; y++) { const fy = y / cell, y0 = fy | 0, ty = fy - y0, sy = ty * ty * (3 - 2 * ty), r0 = y0 * gw;
+      for (let x = 0; x < W; x++) { const fx = x / cell, x0 = fx | 0, tx = fx - x0, sx = tx * tx * (3 - 2 * tx);
+        const a = g[r0 + x0], b = g[r0 + x0 + 1], c = g[r0 + gw + x0], d = g[r0 + gw + x0 + 1], u = a + (b - a) * sx;
+        o[y * W + x] = u + (c + (d - c) * sx - u) * sy; } }
+    return o;
+  }
+  function sprite(size, stops) {
+    const c = document.createElement('canvas'); c.width = c.height = size;
+    const x = c.getContext('2d'), g = x.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    stops.forEach(([o, col]) => g.addColorStop(o, col)); x.fillStyle = g; x.fillRect(0, 0, size, size); return c;
+  }
+  const label = (x, t, px, py, dark) => {
+    x.font = '600 15px "IBM Plex Mono", monospace';
+    const w = x.measureText(t.toUpperCase()).width + 20;
+    x.fillStyle = dark ? 'rgba(251,251,249,.92)' : 'rgba(10,10,12,.62)'; x.fillRect(px, py, w, 30);
+    x.fillStyle = dark ? '#121214' : '#F4F0EA'; x.fillText(t.toUpperCase(), px + 10, py + 20);
+  };
+  // skin tile: fine relief per channel, plus pores whose density follows a field
+  function skin(W, H, seed, { weights = [1, 1, 1], pores = 'field', smooth = 0 } = {}) {
+    const r = rng(seed), N = W * H, c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d'), img = x.createImageData(W, H), d = img.data;
+    const lo = vn(W, H, 160, r), fi = vn(W, H, 2.2, r), de = vn(W, H, 220, r);
+    for (let i = 0; i < N; i++) {
+      const px = i % W, py = (i / W) | 0, sh = 1 + .1 * (.5 - (px / W * .6 + py / H * .4)), bl = lo[i] - .5;
+      const h = smooth ? (fi[i] - .5) * .9 : (fi[i] - .5) * 1.6 + (r() - .5) * .9, j = i * 4;
+      d[j] = (214 + 18 * bl) * sh + h * 9 * weights[0]; d[j + 1] = (166 - 7 * bl) * sh + h * 9 * weights[1]; d[j + 2] = (139 - 9 * bl) * sh + h * 9 * weights[2]; d[j + 3] = 255;
+    }
+    x.putImageData(img, 0, 0);
+    const pore = sprite(32, [[0, 'rgba(78,38,30,.9)'], [.35, 'rgba(104,54,42,.55)'], [.7, 'rgba(140,80,62,.12)'], [1, 'rgba(0,0,0,0)']]);
+    if (pores === 'even') {
+      const st = 13; x.globalAlpha = .55;
+      for (let y = st / 2; y < H; y += st) for (let q = st / 2; q < W; q += st) x.drawImage(pore, q - 2.4, y - 2.4, 4.8, 4.8);
+    } else if (pores === 'field') {
+      for (let n = 0; n < N / 160; n++) { const q = r() * W, y = r() * H, i = (y | 0) * W + (q | 0); if (r() > .2 + .8 * de[i]) continue; const s = (1.6 + r() * 3) * (.7 + de[i] * .9); x.globalAlpha = .45 + r() * .5; x.drawImage(pore, q - s / 2, y - s / 2, s, s); }
+    }
+    x.globalAlpha = 1;
+    return c;
+  }
+  function panels(id, draw) {
+    const c = document.getElementById(id), x = c.getContext('2d'), W = c.width, H = c.height, w = (W - 12) / 2;
+    x.fillStyle = '#E8E8E4'; x.fillRect(0, 0, W, H);
+    draw(x, 0, w, H, 'generated'); draw(x, w + 12, w, H, 'real');
+    return x;
+  }
+
+  // cover: the AI pass against real skin
+  {
+    const c = document.getElementById('c0'), x = c.getContext('2d'), W = c.width, H = c.height;
+    const wax = skin(W, H, 7, { pores: 'even', smooth: 1 }), real = skin(W, H, 7, { weights: [.62, 1, .88] });
+    x.filter = 'blur(2.4px)'; x.drawImage(wax, 0, 0); x.filter = 'none';
+    const g = x.createRadialGradient(W * .3, H * .35, 0, W * .3, H * .35, W * .5); g.addColorStop(0, 'rgba(255,248,242,.34)'); g.addColorStop(1, 'rgba(255,248,242,0)'); x.fillStyle = g; x.fillRect(0, 0, W / 2, H);
+    x.drawImage(real, W / 2, 0, W / 2, H, W / 2, 0, W / 2, H);
+    x.fillStyle = '#fff'; x.fillRect(W / 2 - 1, 0, 2, H);
+    label(x, 'AI pass · wax', 18, 18); label(x, 'Real skin', W / 2 + 18, 18);
+  }
+  // 01 channels
+  panels('c1', (x, ox, w, H, kind) => {
+    const tw = (w - 24) / 3, wt = kind === 'real' ? [.62, 1, .88] : [1, 1, 1];
+    ['#E5484D', '#3FB950', '#4C8DFF'].forEach((col, k) => {
+      const t = skin(Math.round(tw), H - 76, 11, { pores: 'none' }), tx = t.getContext('2d'), im = tx.getImageData(0, 0, t.width, t.height), d = im.data;
+      for (let i = 0; i < d.length; i += 4) { const v = 128 + (d[i + 1] - 160) * 3.2 * wt[k]; d[i] = d[i + 1] = d[i + 2] = cl(v, 0, 255); }
+      tx.putImageData(im, 0, 0); tx.globalCompositeOperation = 'multiply'; tx.fillStyle = col; tx.fillRect(0, 0, t.width, t.height);
+      x.drawImage(t, ox + k * (tw + 12), 48);
+      x.font = '600 14px "IBM Plex Mono", monospace'; x.fillStyle = '#45454B'; x.fillText(['R', 'G', 'B'][k] + '  ×' + wt[k], ox + k * (tw + 12), H - 8);
+    });
+    label(x, kind === 'real' ? 'Real skin' : 'Generated', ox, 0, true);
+  });
+  // 02 pores
+  panels('c2', (x, ox, w, H, kind) => { x.drawImage(skin(Math.round(w), H, 21, { pores: kind === 'real' ? 'field' : 'even' }), ox, 0); label(x, kind === 'real' ? 'Real: open T-zone, fine cheeks' : 'Generated: one pattern', ox + 14, 14); });
+  // 03 sharpness
+  panels('c3', (x, ox, w, H, kind) => {
+    const t = skin(Math.round(w), H, 31, { weights: [.62, 1, .88] });
+    x.drawImage(t, ox, 0);
+    if (kind === 'real') {
+      const b = document.createElement('canvas'); b.width = t.width; b.height = t.height; const bx = b.getContext('2d');
+      bx.filter = 'blur(5px)'; bx.drawImage(t, 0, 0); bx.filter = 'none';
+      const m = bx.createRadialGradient(b.width / 2, b.height / 2, b.height * .2, b.width / 2, b.height / 2, b.width * .62);
+      m.addColorStop(0, 'rgba(0,0,0,0)'); m.addColorStop(1, 'rgba(0,0,0,1)');
+      bx.globalCompositeOperation = 'destination-in'; bx.fillStyle = m; bx.fillRect(0, 0, b.width, b.height);
+      x.drawImage(b, ox, 0);
+    }
+    label(x, kind === 'real' ? 'Real lens: soft corners' : 'Generated: sharp everywhere', ox + 14, 14);
+  });
+  // 04 optics
+  panels('c4', (x, ox, w, H, kind) => {
+    x.fillStyle = '#16161A'; x.fillRect(ox, 0, w, H);
+    const cx = ox + w / 2, cy = H / 2 + 14, R = 120;
+    if (kind === 'real') {
+      x.globalCompositeOperation = 'lighter';
+      [['#ff0000', 1.022], ['#00ff00', 1], ['#0000ff', .978]].forEach(([c, s]) => { x.fillStyle = c; x.beginPath(); x.arc(cx, cy, R * s, 0, 7); x.fill(); });
+      x.globalCompositeOperation = 'source-over';
+      const v = x.createRadialGradient(cx, H / 2, H * .3, cx, H / 2, w * .62); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.55)'); x.fillStyle = v; x.fillRect(ox, 0, w, H);
+    } else { x.fillStyle = '#fff'; x.beginPath(); x.arc(cx, cy, R, 0, 7); x.fill(); }
+    label(x, kind === 'real' ? 'Real lens: fringe + falloff' : 'Generated: perfect', ox + 14, 14);
+  });
+  // 05 grain
+  {
+    const c = document.getElementById('c5'), x = c.getContext('2d'), W = c.width, H = c.height, r = rng(5), sh = (H - 36) / 2;
+    x.fillStyle = '#E8E8E4'; x.fillRect(0, 0, W, H);
+    [0, 1].forEach(row => {
+      const img = x.createImageData(W, Math.round(sh)), d = img.data;
+      for (let y = 0; y < img.height; y++) for (let q = 0; q < W; q++) {
+        const L = q / (W - 1), base = 255 * L, n = r() - .5, j = (y * W + q) * 4;
+        const amp = row ? 70 * 4 * L * (1 - L) : 22, bb = row ? 1.35 : 1, rr = row ? .8 : 1;
+        d[j] = cl(base + n * amp * rr, 0, 255); d[j + 1] = cl(base + n * amp, 0, 255); d[j + 2] = cl(base + (r() - .5) * amp * bb, 0, 255); d[j + 3] = 255;
+      }
+      x.putImageData(img, 0, row ? sh + 36 : 0);
+      label(x, row ? 'Real: grain follows exposure' : 'Generated: flat grain', 14, (row ? sh + 36 : 0) + 14, true);
+    });
+  }
+  // 06 highlights
+  {
+    const c = document.getElementById('c6'), x = c.getContext('2d'), W = c.width, H = c.height, sh = (H - 36) / 2;
+    x.fillStyle = '#E8E8E4'; x.fillRect(0, 0, W, H);
+    [0, 1].forEach(row => {
+      const g = x.createLinearGradient(0, 0, W, 0);
+      for (let k = 0; k <= 40; k++) { const t = k / 40, e = t * 1.45; const v = row ? 255 * (1 - Math.exp(-2.3 * e)) / (1 - Math.exp(-2.3 * 1.45)) : Math.min(255, 255 * e); g.addColorStop(t, `rgb(${v | 0},${(v * .93) | 0},${(v * .86) | 0})`); }
+      x.fillStyle = g; x.fillRect(0, row ? sh + 36 : 0, W, sh);
+      label(x, row ? 'Film shoulder: rolls off' : 'Generated: clipped at white', 14, (row ? sh + 36 : 0) + 14, true);
+    });
+  }
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

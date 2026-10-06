@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Denno Gamboa · LinkedIn banner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;family=Kalam:wght@400&amp;display=swap">
+<style>
+/* 1584×396. LinkedIn puts the profile photo over the bottom-left, so that corner only carries texture. */
+:root{--stage:#E8E8E4;--ink:#121214;--ink-3:#7C7C83;--red:#D2281E;--blue:#2C69C6}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--stage)}
+.b{position:relative;width:1584px;height:396px;overflow:hidden;background:var(--stage);color:var(--ink);font-family:"Archivo",Arial,sans-serif}
+.crop{position:absolute;width:22px;height:22px;border:0 solid var(--ink-3)}
+.crop.a{top:16px;left:16px;border-top-width:1px;border-left-width:1px}
+.crop.b2{top:16px;right:16px;border-top-width:1px;border-right-width:1px}
+.crop.c{bottom:16px;right:16px;border-bottom-width:1px;border-right-width:1px}
+.slug{position:absolute;top:24px;left:52px;right:52px;display:flex;justify-content:space-between;font:500 13px/1 "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.slug .red{color:var(--red)}
+/* behind the photo: the five formats of one master, in non-repro blue */
+.frames{position:absolute;left:70px;top:70px;width:300px;height:300px}
+.frames i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1.5px solid rgb(44 105 198/.45)}
+.frames span{position:absolute;font:600 10px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;color:rgb(44 105 198/.7)}
+.lines{position:absolute;left:470px;top:86px;display:grid;gap:4px;font:900 74px/.9 "Archivo",Arial,sans-serif;text-transform:uppercase;letter-spacing:-.005em}
+.lines .wide{font-stretch:125%}
+.lines .last{position:relative;justify-self:start}
+.pen{position:absolute;left:-1%;bottom:-16px;width:102%;height:20px;overflow:visible}
+.pen path{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round}
+.note{position:absolute;margin:0;font:400 27px/1 "Kalam",cursive;white-space:nowrap}
+.n1{left:1072px;top:304px;color:var(--red);transform:rotate(-3deg)}
+.n2{left:968px;top:50px;color:var(--blue);transform:rotate(-2deg)}
+.cc{position:absolute;right:58px;top:112px;display:grid;gap:10px;width:200px}
+.checker{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.checker i{display:block;aspect-ratio:1}
+.cc p{margin:0;font:500 10px/1.5 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.who{position:absolute;right:58px;bottom:34px;margin:0;text-align:right;font:600 13px/1.6 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="b" id="banner">
+  <i class="crop a"></i><i class="crop b2"></i><i class="crop c"></i>
+  <div class="slug"><span>Proof · Denno Gamboa · Creative Technologist</span><span class="red">AI declared</span></div>
+  <div class="frames" aria-hidden="true">
+    <i style="width:284px;height:160px"></i>
+    <i style="width:150px;height:188px"></i>
+    <i style="width:106px;height:188px"></i>
+    <i style="width:170px;height:170px"></i>
+    <span style="left:0;top:58px">16:9</span><span style="left:76px;top:46px">4:5</span><span style="left:162px;top:46px">9:16</span><span style="left:236px;top:58px">1:1</span>
+  </div>
+  <div class="lines">
+    <div>One shoot.</div>
+    <div class="wide">Every format.</div>
+    <div class="last">Nothing fake.<svg class="pen" viewBox="0 0 400 24" preserveAspectRatio="none"><path d="M3 15 C 80 5, 190 21, 397 8"/></svg></div>
+  </div>
+  <p class="note n2">AI image production for luxury &amp; beauty</p>
+  <p class="note n1">&larr; open to creative technologist roles</p>
+  <div class="cc"><div class="checker" id="cc"></div><p>ColorChecker · 24 patches</p></div>
+  <p class="who">Madrid · heraskinlab.com</p>
+</div>
+<script>
+const CC = ['#735244','#C29682','#627A9D','#576C43','#8580B1','#67BDAA','#D67E2C','#505BA6','#C15A63','#5E3C6C','#9DBC40','#E0A32E','#383D96','#469449','#AF363C','#E7C71F','#BB5695','#0885A1','#F3F3F2','#C8C8C8','#A0A0A0','#7A7A79','#555555','#343434'];
+document.getElementById('cc').innerHTML = CC.map(c => `<i style="background:${c}"></i>`).join('');
+</script>
+</body>
+</html>
