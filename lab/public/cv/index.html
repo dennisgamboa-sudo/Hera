@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Dennis Gamboa, creative technologist for luxury image in Madrid: AI-assisted campaign versioning, product-faithful retouching and declared AI provenance.">
-<meta property="og:title" content="Dennis Gamboa · Creative Technologist">
+<meta name="description" content="Denno Gamboa, creative technologist for luxury image in Madrid: AI-assisted campaign versioning, product-faithful retouching and declared AI provenance.">
+<meta property="og:title" content="Denno Gamboa · Creative Technologist">
 <meta property="og:description" content="One shoot, every format, nothing fake. A CV with a 15-second reel, three versions and its own provenance passport.">
 <meta property="og:image" content="https://hera-vercel.vercel.app/cv/showreel.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <!-- artifact:start -->
-<title>Dennis Gamboa CV</title>
+<title>Denno Gamboa CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Kalam:wght@400;700&amp;display=swap">
@@ -187,7 +187,7 @@ html[data-v="ai"] .p-skin{order:-1}
 .circle::after{content:"";position:absolute;inset:-3px -6px -2.5px -6px;border:1.3px solid var(--red);border-radius:11px 9px 12px 8px/9px 11px 8px 12px;transform:rotate(-1deg);pointer-events:none}
 .tools{display:grid;gap:2.2mm}
 .tool{display:grid;grid-template-columns:30mm 1fr;gap:3mm;padding-bottom:2.2mm;border-bottom:1px solid var(--rule)}
-.tool:last-child{border-bottom:0;padding-bottom:0}
+.tool:last-child,html[data-v="studio"] .t-skin,html:not([data-v="studio"]):not([data-v="ai"]) .t-studio{border-bottom:0;padding-bottom:0}
 .tool h3{margin:0;font:750 10.5px/1.25 var(--f-display)}
 .tool .u{display:block;margin-top:.8mm;font:500 8px/1.3 var(--f-mono);color:var(--blue);text-decoration:none;word-break:break-all}
 .tool p{margin:0;font-size:9.3px;line-height:1.42;color:var(--ink-2)}
@@ -198,6 +198,9 @@ html[data-v="ai"] .p-skin{order:-1}
 .line{list-style:none;margin:0;padding:0 0 0 4.4mm;position:relative;display:grid;gap:1.3mm}
 .line::before{content:"";position:absolute;left:1.05mm;top:1.6mm;bottom:1.6mm;width:1px;background:var(--ink)}
 .line li{position:relative}
+/* the studio version carries one more tool, so its main column runs a little tighter */
+html[data-v="studio"] .cols>div>section{margin-bottom:2.6mm}
+html[data-v="studio"] .line{gap:.9mm}
 .line li::before{content:"";position:absolute;left:-4.4mm;top:1.05mm;width:2.1mm;height:2.1mm;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
 .line li.cur::before{background:var(--red);border-color:var(--red)}
 .line h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
@@ -270,7 +273,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
 }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Dennis Gamboa","alternateName":"Denno Gamboa","jobTitle":"Creative Technologist","description":"Creative technologist for luxury image: AI-assisted campaign versioning, product-faithful retouching, skin-realism tooling and declared AI provenance.","email":"mailto:dennis.gamboa@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://heraaistudio.com/","sameAs":["https://heraskinlab.com/","https://hera-vercel.vercel.app/studio"],"worksFor":{"@type":"Organization","name":"HERA Studio","url":"https://heraaistudio.com/"},"knowsLanguage":["es","en"],"knowsAbout":["Generative AI image production","Retouching","Colour correction","Campaign versioning","Skin texture realism","Content provenance (C2PA)","EU AI Act Article 50","Prompt design","React","TypeScript","Fiction writing"]}
+{"@context":"https://schema.org","@type":"Person","name":"Denno Gamboa","alternateName":"Dennis Gamboa","jobTitle":"Creative Technologist","description":"Creative technologist for luxury image: AI-assisted campaign versioning, product-faithful retouching, skin-realism tooling and declared AI provenance.","email":"mailto:dennis.gamboa@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Madrid","addressCountry":"ES"},"url":"https://heraaistudio.com/","sameAs":["https://heraskinlab.com/","https://hera-vercel.vercel.app/studio"],"worksFor":{"@type":"Organization","name":"HERA Studio","url":"https://heraaistudio.com/"},"knowsLanguage":["es","en"],"knowsAbout":["Generative AI image production","Retouching","Colour correction","Campaign versioning","Skin texture realism","Content provenance (C2PA)","EU AI Act Article 50","Prompt design","React","TypeScript","Fiction writing"]}
 </script>
 </head>
 <body>
@@ -284,7 +287,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       <a href="#studio" data-v="studio">Production studios</a>
       <a href="#ai" data-v="ai">AI companies</a>
       <span class="hand">same facts, three cuts</span>
-      <a id="pdfLink" href="Dennis_Gamboa_CV.pdf" target="_blank" rel="noopener">PDF</a>
+      <a id="pdfLink" href="Denno_Gamboa_CV.pdf" target="_blank" rel="noopener">PDF</a>
     </nav>
   </div>
 
@@ -354,16 +357,16 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       <div class="sc s5" id="s5" aria-hidden="true">
         <div class="days" id="s5d">01</div>
         <p class="line"><span id="s5a"></span><i class="caret" id="s5c"></i><span class="rest" id="s5b"></span></p>
-        <p class="by" id="s5y">Golpe de estado · first novel · as Denno Gamboa</p>
+        <p class="by" id="s5y">Golpe de estado · first novel</p>
         <p class="note red" id="s5n">I write the story too.</p>
       </div>
 
       <div class="sc s6" id="s6" aria-hidden="true">
-        <div class="name"><span id="s6a">Dennis</span><span><span id="s6b">Gamboa</span><i class="dot" id="s6d"></i></span></div>
+        <div class="name"><span id="s6a">Denno</span><span><span id="s6b">Gamboa</span><i class="dot" id="s6d"></i></span></div>
         <p class="role" id="s6r"><span data-only="luxury">Creative Technologist · AI image lead for luxury &amp; beauty</span><span data-only="studio">Creative Technologist · generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
         <p class="note red" id="s6n">open to new projects</p>
         <div class="cc"><div class="checker" id="s6c"></div><p>ColorChecker · patches 1 and 2 are<br>called dark skin and light skin</p></div>
-        <p class="where" id="s6w">Madrid · heraaistudio.com</p>
+        <p class="where" id="s6w">Madrid · <span data-only="luxury studio">hera-vercel.vercel.app/studio</span><span data-only="ai">heraaistudio.com</span></p>
       </div>
 
       <div class="tl" aria-hidden="true"><span>title</span><span>versioning</span><span>skin</span><span>passport</span><span>story</span><span>end</span><i id="tlh"></i></div>
@@ -375,23 +378,24 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       <a class="file" href="showreel.mp4" target="_blank" rel="noopener">MP4</a>
       <span class="meta">15 s · drawn live in the browser, frame by frame</span>
     </div>
-    <p class="sr-only">Showreel in six scenes. One shoot, every format, nothing fake. A product stays locked while the frame changes through five formats. Skin texture restored: fidelity from 0.33 to 0.83 and 65 percent more micro-texture. A provenance passport that declares the AI. A line from the novel Golpe de estado. End card: Dennis Gamboa, open to new projects.</p>
+    <p class="sr-only">Showreel in six scenes. One shoot, every format, nothing fake. A product stays locked while the frame changes through five formats. Skin texture restored: fidelity from 0.33 to 0.83 and 65 percent more micro-texture. A provenance passport that declares the AI. A line from the novel Golpe de estado. End card: Denno Gamboa, open to new projects.</p>
   </section>
 
   <main class="sheet" id="cv">
-    <div class="slug" aria-hidden="true"><span>Proof · Dennis_Gamboa_CV</span><span id="slugV">Luxury &amp; beauty</span><span>2026-10-05</span><span>sRGB IEC61966-2.1</span><span class="red">AI declared · see passport</span></div>
+    <div class="slug" aria-hidden="true"><span>Proof · Denno_Gamboa_CV</span><span id="slugV">Luxury &amp; beauty</span><span>2026-10-05</span><span>sRGB IEC61966-2.1</span><span class="red">AI declared · see passport</span></div>
     <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i><i class="reg l"></i><i class="reg r"></i>
 
     <header class="head">
       <div>
-        <h1>Dennis<br>Gamboa<i class="dot"></i></h1>
+        <h1>Denno<br>Gamboa<i class="dot"></i></h1>
         <p class="role"><span data-only="luxury">Creative Technologist · AI image lead · Luxury &amp; beauty</span><span data-only="studio">Creative Technologist · Generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
       </div>
       <ul class="contact">
         <li>Madrid · open to remote and EU relocation</li>
-        <li><a href="mailto:dennis.gamboa@gmail.com">dennis.gamboa@gmail.com</a></li>
+        <li><a href="mailto:denno@heraaistudio.com">denno@heraaistudio.com</a></li>
         <li class="print-only">+34 674 892 369</li>
-        <li><a href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></li>
+        <li data-only="luxury studio"><a href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app/studio</a></li>
+        <li data-only="ai"><a href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></li>
         <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/<i class="fill">your-handle</i></a></li>
       </ul>
     </header>
@@ -428,20 +432,28 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
           <ul class="proof">
             <li class="p-lvmh"><span><b>Final round of a competitive pitch for an LVMH maison</b> (Holiday 2026 campaign visuals): <span class="circle">test delivered in two days</span>, responsible-AI questions answered for the group’s committee.</span></li>
             <li class="p-skin"><span><b>HERA Skin Lab, measured on a test bench:</b> fidelity 0.33 → 0.83, 65% more micro-texture, and under 0.4/255 levels of identity leak even when fed a different face. <span class="hand red">&larr; real bench numbers</span></span></li>
-            <li class="p-zara"><span><b>Zara Woman, Inditex:</b> photography, 3D and video published to the sites of 30+ markets. The same multi-market versioning HERA now runs with AI.</span></li>
+            <li class="p-zara" data-only="luxury studio"><span><b>Zara Woman, Inditex:</b> photography, 3D and video published to the sites of 30+ markets. The same multi-market versioning HERA now runs with AI.</span></li>
           </ul>
         </section>
 
         <section>
           <h2>Built &amp; shipped</h2>
           <div class="tools">
-            <article class="tool">
-              <div><h3>HERA Skin Lab</h3><a class="u" href="https://heraskinlab.com/" target="_blank" rel="noopener">heraskinlab.com</a></div>
-              <div><p>Moves real skin texture from an AI pass onto the original photo without changing the face, and switches itself off wherever the model invented detail.</p><p class="stk">Gemini image models · optical flow · TypeScript · Cloud Run</p></div>
+            <article class="tool" data-only="studio">
+              <div><h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a></div>
+              <div><p>One approved master, every format, delivered in 48 hours with a HERA Passport.</p><p class="stk">React · TypeScript · Vite · Replicate · Vercel</p></div>
             </article>
-            <article class="tool screen-only">
+            <article class="tool t-skin">
+              <div><h3>HERA Skin Lab</h3><a class="u" href="https://heraskinlab.com/" target="_blank" rel="noopener">heraskinlab.com</a></div>
+              <div><p>Moves real skin texture from an AI pass onto the original photo without changing the face, and switches itself off wherever the model invented detail.<span data-only="luxury"> Tells you how much it changed. Never stores the photo.</span></p><p class="stk">Gemini image models · optical flow · TypeScript · Cloud Run</p></div>
+            </article>
+            <article class="tool t-studio screen-only" data-only="luxury ai">
               <div><h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a></div>
               <div><p>Campaign app: diffusion upscaling through serverless functions, a 1080×1350 carousel builder, scheduler and moodboard. Built for the iPhone first.</p><p class="stk">React · TypeScript · Vite · Replicate · Vercel</p></div>
+            </article>
+            <article class="tool" data-only="ai">
+              <div><h3>HERA AI Studio</h3><a class="u" href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></div>
+              <div><p>GEO for Madrid hotels: 10 guest questions × 4 assistants = 40 answers audited with sources, then fixed and re-measured monthly.</p><p class="stk">LLM evaluation · structured data · schema.org</p></div>
             </article>
           </div>
           <ol class="log screen-only" aria-label="Build log">
@@ -487,7 +499,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         <section>
           <h2>Also built</h2>
           <dl class="kv">
-            <div><dt>GEO audit</dt><dd>Measures how AI assistants describe and recommend a business.</dd></div>
+            <div data-only="luxury studio"><dt>HERA AI Studio · heraaistudio.com</dt><dd>Measures whether ChatGPT, Gemini, Claude and Perplexity recommend luxury hotels in Madrid, then fixes what’s in the hotel’s control.</dd></div>
             <div><dt>Claude agent skills</dt><dd>Image QA before delivery, manuscript editing in English and Spanish, Instagram editorial kits and a daily project stand-up.</dd></div>
           </dl>
         </section>
@@ -498,7 +510,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         </section>
 
         <section>
-          <h2>Writing · as Denno Gamboa</h2>
+          <h2>Writing</h2>
           <dl class="kv books">
             <div><dt>Golpe de estado</dt><dd>First novel, a literary thriller: three men run together every morning for forty-six days. In final revision.</dd></div>
             <div><dt>The Receipt</dt><dd>Its fourth chapter, in English. On submission.</dd></div>
@@ -545,12 +557,12 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     root.dataset.v = v;
     document.querySelectorAll('.versions a').forEach(a => a.setAttribute('aria-current', String(a.dataset.v === v)));
     $('slugV').textContent = V[v];
-    $('pdfLink').href = { luxury: 'Dennis_Gamboa_CV.pdf', studio: 'Dennis_Gamboa_CV_studio.pdf', ai: 'Dennis_Gamboa_CV_ai.pdf' }[v];
+    $('pdfLink').href = { luxury: 'Denno_Gamboa_CV.pdf', studio: 'Denno_Gamboa_CV_studio.pdf', ai: 'Denno_Gamboa_CV_ai.pdf' }[v];
   }
   setV(location.hash.slice(1));
   addEventListener('hashchange', () => setV(location.hash.slice(1)));
 
-  /* facts only Dennis has */
+  /* facts only Denno has */
   const fills = document.querySelectorAll('.sheet .fill').length;
   if (fills) { $('todo').hidden = false; $('todoN').textContent = fills; }
 
@@ -560,7 +572,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     el.innerHTML = CC.map((c, i) => `<i style="background:${c}"${i < 2 ? ` title="${i ? 'light skin' : 'dark skin'}"` : ''}></i>`).join('');
   });
 
-  const MRZ = 'P<HRAGAMBOA<<DENNIS'.padEnd(44, '<') + '\nCREATIVE<TECHNOLOGIST<<AI<DECLARED<MAD261005';
+  const MRZ = 'P<HRAGAMBOA<<DENNO'.padEnd(44, '<') + '\nCREATIVE<TECHNOLOGIST<<AI<DECLARED<MAD261005';
   $('mrz').textContent = MRZ;
 
   /* ---------- reel ---------- */

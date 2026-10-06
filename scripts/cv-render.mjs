@@ -37,7 +37,7 @@ async function open(options = {}, init) {
 }
 
 async function pdfs() {
-  const out = [['luxury', 'Dennis_Gamboa_CV.pdf'], ['studio', 'Dennis_Gamboa_CV_studio.pdf'], ['ai', 'Dennis_Gamboa_CV_ai.pdf']];
+  const out = [['luxury', 'Denno_Gamboa_CV.pdf'], ['studio', 'Denno_Gamboa_CV_studio.pdf'], ['ai', 'Denno_Gamboa_CV_ai.pdf']];
   for (const [v, name] of out) {
     const page = await open();
     await page.goto(`${url}#${v}`, { waitUntil: 'networkidle' });
