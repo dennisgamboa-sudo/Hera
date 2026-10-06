@@ -168,7 +168,7 @@ h1 .dot{display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:
 
 .cols{display:grid;grid-template-columns:1fr 57mm;gap:7mm;margin-top:4mm;flex:1}
 .cols>*{min-width:0}
-section{margin-bottom:3.8mm}
+section{margin-bottom:3.3mm}
 h2{margin:0 0 2.5mm;display:flex;gap:8px;align-items:center;font:600 8px/1 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
 h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
@@ -195,13 +195,17 @@ html[data-v="ai"] .p-skin{order:-1}
 .log{list-style:none;margin:3.2mm 0 0;padding:2.6mm 0 0;border-top:1px dashed var(--rule);display:grid;gap:1.4mm;font-size:9.3px;line-height:1.4;color:var(--ink-2)}
 .log li{display:grid;grid-template-columns:24mm 1fr;gap:3mm}
 .log time{font:600 7.8px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.job{display:grid;grid-template-columns:1fr auto;gap:.4mm 3mm;padding:1.4mm 0;border-bottom:1px solid var(--rule)}
-.job:first-of-type{padding-top:0}
-.job:last-child{border-bottom:0}
-.job h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
-.job h3 span{font-weight:400;color:var(--ink-2)}
-.job .when{font:500 8.6px/1.5 var(--f-mono);color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
-.job p{grid-column:1/-1;margin:0;font-size:9.1px;line-height:1.42;color:var(--ink-2)}
+.line{list-style:none;margin:0;padding:0 0 0 4.4mm;position:relative;display:grid;gap:1.3mm}
+.line::before{content:"";position:absolute;left:1.05mm;top:1.6mm;bottom:1.6mm;width:1px;background:var(--ink)}
+.line li{position:relative}
+.line li::before{content:"";position:absolute;left:-4.4mm;top:1.05mm;width:2.1mm;height:2.1mm;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
+.line li.cur::before{background:var(--red);border-color:var(--red)}
+.line h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
+.line h3 span{font-weight:400;color:var(--ink-2)}
+.line h3 em{margin-left:2mm;font:600 7.4px/1 var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--red);vertical-align:1px}
+.line p{margin:.3mm 0 0;font-size:9.1px;line-height:1.42;color:var(--ink-2)}
+.track{margin:2mm 0 0;padding:1.8mm 0 0 4.4mm;border-top:1px dashed var(--rule);font-size:9.1px;line-height:1.42;color:var(--ink-2)}
+.track b{margin-right:1.6mm;font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
 aside section{margin-bottom:4mm}
 .stance{background:rgb(44 105 198/.07);border-left:2px solid var(--blue);padding:3mm 3.2mm}
 .stance h2{color:var(--blue)}
@@ -273,7 +277,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
 <div class="wrap">
 
   <div class="topbar screen-only">
-    <p class="todo" id="todo" hidden>Vista de trabajo · Faltan <b id="todoN">0</b> datos en rojo que solo tú tienes: las fechas de cada puesto y tu usuario de LinkedIn. Pásamelos y regenero los tres PDF. Este aviso desaparece solo cuando ya no queda ninguno.</p>
+    <p class="todo" id="todo" hidden>Vista de trabajo · Datos pendientes en rojo: <b id="todoN">0</b>. Pásamelos y regenero los tres PDF. Este aviso desaparece solo cuando ya no queda ninguno.</p>
     <nav class="versions" aria-label="CV version">
       <span class="lbl">This CV, versioned for</span>
       <a href="#luxury" data-v="luxury">Luxury &amp; beauty</a>
@@ -398,7 +402,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       <span data-only="ai">I know why generated images look fake, and I build the tools that fix it.</span>
     </p>
 
-    <p class="brands"><span class="k">Worked with</span>Zara <i>·</i> Inditex <i>/</i> Carolina Herrera <i>/</i> Purificación García <i>/</i> Hogarth <i>·</i> WPP <i>/</i> Nacho Ricci</p>
+    <p class="brands"><span class="k">Worked with</span>Zara <i>·</i> Inditex <i>/</i> Mango <i>/</i> Carolina Herrera <i>/</i> Purificación García <i>/</i> Warner Bros. <i>/</i> Hogarth <i>·</i> WPP <i>/</i> Locco</p>
 
     <div class="cols">
       <div>
@@ -422,9 +426,9 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         <section>
           <h2>Proof</h2>
           <ul class="proof">
-            <li class="p-lvmh"><span><b>Final round of a competitive pitch for an LVMH maison:</b> Holiday Season 2026 campaign visuals. NDA signed, <span class="circle">test delivered in two days</span>, responsible-AI questions answered point by point for the group’s committee.</span></li>
-            <li class="p-skin"><span><b>HERA Skin Lab, measured on a test bench:</b> fidelity up from 0.33 to 0.83 and 65% more micro-texture reaching the photo. Fed a completely different face, it lets through under 0.4 of 255 luminance levels of structure. <span class="hand red">&larr; real bench numbers</span></span></li>
-            <li class="p-zara"><span><b>Zara Woman, Inditex:</b> sourced and published photography, 3D and video to each country’s site and formats. The same multi-market versioning HERA now runs with AI.</span></li>
+            <li class="p-lvmh"><span><b>Final round of a competitive pitch for an LVMH maison</b> (Holiday 2026 campaign visuals): <span class="circle">test delivered in two days</span>, responsible-AI questions answered for the group’s committee.</span></li>
+            <li class="p-skin"><span><b>HERA Skin Lab, measured on a test bench:</b> fidelity 0.33 → 0.83, 65% more micro-texture, and under 0.4/255 levels of identity leak even when fed a different face. <span class="hand red">&larr; real bench numbers</span></span></li>
+            <li class="p-zara"><span><b>Zara Woman, Inditex:</b> photography, 3D and video published to the sites of 30+ markets. The same multi-market versioning HERA now runs with AI.</span></li>
           </ul>
         </section>
 
@@ -435,7 +439,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
               <div><h3>HERA Skin Lab</h3><a class="u" href="https://heraskinlab.com/" target="_blank" rel="noopener">heraskinlab.com</a></div>
               <div><p>Moves real skin texture from an AI pass onto the original photo without changing the face, and switches itself off wherever the model invented detail.</p><p class="stk">Gemini image models · optical flow · TypeScript · Cloud Run</p></div>
             </article>
-            <article class="tool">
+            <article class="tool screen-only">
               <div><h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a></div>
               <div><p>Campaign app: diffusion upscaling through serverless functions, a 1080×1350 carousel builder, scheduler and moodboard. Built for the iPhone first.</p><p class="stk">React · TypeScript · Vite · Replicate · Vercel</p></div>
             </article>
@@ -450,19 +454,26 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         </section>
 
         <section>
-          <h2>Experience</h2>
-          <div class="job"><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span></h3><span class="when"><i class="fill">20XX</i> – now</span>
-            <p>AI-assisted image production for luxury: campaign versioning, product-faithful retouching and the HERA Passport, a provenance record shipped with every asset.</p></div>
-          <div class="job"><h3>Creative Technologist, internship <span>· Hogarth (WPP), Madrid</span></h3><span class="when">Aug 2024 – Jan 2025</span>
-            <p>Generative AI for brand content: prompt design, Midjourney and ChatGPT workflows, storytelling.</p></div>
-          <div class="job"><h3>Online Product Manager <span>· Inditex, Zara Woman</span></h3><span class="when"><i class="fill">20XX – 20XX</i></span>
-            <p>Commercial planning and samples; photography, 3D and video published to each country’s site; product-image analysis on the web grid.</p></div>
-          <div class="job"><h3>Creative Image Retoucher <span>· Carolina Herrera, Purificación García · Ourense</span></h3><span class="when"><i class="fill">20XX – 20XX</i></span>
-            <p>Colour, texture and form retouching with the creative teams, holding one visual line across campaigns.</p></div>
-          <div class="job"><h3>Colourist, internship <span>· Bymatallana Art Partner, New York</span></h3><span class="when"><i class="fill">20XX</i></span>
-            <p>Seasonal palettes, colorimetry lab and digital dye formulation; colour correction for film and commercials.</p></div>
-          <div class="job"><h3>Digital Retoucher, then Coordinating Manager <span>· Nacho Ricci, Buenos Aires</span></h3><span class="when"><i class="fill">20XX</i> – 2014</span>
-            <p>Retouched for photographers and designers, then ran the studio’s creative team, budget and production.</p></div>
+          <h2>Experience · newest first</h2>
+          <ol class="line">
+            <li class="cur"><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span><em>now</em></h3>
+              <p>AI-assisted image production for luxury: campaign versioning, product-faithful retouching and the HERA Passport, a provenance record shipped with every asset.</p></li>
+            <li class="cur"><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span><em>now</em></h3>
+              <p>Photography, retouching and digital design for Locco’s website, social channels and campaigns, including its Asia campaign.</p></li>
+            <li><h3>Creative Technologist, apprenticeship <span>· Hogarth (WPP), Madrid</span></h3>
+              <p>Generative AI for brand content: visual narratives with Midjourney and ChatGPT, AI production workflows, generative visuals for the Toyota C-HR.</p></li>
+            <li><h3>Assistant Art Director <span>· Warner Bros. Entertainment, Madrid</span></h3>
+              <p>Graphic design for the art department, concept sketches and digital illustration; logistics and purchasing.</p></li>
+            <li><h3>E-commerce Retoucher <span>· Mango</span></h3></li>
+            <li><h3>Online Product Manager <span>· Inditex (Tempe), Zara Woman · Alicante</span></h3>
+              <p>Photography, 3D and video for the sites of 30+ markets, product-image analysis for e-commerce, and an internal photo plan so every department worked from quality images.</p></li>
+            <li><h3>Creative Image Retoucher <span>· Carolina Herrera, Purificación García · Ourense</span></h3></li>
+            <li><h3>Colourist, internship <span>· Bymatallana Art Partner, New York</span></h3></li>
+            <li><h3>Retouch and post-production <span>· Phoenix Studio</span></h3></li>
+            <li><h3>Digital Retoucher, then Coordinating Manager <span>· Nacho Ricci, Buenos Aires</span></h3>
+              <p>Retouched for photographers and designers, then ran the studio’s creative team, budget and production.</p></li>
+          </ol>
+          <p class="track"><b>Parallel track</b> denno, my freelance practice: retouch and creative direction for fashion and lifestyle brands, social and campaign content, photo and video grading.</p>
         </section>
       </div>
 

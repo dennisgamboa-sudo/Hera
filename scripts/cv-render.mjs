@@ -1,9 +1,11 @@
 // Renders the CV's deliverables from lab/public/cv/index.html:
-//   three one-page A4 PDFs (luxury, studio, ai) and the 16-second showreel MP4 + poster.
+//   three one-page A4 PDFs (luxury, studio, ai) and the 16-second showreel MP4 + poster,
+//   plus the LinkedIn banner and carousel from linkedin/.
 // Needs Playwright (Chromium), curl and ffmpeg.
-//   node scripts/cv-render.mjs          -> PDFs and reel
-//   node scripts/cv-render.mjs pdf      -> PDFs only
-//   node scripts/cv-render.mjs reel     -> reel only
+//   node scripts/cv-render.mjs           -> everything
+//   node scripts/cv-render.mjs pdf       -> PDFs only
+//   node scripts/cv-render.mjs reel      -> reel only
+//   node scripts/cv-render.mjs linkedin  -> banner and carousel only
 import { execFileSync, execSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -74,9 +76,30 @@ async function reel() {
   console.log(`showreel.mp4 · ${total} frames at ${FPS} fps`);
 }
 
+// LinkedIn: the 1584×396 banner, and the "six signatures" document post as a PDF plus one PNG per slide
+// (1080×1350 also fits an Instagram carousel).
+async function linkedin() {
+  const li = path.join(root, 'linkedin');
+  const banner = await open({ viewport: { width: 1584, height: 396 } });
+  await banner.goto(pathToFileURL(path.join(li, 'banner.html')).href, { waitUntil: 'networkidle' });
+  await banner.evaluate(() => document.fonts.ready);
+  await banner.locator('#banner').screenshot({ path: path.join(li, 'banner.png') });
+  await banner.context().close();
+
+  const deck = await open({ viewport: { width: 1080, height: 1350 } });
+  await deck.goto(pathToFileURL(path.join(li, 'carousel.html')).href, { waitUntil: 'networkidle' });
+  await deck.waitForFunction(() => window.__ready === true);
+  const slides = await deck.locator('section.s').all();
+  for (const [i, s] of slides.entries()) await s.screenshot({ path: path.join(li, 'slides', `${String(i + 1).padStart(2, '0')}.png`) });
+  await deck.pdf({ path: path.join(li, 'why-ai-skin-looks-like-wax.pdf'), width: '1080px', height: '1350px', printBackground: true });
+  await deck.context().close();
+  console.log(`banner.png · ${slides.length} slides · why-ai-skin-looks-like-wax.pdf`);
+}
+
 try {
   if (what === 'all' || what === 'pdf') await pdfs();
   if (what === 'all' || what === 'reel') await reel();
+  if (what === 'all' || what === 'linkedin') await linkedin();
 } finally {
   await browser.close();
 }
