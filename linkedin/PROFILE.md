@@ -128,7 +128,7 @@ Aptitudes: International Project Management · E-commerce · Product Photography
 
 1. **Showreel.** Publícalo como post de vídeo (`showreel.mp4`) y después márcalo como destacado.
 2. **Carrusel.** Publica `why-ai-skin-looks-like-wax.pdf` como documento y destácalo.
-3. **Enlace al CV.** `hera-vercel.vercel.app/cv/`, cuando esté publicado.
+3. **Enlace al CV.** `https://hera-lab3.vercel.app/cv/`
 4. **Enlace** a `heraskinlab.com`.
 
 ---
@@ -159,7 +159,7 @@ El resto: Adobe Photoshop · Adobe Lightroom · Midjourney · Prompt Engineering
 >
 > The facts are mine and checked by me. The layout and code were made with Claude under my direction, and the CV says so on the page.
 >
-> Full CV: [link]
+> Full CV: https://hera-lab3.vercel.app/cv/
 
 **Jueves · carrusel**
 > Most AI skin looks like wax, and better prompts won't fix it.
