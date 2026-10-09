@@ -1,9 +1,10 @@
 // Renders the CV's deliverables from lab/public/cv/index.html:
-//   three one-page A4 PDFs (luxury, studio, ai) and the 16-second showreel MP4 + poster,
-//   plus the LinkedIn banner and carousel from linkedin/.
+//   three one-page A4 PDFs (luxury, studio, ai), the one-column job-portal PDF from plain.html,
+//   the 16-second showreel MP4 + poster, plus the LinkedIn banner and carousel from linkedin/.
 // Needs Playwright (Chromium), curl and ffmpeg.
 //   node scripts/cv-render.mjs           -> everything
-//   node scripts/cv-render.mjs pdf       -> PDFs only
+//   node scripts/cv-render.mjs pdf       -> PDFs only (the three versions and the job-portal one)
+//   node scripts/cv-render.mjs plain     -> job-portal PDF only
 //   node scripts/cv-render.mjs reel      -> reel only
 //   node scripts/cv-render.mjs linkedin  -> banner and carousel only
 import { execFileSync, execSync } from 'node:child_process';
@@ -57,6 +58,18 @@ async function pdfs() {
   }
 }
 
+// The job-portal PDF: one column, so applicant tracking systems read it in order. Must stay on one page.
+async function plain() {
+  const page = await open();
+  await page.goto(pathToFileURL(path.join(dir, 'plain.html')).href, { waitUntil: 'networkidle' });
+  await page.evaluate(() => document.fonts.ready);
+  const pdf = await page.pdf({ path: path.join(dir, 'Denno_Gamboa_CV_simple.pdf'), preferCSSPageSize: true, printBackground: true });
+  await page.context().close();
+  const pages = pdf.toString('latin1').match(/\/Type\s*\/Page\b/g).length;
+  if (pages !== 1) throw new Error(`Denno_Gamboa_CV_simple.pdf has ${pages} pages, it must fit on one`);
+  console.log('Denno_Gamboa_CV_simple.pdf · 1 page');
+}
+
 async function reel() {
   const frames = mkdtempSync(path.join(tmpdir(), 'reel-'));
   const page = await open({ viewport: { width: 1920, height: 1080 } }, () => { window.__REEL_RENDER__ = true; });
@@ -98,6 +111,7 @@ async function linkedin() {
 
 try {
   if (what === 'all' || what === 'pdf') await pdfs();
+  if (what === 'all' || what === 'pdf' || what === 'plain') await plain();
   if (what === 'all' || what === 'reel') await reel();
   if (what === 'all' || what === 'linkedin') await linkedin();
 } finally {
