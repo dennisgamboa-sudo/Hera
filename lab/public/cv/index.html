@@ -561,7 +561,9 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
       el('path', { d, class: 'g d', 'stroke-width': w, 'stroke-opacity': op, pathLength: 1 }, g);
     }
   }
-  function ring(g, r, w, op, dash) { return el('circle', { r, class: 'g d', 'stroke-width': w, 'stroke-opacity': op, pathLength: 1, ...(dash ? { 'stroke-dasharray': dash, class: 'g' } : {}) }, g); }
+  function ring(g, r, w, op, dash) { // a dashed ring keeps its real length, so the dashes stay dots all the way round
+    return el('circle', dash ? { r, class: 'g', 'stroke-width': w, 'stroke-opacity': op, 'stroke-dasharray': dash } : { r, class: 'g d', 'stroke-width': w, 'stroke-opacity': op, pathLength: 1 }, g);
+  }
   function ringText(g, id, r, txt, size, ls, op = 1) {
     el('path', { id, d: `M0 ${r}A${r} ${r} 0 1 1 0 ${-r}A${r} ${r} 0 1 1 0 ${r}`, fill: 'none' }, g);
     const t = el('text', { 'font-family': 'Syne, Arial, sans-serif', 'font-size': size, 'letter-spacing': ls, 'font-weight': 500, opacity: op }, g);
