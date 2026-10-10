@@ -83,7 +83,7 @@ async function reel() {
   }
   await page.context().close();
   execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(FPS), '-i', path.join(frames, '%04d.png'),
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', path.join(dir, 'showreel.mp4')]);
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', path.join(dir, 'showreel.mp4')]);
   execFileSync('ffmpeg', ['-y', '-v', 'error', '-i', path.join(frames, `${String(total - 1).padStart(4, '0')}.png`), '-q:v', '3', path.join(dir, 'showreel.jpg')]);
   rmSync(frames, { recursive: true, force: true });
   console.log(`showreel.mp4 · ${total} frames at ${FPS} fps`);

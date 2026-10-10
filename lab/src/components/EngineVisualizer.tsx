@@ -127,7 +127,6 @@ export function EngineVisualizer({ engineId, image }: EngineVisualizerProps) {
             ANALYZING VERTICES...
           </motion.div>
           <div className="text-xs font-mono text-cyan-300">MESH DENSITY: ULTRA</div>
-          <div className="text-xs font-mono text-cyan-300">PRECISION: 99.6%</div>
         </div>
       </div>
     )
