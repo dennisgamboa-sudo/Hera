@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Denno Gamboa, creative technologist for luxury image in Madrid: AI-assisted campaign versioning, product-faithful retouching and declared AI provenance.">
 <meta property="og:title" content="Denno Gamboa · Creative Technologist">
-<meta property="og:description" content="Real skin. Measured. Signed. A CV with a 15-second reel, three versions and its own provenance seal.">
+<meta property="og:description" content="Real skin. Measured. Signed. A CV with a 20-second reel, three versions and its own provenance seal.">
 <meta property="og:url" content="https://hera-lab3.vercel.app/cv/">
 <meta property="og:image" content="https://hera-lab3.vercel.app/cv/showreel.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -70,6 +70,14 @@ html[data-v="ai"] [data-only]:not([data-only~="ai"]){display:none!important}
 .s1 .seal{position:absolute;left:50%;top:24cqw;width:34cqw;height:34cqw;transform:translate(-50%,-50%)}
 .s1 .word{top:44cqw;font-size:6cqw}
 
+.s7 .rose{position:absolute;right:4cqw;top:50%;width:50cqw;height:50cqw;transform:translateY(-50%)}
+.s7 .rose .g{fill:none;stroke:var(--gold)}.s7 .rose text{fill:var(--gold)}
+.s7 .ch{position:absolute;left:9cqw;top:17cqw;opacity:0}
+.s7 .ch b{display:block;font:400 10cqw/1 var(--f-serif);font-variation-settings:"opsz" 96;font-variant-numeric:lining-nums;color:var(--ivory)}
+.s7 .ch .cap6{display:block;margin-top:2.4cqw;color:var(--ivory);letter-spacing:.26em}
+.s7 .ch .mono6{display:block;margin-top:1.2cqw;color:rgb(195 165 106/.8)}
+.s7 .ix{position:absolute;left:9.2cqw;bottom:9cqw;display:flex;gap:1.6cqw;font:400 .95cqw/1 var(--f-mono);letter-spacing:.12em;color:rgb(237 231 219/.35)}
+.s7 .ix i{font-style:normal}.s7 .ix i.on{color:var(--gold)}
 .s2 .shot{position:absolute;inset:0}
 .s2 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .s2 .scan{position:absolute;top:0;bottom:0;width:1px;background:var(--gold);box-shadow:0 0 1.4cqw .2cqw rgb(195 165 106/.55);opacity:0}
@@ -262,7 +270,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     <a class="pdf" id="pdfLink" href="Denno_Gamboa_CV.pdf" target="_blank" rel="noopener">PDF</a>
   </nav>
 
-  <section class="reel screen-only" aria-label="Showreel, 15 seconds">
+  <section class="reel screen-only" aria-label="Showreel, 20 seconds">
     <div class="stage" id="stage">
       <i class="reg a"></i><i class="reg b"></i><i class="reg c"></i><i class="reg d"></i>
       <div class="plate" aria-hidden="true"><span id="fig">Fig. I — Look</span><span>Denno Gamboa — Plate I</span></div>
@@ -270,6 +278,17 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
       <div class="sc s1" id="s1" aria-hidden="true">
         <svg class="seal" id="s1seal" viewBox="-110 -110 220 220"></svg>
         <p class="word" id="w1">Look closer.</p>
+      </div>
+
+      <div class="sc s7" id="s7" aria-hidden="true">
+        <svg class="rose" id="s7r" viewBox="-110 -110 220 220"></svg>
+        <div class="ch" id="ch0"><b>2018</b><span class="cap6">Freelance retoucher &amp; creative director</span><span class="mono6">denno · Madrid</span></div>
+        <div class="ch" id="ch1"><b>2021</b><span class="cap6">Retoucher</span><span class="mono6">Tempe · Inditex · Alicante</span></div>
+        <div class="ch" id="ch2"><b>2023</b><span class="cap6">Assistant art director</span><span class="mono6">Warner Bros. Entertainment</span></div>
+        <div class="ch" id="ch3"><b>2024</b><span class="cap6">Creative technologist</span><span class="mono6">Hogarth · WPP · Madrid</span></div>
+        <div class="ch" id="ch4"><b>2025</b><span class="cap6">Photo &amp; digital graphic designer</span><span class="mono6">Locco · Madrid</span></div>
+        <div class="ch" id="ch5"><b>2026</b><span class="cap6">Founder &amp; creative director</span><span class="mono6">HERA Studio · Madrid</span></div>
+        <div class="ix" id="s7ix"><i>2018</i><i>2021</i><i>2023</i><i>2024</i><i>2025</i><i>2026</i></div>
       </div>
 
       <div class="sc s2" id="s2" aria-hidden="true">
@@ -290,7 +309,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
         <div class="phone"><video id="s3v" muted playsinline preload="auto" poster="">
           <source src="skinlab-scan.webm" type="video/webm"><source src="skinlab-scan.mp4" type="video/mp4"></video></div>
         <p class="word" id="w3">Built.</p>
-        <div class="meta" id="s3m"><span class="cap6">HERA Skin Lab</span><span class="mono6">heraskinlab.com · live</span></div>
+        <div class="meta" id="s3m"><span class="cap6">One of my apps</span><span class="mono6">heraskinlab.com · live</span></div>
       </div>
 
       <div class="sc s4" id="s4" aria-hidden="true">
@@ -334,7 +353,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
       <button type="button" id="bReplay">Replay</button>
       <button type="button" id="bSkip">Skip to the CV</button>
       <a class="file" href="showreel.mp4" target="_blank" rel="noopener">MP4</a>
-      <span class="meta">Fifteen seconds, five words.</span>
+      <span class="meta">Twenty seconds, eight years.</span>
     </div>
     <p class="sr-only">Showreel. Look closer: a guilloché seal draws itself. Flawless: AI skin, smooth as wax. A gold scan line passes and the real skin comes back: fidelity from 0.33 to 0.83, 65 percent more micro-texture, face unchanged. Built: HERA Skin Lab scanning a face on a phone. Unchanged: a product stays locked while the frame changes through five formats. Signed: the provenance seal declares the AI. End card: Denno Gamboa, creative technologist, Madrid.</p>
   </section>
@@ -401,7 +420,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
           <ol class="xp">
             <li class="cur"><time datetime="2026-05">2026 – now</time><div><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span></h3>
               <p>AI image production for luxury: campaign versioning, product-faithful retouching and a HERA Passport with every asset. Final round of an LVMH maison pitch for Holiday 2026.</p></div></li>
-            <li class="cur"><time datetime="2025-08">2025 – now</time><div><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span></h3>
+            <li><time datetime="2025-08">2025 – 2026</time><div><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span></h3>
               <p>Photography, retouching and design for davidlocco.com, social and the Asia campaign.</p></div></li>
             <li><time datetime="2018-06">2018 – 2025</time><div><h3>Freelance Retoucher &amp; Creative Director <span>· denno, Madrid</span></h3>
               <p>Retouching, creative direction and grading for fashion and lifestyle brands.</p></div></li>
@@ -551,7 +570,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     return t;
   }
   let sid = 0;
-  function seal(svg, { text = 'DENNO GAMBOA · REAL SKIN · MEASURED · SIGNED · HERA STUDIO · ', micro = 'CONTENT CREDENTIALS · C2PA · HERA PASSPORT · ', center = 'DG', sub = 'MADRID', ticks = true } = {}) {
+  function seal(svg, { text = 'DENNO GAMBOA · RETOUCH · ART DIRECTION · CREATIVE TECHNOLOGY · ', micro = 'ALICANTE · MADRID · SINCE 2018 · ', center = 'DG', sub = 'MADRID', ticks = true } = {}) {
     svg.innerHTML = ''; const n = 's' + (++sid);
     const outer = el('g', { class: 'outer' }, svg), bandA = el('g', { class: 'bandA' }, svg), bandB = el('g', { class: 'bandB' }, svg), core = el('g', { class: 'core' }, svg);
     if (ticks) for (const [x1, y1, x2, y2] of [[0, -108, 0, -100], [0, 100, 0, 108], [-108, 0, -100, 0], [100, 0, 108, 0]]) el('line', { x1, y1, x2, y2, class: 'g d', 'stroke-width': .4, 'stroke-opacity': .7, pathLength: 1 }, outer);
@@ -590,7 +609,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
   if (!stage) return;
   const RENDER = !!window.__REEL_RENDER__;
   if (RENDER) root.classList.add('render');
-  const DUR = 15, FPS = 30;
+  const DUR = 20, FPS = 30, OFF = 5; // OFF: the path scene pushes everything after the first scene back
   const cl = (x, a = 0, b = 1) => x < a ? a : x > b ? b : x;
   const P = (t, a, b) => cl((t - a) / (b - a));
   const L = (a, b, p) => a + (b - a) * p;
@@ -598,7 +617,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
   const io3 = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
 
   const SC = [[0, 2.2], [2.2, 5.6], [5.6, 8.1], [8.1, 10.5], [10.5, 12.5], [12.5, 15]];
-  const FIG = ['Fig. I — Look', 'Fig. II — Skin', 'Fig. III — Tool', 'Fig. IV — Product', 'Fig. V — Seal', 'Fig. VI — Signature'];
+  const FIG = ['Fig. I — Look', 'Fig. III — Skin', 'Fig. IV — Tool', 'Fig. V — Product', 'Fig. VI — Seal', 'Fig. VII — Signature'];
   const scenes = SC.map((_, i) => $('s' + (i + 1)));
   function show(i, t) {
     const [a, b] = SC[i];
@@ -636,7 +655,43 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     word($('w1'), t, .95, 2.2);
   }
 
-  // 02 · skin: the AI pass (wax) and, behind a gold scan, the real skin
+  // 02 · path: eight years engraved as rings, one per chapter, from the centre out
+  const CH = ['2018 · DENNO · FREELANCE RETOUCH · MADRID · ', '2021 · TEMPE · INDITEX · RETOUCHER · ALICANTE · ', '2023 · WARNER BROS. ENTERTAINMENT · ASSISTANT ART DIRECTOR · ', '2024 · HOGARTH · WPP · CREATIVE TECHNOLOGIST · MADRID · ', '2025 · LOCCO · PHOTO & DIGITAL GRAPHIC DESIGNER · MADRID · ', '2026 · HERA STUDIO · FOUNDER & CREATIVE DIRECTOR · MADRID · '];
+  const ROSE = $('s7r'), CT = CH.map((_, i) => 2.45 + i * .72), RINGS = [];
+  (() => {
+    const core = el('g', {}, ROSE);
+    ring(core, 13, .45, .9);
+    const c = el('text', { 'text-anchor': 'middle', y: 5, 'font-family': 'Bodoni Moda, Didot, serif', 'font-style': 'italic', 'font-size': 14, fill: '#EDE7DB' }, core); c.textContent = 'DG';
+    CH.forEach((txt, i) => {
+      const r = 24 + i * 14, g = el('g', {}, ROSE), size = 2.5 + i * .14;
+      band(g, r - 4.6, 2.6, 18 + i * 8, 6 + i, .2, .6); // each chapter has its own wave count, its own moiré
+      ring(g, r - 1, .3, .7);
+      const reps = Math.max(1, Math.floor(Math.PI * 2 * (r + 1.6) / (txt.length * size * .86)));
+      const w = ringText(g, 'ch' + i + 'p', r + 1.6, txt.repeat(reps), size, .5);
+      for (let k = 0; k < 4; k++) { const a = k * Math.PI / 2 + i * .3; el('line', { x1: Math.cos(a) * (r - 1), y1: Math.sin(a) * (r - 1), x2: Math.cos(a) * (r + 4.5), y2: Math.sin(a) * (r + 4.5), class: 'g d', 'stroke-width': .35, 'stroke-opacity': .8, pathLength: 1 }, g); }
+      RINGS.push({ g, lines: [...g.querySelectorAll('.d')], w });
+    });
+    ring(ROSE, 107, .3, .5, '.6 2.2');
+  })();
+  const IX = [...$('s7ix').children];
+  function s7(t) {
+    const [a, b] = [2.2, 2.2 + OFF], o = P(t, a, a + .3) * (1 - P(t, b - .3, b));
+    $('s7').style.opacity = o; $('s7').style.visibility = o > 0 ? 'visible' : 'hidden';
+    if (o <= 0) return;
+    ROSE.style.transform = `translateY(-50%) scale(${L(.92, 1, io3(P(t, a, b)))}) rotate(${(t - a) * 3}deg)`;
+    RINGS.forEach((R, i) => {
+      draw(R.lines, io3(P(t, CT[i], CT[i] + .6)), .3);
+      R.w.style.opacity = o3(P(t, CT[i] + .25, CT[i] + .6));
+      R.g.style.transform = `rotate(${(i % 2 ? -1 : 1) * (t - CT[i]) * (2 + i)}deg)`;
+    });
+    CH.forEach((_, i) => {
+      const e = $('ch' + i), pi = o3(P(t, CT[i], CT[i] + .3)), po = i < CH.length - 1 ? P(t, CT[i + 1] - .05, CT[i + 1] + .15) : P(t, b - .4, b), p = pi * (1 - po);
+      e.style.opacity = p; e.style.filter = `blur(${(1 - pi + po) * .5}cqw)`; e.style.transform = `translateY(${(1 - pi) * 1.2 - po * .8}cqw)`;
+      IX[i].classList.toggle('on', t >= CT[i]);
+    });
+  }
+
+  // 03 · skin: the AI pass (wax) and, behind a gold scan, the real skin
   function rng(s) { return () => { s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
   function vn(W, H, cell, r) {
     const gw = Math.ceil(W / cell) + 2, gh = Math.ceil(H / cell) + 2, g = new Float32Array(gw * gh);
@@ -784,7 +839,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     RET.style.opacity = rp * .9; RET.style.transform = `translate(-50%,-50%) scale(${L(1.25, 1, rp)}) rotate(${t * 6}deg)`;
   }
 
-  // 03 · built: the real app, on a phone
+  // 04 · built: the real app, on a phone
   const G3 = guil($('s3g')), vid = $('s3v');
   function s3(t) {
     const o = show(2, t);
@@ -798,7 +853,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     const m = o3(P(t, 6.3, 6.8)); $('s3m').style.opacity = m; $('s3m').style.transform = `translateY(${(1 - m) * .8}cqw)`;
   }
 
-  // 04 · unchanged: the frame changes five times, the product never moves
+  // 05 · unchanged: the frame changes five times, the product never moves
   const RT = [[56, 31.5, '16:9 · film'], [26, 32.5, '4:5 · feed'], [18.3, 32.5, '9:16 · story'], [31, 31, '1:1 · grid'], [60, 31.4, '1.91:1 · display']];
   const KT = [8.3, 8.75, 9.2, 9.65, 10.05];
   function s4(t) {
@@ -815,8 +870,8 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     word($('w4'), t, 8.55, 10.5);
   }
 
-  // 05 · signed: the seal is struck, the passport line prints
-  const S5 = seal($('s5seal'), { text: 'AI DECLARED · EU AI ACT ART. 50 · HERA PASSPORT · ', center: 'HERA', sub: 'SKIN LAB' });
+  // 06 · signed: the seal is struck, the passport line prints
+  const S5 = seal($('s5seal'), { text: 'AI DECLARED · SIGNED BY DENNO GAMBOA · MADRID · ', micro: 'EU AI ACT ART. 50 · PROVENANCE · ', sub: 'SIGNED' });
   draw(S5.lines, 1, 0);
   function s5(t) {
     if (show(4, t) <= 0) return;
@@ -828,7 +883,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
     $('s5m').textContent = MRZ.slice(0, Math.round(MRZ.length * P(t, 11.2, 12.1)));
   }
 
-  // 06 · signature
+  // 07 · signature
   const G6 = guil($('s6g')), S6 = seal($('s6seal'));
   function s6(t) {
     if (show(5, t) <= 0) return;
@@ -841,11 +896,11 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
   }
 
   function hud(t) {
-    let i = SC.findIndex(([, b]) => t < b); if (i < 0) i = 5;
-    $('fig').textContent = FIG[i];
+    let i = SC.findIndex(([, b]) => (t < 2.2 ? t : t - OFF) < b); if (i < 0) i = 5;
+    $('fig').textContent = t >= 2.2 && t < 2.2 + OFF ? 'Fig. II — Path' : FIG[i];
     $('bar').style.width = t / DUR * 100 + '%';
   }
-  function render(t) { s1(t); s2(t); s3(t); s4(t); s5(t); s6(t); hud(t); grain(t); }
+  function render(t) { const u = t - OFF; s1(t); s7(t); s2(u); s3(u); s4(u); s5(u); s6(u); hud(t); grain(t); }
 
   let playing = false, t0 = 0, cur = 0;
   const bP = $('bPlay');

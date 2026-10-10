@@ -1,6 +1,6 @@
 // Renders the CV's deliverables from lab/public/cv/index.html:
 //   three one-page A4 PDFs (luxury, studio, ai), the one-column job-portal PDF from plain.html,
-//   the 16-second showreel MP4 + poster, plus the LinkedIn banner and carousel from linkedin/.
+//   the 21-second showreel MP4 + poster, plus the LinkedIn banner and carousel from linkedin/.
 // Needs Playwright (Chromium), curl and ffmpeg.
 //   node scripts/cv-render.mjs           -> everything
 //   node scripts/cv-render.mjs pdf       -> PDFs only (the three versions and the job-portal one)
