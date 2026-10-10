@@ -5,282 +5,251 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Denno Gamboa, creative technologist for luxury image in Madrid: AI-assisted campaign versioning, product-faithful retouching and declared AI provenance.">
 <meta property="og:title" content="Denno Gamboa · Creative Technologist">
-<meta property="og:description" content="One shoot, every format, nothing fake. A CV with a 15-second reel, three versions and its own provenance passport.">
+<meta property="og:description" content="Real skin. Measured. Signed. A CV with a 20-second reel, three versions and its own provenance seal.">
 <meta property="og:url" content="https://hera-lab3.vercel.app/cv/">
 <meta property="og:image" content="https://hera-lab3.vercel.app/cv/showreel.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0A0A">
 <!-- artifact:start -->
 <title>Denno Gamboa CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Kalam:wght@400;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Syne:wght@400..800&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <style>
-/* A retouch proof on a light-booth desk: paper stays paper, red pen corrects, blue pencil explains. */
+/* An engraved plate in black and white: hairline guilloché seals, a living grotesk that changes weight as it settles. */
 :root{
-  --desk:#D8D8D3; --desk-ink:#19191B; --desk-ink-2:#56565C; --desk-line:#BDBDB7;
-  --paper:#FBFBF9; --ink:#121214; --ink-2:#45454B; --ink-3:#85858C; --rule:#DBDBD5;
-  --red:#D2281E; --blue:#2C69C6; --stage:#E8E8E4; --night:#111113;
-  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
-  --f-serif:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --stock:#0A0A0A; --plate:#111111; --ivory:#F5F5F3; --ink-2:#A9A9A6; --ink-3:#71716E;
+  --gold:#FFFFFF; --gold-2:#8C8C8A; --line:#262626; --line-2:#363636;
+  --f-sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-serif:"Syne","Helvetica Neue",Arial,sans-serif;
+  --f-caps:"Syne","Helvetica Neue",Arial,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  --f-hand:"Kalam","Segoe Print","Bradley Hand",cursive;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#1C1C1F;--desk-ink:#ECECE8;--desk-ink-2:#A3A3AA;--desk-line:#3A3A40;color-scheme:dark}}
-:root[data-theme="dark"]{--desk:#1C1C1F;--desk-ink:#ECECE8;--desk-ink-2:#A3A3AA;--desk-line:#3A3A40;color-scheme:dark}
-
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--desk);color:var(--desk-ink);font-family:var(--f-display);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:18px 56px;display:grid;gap:16px}
+body{margin:0;background:var(--stock);color:var(--ivory);font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:18px 56px;display:grid;gap:18px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+svg.seal{display:block;overflow:visible}
+svg.seal .g{fill:none;stroke:var(--gold)}
+svg.seal text{fill:var(--gold)}
 
 /* versions: one master, three cuts */
 html:not([data-v="studio"]):not([data-v="ai"]) [data-only]:not([data-only~="luxury"]),
 html[data-v="studio"] [data-only]:not([data-only~="studio"]),
 html[data-v="ai"] [data-only]:not([data-only~="ai"]){display:none!important}
 
-.topbar{display:grid;gap:10px}
-.todo{margin:0;padding:10px 12px;border:1px dashed var(--red);color:var(--desk-ink);font:500 12px/1.5 var(--f-mono)}
-.todo b{color:var(--red)}
-.versions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
-.versions .lbl{color:var(--desk-ink-2);margin-right:4px}
-.versions a{text-decoration:none;padding:8px 11px;border:1px solid var(--desk-line);border-radius:2px;color:var(--desk-ink)}
-.versions a[aria-current="true"]{background:var(--desk-ink);color:var(--desk);border-color:var(--desk-ink)}
-.versions .hand{font:400 15px/1 var(--f-hand);letter-spacing:0;text-transform:none;color:var(--blue);margin-left:4px}
+.versions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font:500 10px/1 var(--f-caps);letter-spacing:.22em;text-transform:uppercase}
+.versions .lbl{color:var(--ink-3);margin-right:2px}
+.versions a{text-decoration:none;padding:9px 12px;border:1px solid var(--line-2);color:var(--ink-2)}
+.versions a[aria-current="true"]{border-color:var(--gold);color:var(--gold)}
+.versions .pdf{margin-left:auto;border-color:var(--gold-2);color:var(--ivory)}
 
 /* ---------- showreel ---------- */
-.stage{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--stage);color:#121214;container-type:inline-size;border-radius:2px;box-shadow:0 1px 2px rgb(0 0 0/.08),0 30px 60px -36px rgb(0 0 0/.5);--hud:#6E6E74}
-.stage.dark{--hud:#A0A0A6}
-.sc{position:absolute;inset:0;visibility:hidden;opacity:0}
-.ch{display:inline-block}
-.hud{position:absolute;z-index:6;top:3cqw;left:3.6cqw;right:3.6cqw;display:flex;justify-content:space-between;font:500 1.15cqw/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--hud)}
-.hud b{font-weight:600;margin-left:1.1cqw}
-.tl{position:absolute;z-index:6;left:3.6cqw;right:3.6cqw;bottom:2.6cqw;display:grid;grid-template-columns:2.4fr 3fr 3.2fr 2.4fr 1.9fr 2.1fr;border-top:1px solid var(--hud);color:var(--hud);font:500 .85cqw/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
-.tl span{padding:.6cqw 0 0 .5cqw;border-left:1px solid var(--hud)}
-.tl i{position:absolute;top:-.5cqw;left:0;width:1cqw;height:1cqw;border-radius:50%;background:var(--red);transform:translateX(-50%)}
-.note{position:absolute;margin:0;font:400 2.1cqw/1.08 var(--f-hand);white-space:nowrap;opacity:0}
-.red{color:var(--red)} .blue{color:var(--blue)}
-.big{font:900 7cqw/.92 var(--f-display);letter-spacing:-.005em;text-transform:uppercase;white-space:nowrap}
+.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;color:var(--ivory);container-type:inline-size;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(0 0 0/.9)}
+.sc{position:absolute;inset:0;visibility:hidden;opacity:0;overflow:hidden}
+.full{position:absolute;inset:0;width:100%;height:100%;display:block}
+.word{position:absolute;left:0;right:0;margin:0;text-align:center;font:normal 500 8.6cqw/1 var(--f-serif);letter-spacing:-.01em;color:var(--ivory);white-space:nowrap;opacity:0;text-shadow:0 .2cqw 2.4cqw rgb(0 0 0/.45)}
+.cap6{font:500 1.05cqw/1 var(--f-caps);letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.mono6{font:400 .95cqw/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.plate{position:absolute;z-index:8;top:2.6cqw;left:3.2cqw;right:3.2cqw;display:flex;justify-content:space-between;pointer-events:none}
+.plate span{font:500 .92cqw/1 var(--f-caps);letter-spacing:.3em;text-transform:uppercase;color:rgb(255 255 255/.75)}
+.reg{position:absolute;z-index:8;width:2.4cqw;height:2.4cqw;border:0 solid rgb(255 255 255/.5)}
+.reg.a{top:1.6cqw;left:1.6cqw;border-top-width:1px;border-left-width:1px}
+.reg.b{top:1.6cqw;right:1.6cqw;border-top-width:1px;border-right-width:1px}
+.reg.c{bottom:1.6cqw;left:1.6cqw;border-bottom-width:1px;border-left-width:1px}
+.reg.d{bottom:1.6cqw;right:1.6cqw;border-bottom-width:1px;border-right-width:1px}
+.bar{position:absolute;z-index:8;left:3.2cqw;right:3.2cqw;bottom:2.2cqw;height:1px;background:rgb(255 255 255/.18)}
+.bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold)}
+.grain{position:absolute;left:-4%;top:-4%;width:108%;height:108%;z-index:7;pointer-events:none;mix-blend-mode:overlay;opacity:.22}
+.vig{position:absolute;inset:0;z-index:6;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 55%,rgb(0 0 0/.72) 100%)}
 
-.s1 .lines{position:absolute;left:7cqw;top:13.5cqw;display:grid;gap:.6cqw;justify-items:start}
-.s1 #s1b{font-stretch:62%}
-.s1 .last{position:relative}
-.pen{position:absolute;left:-1%;bottom:-1.6cqw;width:102%;height:2.2cqw;overflow:visible}
-.pen path{fill:none;stroke:var(--red);stroke-width:.55cqw;stroke-linecap:round}
-.s1 #s1n1{left:44cqw;top:8.4cqw;transform:rotate(-2deg)}
-.s1 #s1n2{left:68cqw;top:33cqw;transform:rotate(-4deg)}
+.s1 .seal{position:absolute;left:50%;top:24cqw;width:34cqw;height:34cqw;transform:translate(-50%,-50%)}
+.s1 .word{top:44cqw;font-size:6cqw}
 
-.s2 .title{position:absolute;left:3.6cqw;top:7cqw;display:grid;gap:.6cqw}
-.k6{font:600 1cqw/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
-.s2 .title b{font:800 2.3cqw/1 var(--f-display)}
-.frame{position:absolute;left:50%;top:30.5cqw;transform:translate(-50%,-50%);border:1.5px solid #121214;overflow:hidden}
-.frame .set{position:absolute;left:50%;top:50%;width:72cqw;height:44cqw;transform:translate(-50%,-50%);background:radial-gradient(ellipse 55% 60% at 50% 42%,#F6F4EF 0%,#D9D4CA 60%,#B9B2A6 100%)}
-.frame .set::after{content:"";position:absolute;left:0;right:0;top:66%;height:1px;background:rgb(0 0 0/.12)}
-.frame .lab{position:absolute;left:.8cqw;top:.7cqw;font:600 1.1cqw/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
-.bottle{position:absolute;left:50%;top:30.5cqw;height:23cqw;transform:translate(-50%,-50%);opacity:0}
-.xh{position:absolute;left:50%;top:30.5cqw;width:15cqw;height:15cqw;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
-.xh::before,.xh::after{content:"";position:absolute;background:var(--blue)}
-.xh::before{left:0;right:0;top:50%;height:1px}
-.xh::after{top:0;bottom:0;left:50%;width:1px}
-.vc{position:absolute;right:3.6cqw;top:7cqw;font:600 1.3cqw/1 var(--f-mono);letter-spacing:.1em}
-.s2 #s2n1{left:58cqw;top:42cqw;transform:rotate(-3deg)}
-.s2 #s2n2{left:7cqw;top:48cqw;transform:rotate(1.5deg)}
+.s7 .rose{position:absolute;right:4cqw;top:50%;width:50cqw;height:50cqw;transform:translateY(-50%)}
+.s7 .rose .g{fill:none;stroke:var(--gold)}.s7 .rose text{fill:var(--gold)}
+.s7 .ch{position:absolute;left:9cqw;top:17cqw;opacity:0}
+.s7 .ch b{display:block;font:400 7.6cqw/1 var(--f-serif);font-variant-numeric:lining-nums;color:var(--ivory)}
+.s7 .ch .cap6{display:block;margin-top:2.4cqw;color:var(--ivory);letter-spacing:.26em}
+.s7 .ch .mono6{display:block;margin-top:1.2cqw;color:rgb(255 255 255/.8)}
+.s7 .ix{position:absolute;left:9.2cqw;bottom:9cqw;display:flex;gap:1.6cqw;font:400 .95cqw/1 var(--f-mono);letter-spacing:.12em;color:rgb(245 245 243/.35)}
+.s7 .ix i{font-style:normal}.s7 .ix i.on{color:var(--gold)}
+.s2 .shot{position:absolute;inset:0}
+.s2 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;filter:grayscale(1) contrast(1.06)}
+.s2 .scan{position:absolute;top:0;bottom:0;width:1px;background:var(--gold);box-shadow:0 0 1.4cqw .2cqw rgb(255 255 255/.55);opacity:0}
+.s2 .ret{position:absolute;left:50%;top:44%;width:24cqw;height:24cqw;transform:translate(-50%,-50%);opacity:0}
+.s2 .word{top:22.5cqw}
+.s2 .read{position:absolute;left:3.2cqw;bottom:5cqw;margin:0;display:flex;gap:3.4cqw;padding:1.4cqw 1.8cqw;background:rgb(0 0 0/.62);border-top:1px solid rgb(255 255 255/.6);z-index:2}
+.s2 .read div{display:grid;gap:.6cqw}
+.s2 .read dt{font:500 .85cqw/1 var(--f-caps);letter-spacing:.3em;text-transform:uppercase;color:rgb(245 245 243/.7)}
+.s2 .read dd{margin:0;font:400 2.6cqw/1 var(--f-serif);font-variant-numeric:tabular-nums lining-nums;color:var(--ivory)}
 
-.s3{background:var(--night)}
-.shot{position:absolute;left:3.6cqw;right:3.6cqw;top:6.6cqw;bottom:6.8cqw;overflow:hidden;border-radius:.3cqw;background:#2a201c}
-.shot canvas{display:block;width:100%;height:100%}
-.wipe{position:absolute;top:0;bottom:0;width:0;border-left:2px solid #fff}
-.wipe i{position:absolute;top:50%;left:-1.3cqw;width:2.6cqw;height:2.6cqw;margin-left:-1px;border-radius:50%;background:#fff;transform:translateY(-50%);display:grid;place-items:center;font:700 1.2cqw/1 var(--f-mono);color:#121214;font-style:normal}
-.lab3{position:absolute;top:1.3cqw;font:600 1.05cqw/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#F4F0EA;background:rgb(10 10 12/.6);padding:.55cqw .8cqw}
-.lab3.l{left:1.3cqw} .lab3.r{right:1.3cqw}
-.loupe{position:absolute;top:46%;left:70%;width:17cqw;aspect-ratio:1;border-radius:50%;overflow:hidden;border:.28cqw solid #fff;box-shadow:0 1.2cqw 3cqw rgb(0 0 0/.55);opacity:0}
-.loupe canvas{display:block;width:100%;height:100%}
-.loupe span{position:absolute;left:50%;bottom:1cqw;transform:translateX(-50%);font:600 1cqw/1 var(--f-mono);color:#fff;background:rgb(10 10 12/.6);padding:.3cqw .5cqw}
-.readout{position:absolute;left:1.3cqw;bottom:1.3cqw;margin:0;display:grid;grid-template-columns:repeat(3,auto);gap:2.4cqw;background:rgb(10 10 12/.66);padding:1cqw 1.5cqw;color:#F4F0EA}
-.readout dt{font:600 .85cqw/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#ABABB0}
-.readout dd{margin:.45cqw 0 0;font:800 2.5cqw/1 var(--f-display);font-variant-numeric:tabular-nums}
-.s3 .note{background:rgb(251 251 249/.92);padding:.25cqw .8cqw}
-.s3 #s3n1{left:5cqw;top:12.4cqw;transform:rotate(-2deg)}
-.s3 #s3n2{right:5cqw;top:12.4cqw;transform:rotate(2deg)}
+.s3 .phone{position:absolute;left:58cqw;top:50%;width:19.4cqw;height:41.6cqw;transform:translateY(-50%);border-radius:2.6cqw;overflow:hidden;box-shadow:0 0 0 1px rgb(255 255 255/.6),0 0 0 .55cqw #000,0 0 0 calc(.55cqw + 1px) rgb(255 255 255/.25),0 3cqw 6cqw -2cqw rgb(0 0 0/.9);background:#111}
+.s3 video,.s3 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.s3 .word{left:9cqw;right:auto;top:17cqw;text-align:left;font-size:9.4cqw}
+.s3 .meta{position:absolute;left:9.4cqw;top:30cqw;display:grid;gap:1.2cqw}
+.s3 .meta .mono6{color:rgb(245 245 243/.62)}
+.s3 .guil{position:absolute;right:-14cqw;top:50%;width:62cqw;height:62cqw;transform:translateY(-50%);opacity:.22}
 
-.pass{position:absolute;left:8cqw;top:9cqw;width:60cqw;background:#FBFBF9;border:1px solid #CFCFCA;box-shadow:0 1.6cqw 4cqw -1.6cqw rgb(0 0 0/.35);padding:2.2cqw 2.6cqw 2.4cqw;opacity:0}
-.pass header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid #121214;padding-bottom:1cqw}
-.pass header b{font:850 2cqw/1 var(--f-display);font-stretch:112%;letter-spacing:.08em}
-.pass header span{font:500 1.1cqw/1 var(--f-mono);letter-spacing:.1em;color:#6E6E74}
-.pass pre{margin:1.5cqw 0 1.2cqw;min-height:12.2cqw;font:500 1.5cqw/1.62 var(--f-mono);white-space:pre}
-.pass .m{min-height:4.2cqw;margin:0;padding-top:1cqw;border-top:1px dashed #BDBDB7;font:600 1.3cqw/1.55 var(--f-mono);letter-spacing:.05em;white-space:pre}
-.stamp{position:absolute;right:3cqw;top:6.8cqw;border:.4cqw solid var(--red);outline:.15cqw solid var(--red);outline-offset:.35cqw;color:var(--red);font:900 2.7cqw/1 var(--f-display);font-stretch:112%;letter-spacing:.06em;padding:.9cqw 1.4cqw .7cqw;text-align:center;mix-blend-mode:multiply;opacity:0}
-.stamp small{display:block;margin-top:.5cqw;font:600 .95cqw/1 var(--f-mono);letter-spacing:.14em}
-.s4 #s4n1{left:71cqw;top:19cqw;transform:rotate(-3deg)}
+.s4 .set{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 46%,#1E1E1E 0%,#121212 55%,#060606 100%)}
+.s4 .floor{position:absolute;left:0;right:0;top:66%;height:1px;background:linear-gradient(90deg,transparent,rgb(255 255 255/.25),transparent)}
+.s4 .frame{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);border:1px solid var(--gold)}
+.s4 .frame b{position:absolute;left:0;top:-1.9cqw;font:500 .9cqw/1 var(--f-caps);letter-spacing:.3em;color:var(--gold);white-space:nowrap}
+.s4 .frame i{position:absolute;right:0;top:-1.9cqw;font:400 .9cqw/1 var(--f-mono);letter-spacing:.12em;color:rgb(255 255 255/.8);font-style:normal}
+.s4 .bottle{position:absolute;left:50%;top:44%;height:19cqw;transform:translate(-50%,-50%)}
+.s4 .word{top:37.5cqw;font-size:6.6cqw}
 
-.s5 .days{position:absolute;right:5cqw;top:4.5cqw;font:900 31cqw/1 var(--f-display);font-stretch:62%;color:transparent;-webkit-text-stroke:.12cqw rgb(18 18 20/.2);font-variant-numeric:tabular-nums}
-.s5 .line{position:absolute;left:8cqw;top:14cqw;width:64cqw;margin:0;font:italic 400 4.5cqw/1.13 var(--f-serif);font-variation-settings:"opsz" 30}
-.s5 .line .rest{visibility:hidden}
-.s5 .caret{display:inline-block;width:.06em;height:.9em;margin-left:.04em;background:var(--red);vertical-align:-.08em}
-.s5 .by{position:absolute;left:8cqw;top:37.5cqw;margin:0;font:600 1.2cqw/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;opacity:0}
-.s5 #s5n{left:8cqw;top:41.5cqw;transform:rotate(-2deg)}
+.s5 .seal{position:absolute;left:50%;top:44%;width:30cqw;height:30cqw;transform:translate(-50%,-50%)}
+.s5 .word{top:37cqw;font-size:6.6cqw}
+.s5 .mrz{position:absolute;left:0;right:0;bottom:5.2cqw;margin:0;text-align:center;font:400 1.05cqw/1.6 var(--f-mono);letter-spacing:.14em;color:rgb(255 255 255/.8);white-space:pre}
 
-.s6 .name{position:absolute;left:7cqw;top:10.5cqw;font:900 10.5cqw/.86 var(--f-display);font-stretch:125%;letter-spacing:-.01em}
-.s6 .name>span{display:block}
-.s6 .dot{display:inline-block;width:.2em;height:.2em;margin-left:.05em;border-radius:50%;background:var(--red);transform:scale(0)}
-.s6 .role{position:absolute;left:7.3cqw;top:33.5cqw;margin:0;font:500 1.75cqw/1.2 var(--f-display);letter-spacing:.12em;opacity:0}
-.s6 #s6n{left:7.3cqw;top:38.6cqw;transform:rotate(-2deg)}
-.s6 .cc{position:absolute;right:6.4cqw;top:11cqw;display:grid;gap:.6cqw}
-.checker{display:grid;grid-template-columns:repeat(6,1fr);gap:.35cqw}
-.checker i{display:block;aspect-ratio:1}
-.s6 .checker{width:20.5cqw}
-.s6 .cc p{margin:0;font:500 .85cqw/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#6E6E74}
-.s6 .where{position:absolute;right:6.4cqw;top:39cqw;margin:0;font:600 1.2cqw/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;opacity:0}
+.s6 .guil{position:absolute;left:50%;top:50%;width:120cqw;height:120cqw;transform:translate(-50%,-50%);opacity:.14}
+.s6 .seal{position:absolute;left:50%;top:21cqw;width:13cqw;height:13cqw;transform:translate(-50%,-50%)}
+.s6 .name{position:absolute;left:0;right:0;top:30.5cqw;margin:0;text-align:center;font:400 7cqw/1 var(--f-serif);letter-spacing:-.03em;opacity:0}
+.s6 .name em{font-style:normal;font-weight:800}
+.s6 .role{position:absolute;left:0;right:0;top:40.6cqw;margin:0;text-align:center;opacity:0}
+.s6 .where{position:absolute;left:0;right:0;top:44cqw;margin:0;text-align:center;opacity:0;color:rgb(245 245 243/.7)}
 
-@container (max-width:560px){.note{font-size:2.9cqw}.hud{font-size:1.9cqw}.tl{font-size:1.5cqw}.tl span:nth-child(n){overflow:hidden}}
-.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
-.ctl button{font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--desk-line);background:transparent;color:var(--desk-ink);border-radius:2px;cursor:pointer}
-.ctl button:hover{border-color:var(--desk-ink)}
-.ctl .file{font:600 11px/1 var(--f-mono);letter-spacing:.1em;padding:9px 12px;border:1px solid var(--desk-line);border-radius:2px;color:var(--desk-ink);text-decoration:none}
-.ctl .meta{margin-left:auto;font:400 15px/1.2 var(--f-hand);color:var(--desk-ink-2)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.ctl button,.ctl .file{font:500 10px/1 var(--f-caps);letter-spacing:.22em;text-transform:uppercase;padding:10px 13px;border:1px solid var(--line-2);background:transparent;color:var(--ivory);cursor:pointer;text-decoration:none}
+.ctl button:hover,.ctl .file:hover{border-color:var(--gold)}
+.ctl .meta{margin-left:auto;font:normal 500 14px/1.2 var(--f-serif);color:var(--ink-2)}
 
 /* ---------- the sheet ---------- */
-.sheet{position:relative;width:210mm;max-width:100%;min-height:297mm;margin:0 auto;background:var(--paper);color:var(--ink);padding:12mm 13mm 9mm;display:flex;flex-direction:column;box-shadow:0 1px 2px rgb(0 0 0/.08),0 26px 60px -30px rgb(0 0 0/.45);-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.slug{position:absolute;top:4.6mm;left:13mm;right:13mm;display:flex;justify-content:space-between;gap:4mm;font:500 6.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-.slug .red{color:var(--red)}
-.crop{position:absolute;width:4.5mm;height:4.5mm;border:0 solid var(--ink-3)}
-.crop.a{top:3mm;left:3mm;border-top-width:.6px;border-left-width:.6px}
-.crop.b{top:3mm;right:3mm;border-top-width:.6px;border-right-width:.6px}
-.crop.c{bottom:3mm;left:3mm;border-bottom-width:.6px;border-left-width:.6px}
-.crop.d{bottom:3mm;right:3mm;border-bottom-width:.6px;border-right-width:.6px}
-.reg{position:absolute;top:50%;width:4mm;height:4mm;margin-top:-2mm;border:.6px solid var(--ink-3);border-radius:50%}
-.reg::before,.reg::after{content:"";position:absolute;background:var(--ink-3)}
-.reg::before{left:-1mm;right:-1mm;top:50%;height:.6px}
-.reg::after{top:-1mm;bottom:-1mm;left:50%;width:.6px}
-.reg.l{left:4.5mm} .reg.r{right:4.5mm}
+.sheet{position:relative;width:210mm;max-width:100%;min-height:297mm;margin:0 auto;background:radial-gradient(ellipse 90% 60% at 70% 0%,#151515 0%,var(--plate) 55%,#090909 100%);color:var(--ivory);padding:13mm 13mm 9mm;display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--line),0 30px 70px -30px rgb(0 0 0/.9);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slug{position:absolute;top:5mm;left:13mm;right:13mm;display:flex;justify-content:space-between;gap:4mm;font:500 6px/1 var(--f-caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2)}
+.crop{position:absolute;width:5mm;height:5mm;border:0 solid var(--gold-2)}
+.crop.a{top:3mm;left:3mm;border-top-width:.5px;border-left-width:.5px}
+.crop.b{top:3mm;right:3mm;border-top-width:.5px;border-right-width:.5px}
+.crop.c{bottom:3mm;left:3mm;border-bottom-width:.5px;border-left-width:.5px}
+.crop.d{bottom:3mm;right:3mm;border-bottom-width:.5px;border-right-width:.5px}
+.tick{position:absolute;top:50%;width:6mm;height:.5px;background:var(--gold-2)}
+.tick.l{left:0} .tick.r{right:0}
 
-.head{display:grid;grid-template-columns:1fr auto;gap:8mm;align-items:end;padding-bottom:4mm;border-bottom:1.5px solid var(--ink)}
-h1{margin:0;font:900 39px/.88 var(--f-display);font-stretch:125%;letter-spacing:-.012em;text-transform:uppercase}
-h1 .dot{display:inline-block;width:7px;height:7px;margin-left:3px;border-radius:50%;background:var(--red)}
-.role{margin:9px 0 0;font:600 9.4px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
-.now{margin:2.2mm 0 0;font-size:9.6px;line-height:1.3;color:var(--ink)}
-.now b{margin-right:2mm;font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--red);vertical-align:1px}
-.now i{font-style:normal;color:var(--ink-3)}
-.contact{list-style:none;margin:0;padding:0;text-align:right;font-size:10px;line-height:1.72;color:var(--ink-2)}
-.contact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
-.thesis{margin:3.8mm 0 0;max-width:155mm;font:italic 400 20px/1.2 var(--f-serif);letter-spacing:-.005em;text-wrap:balance}
-.brands{display:flex;flex-wrap:wrap;align-items:baseline;gap:1mm 2.6mm;margin:3.4mm 0 0;padding:2.2mm 0;border-block:1px solid var(--rule);font-size:10px;font-weight:600}
-.brands .k{font:600 7.6px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-right:1mm}
-.brands i{font-style:normal;color:var(--ink-3);font-weight:400}
+.head{display:grid;grid-template-columns:1fr 36mm;gap:8mm;align-items:center}
+.kick{margin:0 0 3mm;font:500 7.2px/1.4 var(--f-caps);letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0;font:400 44px/.94 var(--f-serif);letter-spacing:-.03em}
+h1 em{font-style:normal;font-weight:800}
+.thesis{margin:3.4mm 0 0;max-width:128mm;font:normal 500 15.5px/1.3 var(--f-serif);color:var(--ink-2);text-wrap:balance}
+.head .seal{width:36mm;height:36mm}
+.contact{list-style:none;margin:4.4mm 0 0;padding:2.2mm 0;border-block:.5px solid var(--line-2);display:flex;flex-wrap:wrap;gap:1mm 0;font-size:8.6px;line-height:1.4;color:var(--ink-2)}
+.contact li+li::before{content:"·";color:var(--gold);margin:0 2.6mm}
+.contact a{color:var(--ivory);text-decoration:none}
 
-.cols{display:grid;grid-template-columns:1fr 57mm;gap:7mm;margin-top:4mm;flex:1}
-.cols>*{min-width:0}
-section{margin-bottom:2.8mm}
-h2{margin:0 0 2.5mm;display:flex;gap:8px;align-items:center;font:600 8px/1 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
-h2::after{content:"";flex:1;height:1px;background:var(--rule)}
-.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
-.cap{border-top:2px solid var(--ink);padding-top:2.4mm}
-.cap .k{font:600 7.6px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
-.cap h3{margin:1.2mm 0 .8mm;font:700 12px/1.2 var(--f-display)}
-.cap p{margin:0;font-size:9.3px;line-height:1.42;color:var(--ink-2)}
-.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin:3.6mm 0 0;padding:0}
-.nums>div{border-top:2px solid var(--ink);padding-top:2mm;position:relative}
-.nums dt{font:900 23px/1 var(--f-display);font-stretch:80%;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.nums dt small{font-size:15px;font-weight:600;color:var(--red);margin:0 .6mm}
-.nums dd{margin:1.4mm 0 0;font-size:8.8px;line-height:1.38;color:var(--ink-2)}
-.nums .tag{position:absolute;right:1mm;top:-4.4mm;font-size:12px;transform:rotate(-3deg)}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin:4.2mm 0 0;padding:0}
+.nums>div{padding:0 3.2mm;border-left:.5px solid var(--line-2)}
+.nums>div:first-child{padding-left:0;border-left:0}
+.nums dt{font:400 27px/1 var(--f-serif);font-variant-numeric:lining-nums tabular-nums;color:var(--gold);white-space:nowrap}
+.nums dt small{font-size:17px;margin:0 .8mm;color:var(--gold-2)}
+.nums dd{margin:1.6mm 0 0;font-size:8.2px;line-height:1.4;color:var(--ink-2)}
 html[data-v="studio"] .n-48{order:-3} html[data-v="studio"] .n-mkts{order:-2}
-.hand{font:400 13px/1 var(--f-hand);white-space:nowrap}
-.circle{position:relative;white-space:nowrap}
-.circle::after{content:"";position:absolute;inset:-3px -6px -2.5px -6px;border:1.3px solid var(--red);border-radius:11px 9px 12px 8px/9px 11px 8px 12px;transform:rotate(-1deg);pointer-events:none}
-.xp{list-style:none;margin:0;padding:0;display:grid;gap:1.6mm}
-.xp li{display:grid;grid-template-columns:19mm 1fr;gap:2.4mm}
-.xp time{position:relative;padding-left:3mm;font:600 7.4px/1.75 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.xp time::before{content:"";position:absolute;left:0;top:1.15mm;width:1.6mm;height:1.6mm;border-radius:50%;border:1px solid var(--ink)}
-.xp .cur time{color:var(--red)}
-.xp .cur time::before{background:var(--red);border-color:var(--red)}
-.xp h3{margin:0;font:700 10.2px/1.3 var(--f-display)}
+
+.brands{display:flex;flex-wrap:wrap;align-items:baseline;gap:1mm 2mm;margin:4.2mm 0 0;padding:2.2mm 0;border-block:.5px solid var(--line-2);font:500 7.2px/1.4 var(--f-caps);letter-spacing:.16em;text-transform:uppercase;color:var(--ivory)}
+.brands .k{color:var(--gold);margin-right:1.4mm}
+.brands i{font-style:normal;color:var(--gold-2)}
+
+h2{margin:0 0 2.6mm;display:flex;gap:2.4mm;align-items:center;font:500 7px/1 var(--f-caps);letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+h2::after{content:"";flex:1;height:.5px;background:var(--line-2)}
+h2 span{color:var(--gold-2);letter-spacing:.2em}
+section{margin-bottom:3mm}
+.what{margin:4.2mm 0 0}
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+.cap .k{display:block;font:normal 500 15px/1 var(--f-serif);color:var(--gold)}
+.cap h3{margin:1.4mm 0 .8mm;font:600 10.4px/1.25 var(--f-sans)}
+.cap p{margin:0;font-size:8.7px;line-height:1.45;color:var(--ink-2)}
+
+.cols{display:grid;grid-template-columns:1fr 56mm;gap:8mm;margin-top:3.4mm;flex:1}
+.cols>*{min-width:0}
+.xp{list-style:none;margin:0;padding:0;display:grid;gap:1.8mm}
+.xp li{display:grid;grid-template-columns:18mm 1fr;gap:2.4mm}
+.xp time{position:relative;padding-left:3mm;font:400 7.2px/1.8 var(--f-mono);letter-spacing:.06em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.xp time::before{content:"";position:absolute;left:0;top:1.25mm;width:1.4mm;height:1.4mm;border-radius:50%;border:.5px solid var(--gold-2)}
+.xp .cur time{color:var(--gold)}
+.xp .cur time::before{background:var(--gold);border-color:var(--gold)}
+.xp h3{margin:0;font:600 9.8px/1.3 var(--f-sans)}
 .xp h3 span{font-weight:400;color:var(--ink-2)}
-.xp p{margin:.3mm 0 0;font-size:9.1px;line-height:1.42;color:var(--ink-2)}
-.sub{margin:2.6mm 0 1.4mm;padding-top:2mm;border-top:1px dashed var(--rule);font:600 7.4px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
-dl.also{margin:0;display:grid;gap:.9mm}
-dl.also div{display:grid;grid-template-columns:30mm 1fr;gap:2.6mm;font-size:8.9px;line-height:1.38}
-dl.also dt{font-weight:700}
-dl.also dd{margin:0;color:var(--ink-2)}
-.what{margin:3.6mm 0 0}
-.what .caps{gap:6mm}
-.early{list-style:none;margin:0;padding:0;display:grid;gap:.9mm;font-size:8.9px;line-height:1.38;color:var(--ink-2)}
-.early b{font-weight:700;color:var(--ink)}
+.xp p{margin:.3mm 0 0;font-size:8.7px;line-height:1.42;color:var(--ink-2)}
+.sub{margin:2.6mm 0 1.4mm;padding-top:2mm;border-top:.5px dotted var(--line-2);font:500 6.6px/1 var(--f-caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2)}
+.early{list-style:none;margin:0;padding:0;display:grid;gap:.9mm;font-size:8.5px;line-height:1.38;color:var(--ink-2)}
+.early b{font-weight:600;color:var(--ivory)}
 .tools{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm}
 html[data-v="ai"] .tools{grid-template-columns:repeat(3,1fr);gap:3.2mm}
-.tool{border-top:1px solid var(--ink);padding-top:1.8mm}
-.tool h3{margin:0;font:750 10.5px/1.25 var(--f-display)}
-.tool .u{display:block;margin-top:.5mm;font:500 7.6px/1.3 var(--f-mono);color:var(--blue);text-decoration:none;overflow-wrap:break-word}
-.tool p{margin:1mm 0 0;font-size:8.9px;line-height:1.4;color:var(--ink-2)}
-.tool .stk{margin-top:.8mm;font:500 7.2px/1.35 var(--f-mono);letter-spacing:.04em;color:var(--ink-3)}
-.log{list-style:none;margin:3.2mm 0 0;padding:2.6mm 0 0;border-top:1px dashed var(--rule);display:grid;gap:1.4mm;font-size:9.3px;line-height:1.4;color:var(--ink-2)}
+.tool{border-top:.5px solid var(--gold-2);padding-top:1.8mm}
+.tool h3{margin:0;font:normal 500 13px/1.15 var(--f-serif);color:var(--ivory)}
+.tool .u{display:block;margin-top:.7mm;font:400 7.2px/1.3 var(--f-mono);color:var(--gold);text-decoration:none;overflow-wrap:break-word}
+.tool p{margin:1mm 0 0;font-size:8.5px;line-height:1.42;color:var(--ink-2)}
+.tool .stk{margin-top:.8mm;font:400 6.8px/1.35 var(--f-mono);letter-spacing:.04em;color:var(--ink-3)}
+dl.also{margin:0;display:grid;gap:.9mm}
+dl.also div{display:grid;grid-template-columns:28mm 1fr;gap:2.6mm;font-size:8.5px;line-height:1.38}
+dl.also dt{font-weight:600}
+dl.also dd{margin:0;color:var(--ink-2)}
+.log{list-style:none;margin:3.2mm 0 0;padding:2.6mm 0 0;border-top:.5px dotted var(--line-2);display:grid;gap:1.4mm;font-size:9px;line-height:1.4;color:var(--ink-2)}
 .log li{display:grid;grid-template-columns:24mm 1fr;gap:3mm}
-.log time{font:600 7.8px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.log time{font:400 7.4px/1.6 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2)}
 aside section{margin-bottom:4mm}
-.stance{background:rgb(44 105 198/.07);border-left:2px solid var(--blue);padding:3mm 3.2mm}
-.stance h2{color:var(--blue)}
-.stance p{margin:0;font-size:9.4px;line-height:1.5}
-.stance p+p{margin-top:1.4mm;color:var(--ink-2)}
-.tags{display:flex;flex-wrap:wrap;gap:1.1mm}
-.tags span{font-size:8.6px;line-height:1;padding:1.2mm 1.7mm;border:1px solid var(--rule)}
+.stance{border:.5px solid var(--gold-2);padding:3mm 3.2mm}
+.stance p{margin:0;font:normal 500 11px/1.4 var(--f-serif)}
+.stance p+p{margin-top:1.4mm;font:400 8.7px/1.45 var(--f-sans);color:var(--ink-2)}
 dl.kv{margin:0;display:grid;gap:1.9mm}
-dl.stack{margin:0;display:grid;gap:1.5mm}
-dl.stack div{display:grid;grid-template-columns:10mm 1fr;gap:2mm}
-dl.stack dt{font:600 7.2px/1.6 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-dl.stack dd{margin:0;font-size:8.9px;line-height:1.4}
 dl.kv div{display:grid;gap:.4mm}
-dl.kv dt{font:600 7.6px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-dl.kv dd{margin:0;font-size:9.3px;line-height:1.4}
-dl.books dt{font:italic 500 12px/1.1 var(--f-serif);letter-spacing:0;text-transform:none;color:var(--ink)}
-.mini{margin:2.2mm 0 0;font-size:8.8px;line-height:1.45;color:var(--ink-2)}
-.bio{margin:2.4mm 0 0;padding:2.4mm 0 0 3mm;border-left:1px solid var(--rule);font:italic 400 10.5px/1.45 var(--f-serif);color:var(--ink-2)}
-.foot{margin-top:auto;padding-top:3mm;border-top:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:6mm;align-items:end}
-.mrz{display:block;font:600 9.4px/1.55 var(--f-mono);letter-spacing:.08em;white-space:pre;color:var(--ink)}
-.foot .hand{display:block;margin-top:1.2mm;color:var(--blue)}
-.foot-r{display:grid;gap:1.8mm;justify-items:end}
-.foot .checker{width:50mm;grid-template-columns:repeat(12,1fr);gap:.5mm}
-.decl{margin:0;text-align:right;font:500 6.8px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+dl.kv dt{font:500 6.6px/1.3 var(--f-caps);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
+dl.kv dd{margin:0;font-size:8.8px;line-height:1.4}
+dl.books dt{font:normal 500 12.5px/1.1 var(--f-serif);letter-spacing:0;text-transform:none;color:var(--ivory)}
+dl.books dd{color:var(--ink-2)}
+dl.stack{margin:0;display:grid;gap:1.5mm}
+dl.stack div{display:grid;grid-template-columns:9mm 1fr;gap:2mm}
+dl.stack dt{font:500 6.4px/1.7 var(--f-caps);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}
+dl.stack dd{margin:0;font-size:8.5px;line-height:1.4}
+.mini{margin:2.2mm 0 0;font-size:8.6px;line-height:1.45;color:var(--ink-2)}
+.bio{margin:2.4mm 0 0;padding:2.4mm 0 0 3mm;border-left:.5px solid var(--gold-2);font:normal 500 10.5px/1.45 var(--f-serif);color:var(--ink-2)}
+.foot{margin-top:auto;padding-top:3mm;border-top:.5px solid var(--line-2);display:grid;grid-template-columns:auto 1fr;gap:6mm;align-items:center}
+.mrz{display:block;font:400 8.6px/1.55 var(--f-mono);letter-spacing:.1em;white-space:pre;color:var(--ink-2)}
+.foot-r{display:grid;gap:1.6mm;justify-items:end}
+.foot-r .band{width:62mm;height:5.2mm}
+.decl{margin:0;text-align:right;font:500 5.8px/1.6 var(--f-caps);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-2)}
 
 /* the phone number goes on paper, not on the public page */
 @media screen{.print-only{display:none}}
+.fill{color:#FFFFFF;font-style:normal;border-bottom:1px dashed #FFFFFF}
 
-/* unknown facts: visible on screen and on paper until they are filled */
-.fill{color:var(--red);font-style:normal;border-bottom:1px dashed var(--red)}
-
-/* on a wide screen the proof is read at 120% */
 @media screen and (min-width:1060px){.sheet{zoom:1.2}}
-
 @media screen and (max-width:820px){
-  .sheet{width:100%;min-height:0;padding:34px 18px 22px}
+  .versions .pdf{margin-left:0}
+  .sheet{width:100%;min-height:0;padding:36px 18px 22px}
   .slug{left:18px;right:18px;top:14px;flex-wrap:wrap;gap:4px 10px}
-  .crop,.reg{display:none}
-  .head{grid-template-columns:1fr;gap:12px}
-  .contact{text-align:left}
-  h1{font-size:34px}
-  .thesis{font-size:20px}
+  .crop,.tick{display:none}
+  .head{grid-template-columns:1fr;gap:16px}
+  .head .seal{width:120px;height:120px;order:-1}
+  h1{font-size:42px}
+  .thesis{font-size:17px}
+  .contact{display:grid;gap:4px}
+  .contact li+li::before{display:none}
+  .nums{grid-template-columns:1fr 1fr;row-gap:16px}
+  .nums>div{padding:0;border-left:0}
   .cols{grid-template-columns:1fr}
-  .caps{grid-template-columns:1fr}
-  .tools,html[data-v="ai"] .tools,.nums{grid-template-columns:1fr 1fr}
-  .xp li{grid-template-columns:1fr;gap:2px}
-  .log li{grid-template-columns:1fr;gap:2px}
+  .caps{grid-template-columns:1fr;gap:14px}
+  .tools,html[data-v="ai"] .tools{grid-template-columns:1fr}
+  .xp li,.log li,dl.also div{grid-template-columns:1fr;gap:2px}
   .foot{grid-template-columns:1fr;gap:12px}
   .foot-r{justify-items:start}
   .decl{text-align:left}
-  .mrz{font-size:7.4px;overflow-x:auto}
+  .mrz{font-size:7px;overflow-x:auto}
+  .ctl .meta{margin-left:0;width:100%}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 /* frame-by-frame render of the reel */
 html.render,html.render body{background:#000}
 html.render .wrap{display:block;max-width:none;padding:0}
 html.render .wrap>:not(.reel),html.render .ctl{display:none}
-html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;box-shadow:none}
+html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
 
 @page{size:A4;margin:0}
 @media print{
-  html,body{background:#fff}
+  html,body{background:var(--stock)}
   .screen-only{display:none!important}
   .wrap{display:block;max-width:none;padding:0}
   .sheet{width:210mm;height:297mm;min-height:0;margin:0;box-shadow:none;overflow:hidden;break-after:avoid}
@@ -293,136 +262,131 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
 <body>
 <div class="wrap">
 
-  <div class="topbar screen-only">
-    <p class="todo" id="todo" hidden>Vista de trabajo · Datos pendientes en rojo: <b id="todoN">0</b>. Pásamelos y regenero los tres PDF.</p>
-    <nav class="versions" aria-label="CV version">
-      <span class="lbl">This CV, versioned for</span>
-      <a href="#luxury" data-v="luxury">Luxury &amp; beauty</a>
-      <a href="#studio" data-v="studio">Production studios</a>
-      <a href="#ai" data-v="ai">AI companies</a>
-      <span class="hand">same facts, three cuts</span>
-      <a id="pdfLink" href="Denno_Gamboa_CV.pdf" target="_blank" rel="noopener">PDF</a>
-    </nav>
-  </div>
+  <nav class="versions screen-only" aria-label="CV version">
+    <span class="lbl">Versioned for</span>
+    <a href="#luxury" data-v="luxury">Luxury &amp; beauty</a>
+    <a href="#studio" data-v="studio">Production studios</a>
+    <a href="#ai" data-v="ai">AI companies</a>
+    <a class="pdf" id="pdfLink" href="Denno_Gamboa_CV.pdf" target="_blank" rel="noopener">PDF</a>
+  </nav>
 
-  <section class="reel screen-only" aria-label="Showreel, 15 seconds">
+  <section class="reel screen-only" aria-label="Showreel, 20 seconds">
     <div class="stage" id="stage">
-      <div class="hud" aria-hidden="true"><span>Showreel CV<b id="hudS">01 title</b></span><span id="tc">00:00:00:00</span></div>
+      <i class="reg a"></i><i class="reg b"></i><i class="reg c"></i><i class="reg d"></i>
+      <div class="plate" aria-hidden="true"><span id="fig">Fig. I — Look</span><span>Denno Gamboa — Plate I</span></div>
 
       <div class="sc s1" id="s1" aria-hidden="true">
-        <div class="lines">
-          <div class="big" id="s1a">One shoot.</div>
-          <div class="big" id="s1b">Every format.</div>
-          <div class="big last"><span id="s1c">Nothing fake.</span><svg class="pen" viewBox="0 0 400 24" preserveAspectRatio="none"><path id="s1pen" d="M3 15 C 80 5, 190 21, 397 8"/></svg></div>
-        </div>
-        <p class="note blue" id="s1n1">same letters, new proportions</p>
-        <p class="note red" id="s1n2">&larr; the whole job</p>
+        <svg class="seal" id="s1seal" viewBox="-110 -110 220 220"></svg>
+        <p class="word" id="w1">Look closer.</p>
+      </div>
+
+      <div class="sc s7" id="s7" aria-hidden="true">
+        <svg class="rose" id="s7r" viewBox="-110 -110 220 220"></svg>
+        <div class="ch" id="ch0"><b>2018</b><span class="cap6">Freelance retoucher &amp; creative director</span><span class="mono6">denno · Madrid</span></div>
+        <div class="ch" id="ch1"><b>2021</b><span class="cap6">Retoucher</span><span class="mono6">Tempe · Inditex · Alicante</span></div>
+        <div class="ch" id="ch2"><b>2023</b><span class="cap6">Assistant art director</span><span class="mono6">Warner Bros. Entertainment</span></div>
+        <div class="ch" id="ch3"><b>2024</b><span class="cap6">Creative technologist</span><span class="mono6">Hogarth · WPP · Madrid</span></div>
+        <div class="ch" id="ch4"><b>2025</b><span class="cap6">Photo &amp; digital graphic designer</span><span class="mono6">Locco · Madrid</span></div>
+        <div class="ch" id="ch5"><b>2026</b><span class="cap6">Founder &amp; creative director</span><span class="mono6">HERA Studio · Madrid</span></div>
+        <div class="ix" id="s7ix"><i>2018</i><i>2021</i><i>2023</i><i>2024</i><i>2025</i><i>2026</i></div>
       </div>
 
       <div class="sc s2" id="s2" aria-hidden="true">
-        <div class="title"><span class="k6">Versioning · geo-lock</span><b>One master, five formats</b></div>
-        <span class="vc" id="s2n">v01 / 05</span>
-        <div class="frame" id="s2f"><div class="set"></div><span class="lab" id="s2lab">16:9 · film</span></div>
-        <svg class="bottle" id="s2b" viewBox="0 0 120 200" aria-hidden="true">
-          <defs>
-            <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#C9CDD0"/><stop offset=".42" stop-color="#F7F8F9"/><stop offset="1" stop-color="#B3B8BC"/></linearGradient>
-            <linearGradient id="jc" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#EAC58C"/><stop offset="1" stop-color="#C4843C"/></linearGradient>
-          </defs>
-          <rect x="43" y="4" width="34" height="36" rx="3" fill="#141416"/>
-          <rect x="52" y="40" width="16" height="14" fill="#BFC3C6"/>
-          <rect x="13" y="54" width="94" height="142" rx="15" fill="url(#gl)" stroke="#979DA2" stroke-width="1"/>
-          <rect x="21" y="84" width="78" height="104" rx="9" fill="url(#jc)" opacity=".86"/>
-          <rect x="30" y="118" width="60" height="32" fill="#FBFBF9" opacity=".92"/>
-          <text x="60" y="139" text-anchor="middle" font-family="Bodoni Moda, Georgia, serif" font-size="12.5" letter-spacing="2.4" fill="#121214">MAISON</text>
-          <rect x="19" y="60" width="7" height="128" rx="3.5" fill="#fff" opacity=".55"/>
-        </svg>
-        <div class="xh" id="s2x"></div>
-        <p class="note red" id="s2n1">product: 0 px drift &#10003;</p>
-        <p class="note blue" id="s2n2">set re-framed, never rebuilt</p>
+        <div class="shot" id="s2shot"><canvas id="skin"></canvas><canvas id="skinR"></canvas></div>
+        <div class="scan" id="s2scan"></div>
+        <svg class="ret" id="s2ret" viewBox="-100 -100 200 200"></svg>
+        <p class="word" id="w2a">Flawless.</p>
+        <p class="word" id="w2b">Real.</p>
+        <dl class="read" id="s2read">
+          <div><dt>Skin fidelity</dt><dd id="r1">0.33</dd></div>
+          <div><dt>Micro-texture</dt><dd id="r2">+0%</dd></div>
+          <div><dt>Face</dt><dd>unchanged</dd></div>
+        </dl>
       </div>
 
       <div class="sc s3" id="s3" aria-hidden="true">
-        <div class="shot" id="s3shot">
-          <canvas id="skin"></canvas>
-          <div class="wipe" id="s3w"><i>&#8596;</i></div>
-          <span class="lab3 l">AI pass · wax</span>
-          <span class="lab3 r">HERA graft v5.1 · real pores</span>
-          <div class="loupe" id="s3l"><canvas id="loupe"></canvas><span>&times;3</span></div>
-          <dl class="readout">
-            <div><dt>fidelity</dt><dd id="r1">0.33</dd></div>
-            <div><dt>micro-texture</dt><dd id="r2">+0%</dd></div>
-            <div id="r3w" style="opacity:0"><dt>identity leak</dt><dd>&lt;0.4/255</dd></div>
-          </dl>
-        </div>
-        <p class="note red" id="s3n1">AI wax, evenly spaced pores</p>
-        <p class="note blue" id="s3n2">same face, real skin</p>
+        <svg class="guil" id="s3g" viewBox="-110 -110 220 220"></svg>
+        <div class="phone"><video id="s3v" muted playsinline preload="auto" poster="">
+          <source src="skinlab-scan.webm" type="video/webm"><source src="skinlab-scan.mp4" type="video/mp4"></video></div>
+        <p class="word" id="w3">Built.</p>
+        <div class="meta" id="s3m"><span class="cap6">One of my apps</span><span class="mono6">heraskinlab.com · live</span></div>
       </div>
 
       <div class="sc s4" id="s4" aria-hidden="true">
-        <div class="pass" id="s4p">
-          <header><b>HERA PASSPORT</b><span>No. 0412 · v05</span></header>
-          <pre id="s4t"></pre>
-          <p class="m" id="s4m"></p>
-          <div class="stamp" id="s4s">AI DECLARED<small>EU AI Act · Art. 50</small></div>
-        </div>
-        <p class="note blue" id="s4n1">the file carries<br>its own story</p>
+        <div class="set"></div><div class="floor"></div>
+        <svg class="bottle" id="s4b" viewBox="0 0 120 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#1C1C1C"/><stop offset=".4" stop-color="#5A5A5A"/><stop offset=".55" stop-color="#BDBDBD"/><stop offset="1" stop-color="#141414"/></linearGradient>
+            <linearGradient id="cp" x1="0" x2="1"><stop offset="0" stop-color="#4A4A4A"/><stop offset=".45" stop-color="#EDEDED"/><stop offset="1" stop-color="#3A3A3A"/></linearGradient>
+          </defs>
+          <rect x="44" y="4" width="32" height="38" rx="2" fill="url(#cp)"/>
+          <rect x="52" y="42" width="16" height="12" fill="#1A1A1A"/>
+          <rect x="14" y="54" width="92" height="142" rx="14" fill="url(#gl)" stroke="#FFFFFF" stroke-opacity=".5" stroke-width=".6"/>
+          <rect x="30" y="112" width="60" height="36" fill="none" stroke="#EDEDED" stroke-opacity=".75" stroke-width=".6"/>
+          <text x="60" y="134" text-anchor="middle" font-family="Syne, Arial, sans-serif" font-weight="700" font-size="10" letter-spacing="3" fill="#F5F5F3">MAISON</text>
+          <rect x="20" y="60" width="6" height="128" rx="3" fill="#fff" opacity=".22"/>
+        </svg>
+        <div class="frame" id="s4f"><b id="s4lab">16:9 · film</b><i id="s4n">v01/05</i></div>
+        <p class="word" id="w4">Unchanged.</p>
       </div>
 
       <div class="sc s5" id="s5" aria-hidden="true">
-        <div class="days" id="s5d">01</div>
-        <p class="line"><span id="s5a"></span><i class="caret" id="s5c"></i><span class="rest" id="s5b"></span></p>
-        <p class="by" id="s5y">Golpe de estado · first novel</p>
-        <p class="note red" id="s5n">I write the story too.</p>
+        <svg class="seal" id="s5seal" viewBox="-110 -110 220 220"></svg>
+        <p class="word" id="w5">Signed.</p>
+        <p class="mrz" id="s5m"></p>
       </div>
 
       <div class="sc s6" id="s6" aria-hidden="true">
-        <div class="name"><span id="s6a">Denno</span><span><span id="s6b">Gamboa</span><i class="dot" id="s6d"></i></span></div>
-        <p class="role" id="s6r"><span data-only="luxury">Creative Technologist · AI image lead for luxury &amp; beauty</span><span data-only="studio">Creative Technologist · generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
-        <p class="note red" id="s6n">open to new projects</p>
-        <div class="cc"><div class="checker" id="s6c"></div><p>ColorChecker · patches 1 and 2 are<br>called dark skin and light skin</p></div>
-        <p class="where" id="s6w">Madrid · <span data-only="luxury studio">hera-vercel.vercel.app/studio</span><span data-only="ai">heraaistudio.com</span></p>
+        <svg class="guil" id="s6g" viewBox="-110 -110 220 220"></svg>
+        <svg class="seal" id="s6seal" viewBox="-110 -110 220 220"></svg>
+        <p class="name" id="s6n">Denno <em>Gamboa</em></p>
+        <p class="role cap6" id="s6r"><span data-only="luxury">Creative Technologist · AI image for luxury &amp; beauty</span><span data-only="studio">Creative Technologist · generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
+        <p class="where mono6" id="s6w">Madrid · denno@heraaistudio.com · <span data-only="luxury studio">hera-vercel.vercel.app/studio</span><span data-only="ai">heraaistudio.com</span></p>
       </div>
 
-      <div class="tl" aria-hidden="true"><span>title</span><span>versioning</span><span>skin</span><span>passport</span><span>story</span><span>end</span><i id="tlh"></i></div>
+      <div class="vig"></div>
+      <canvas class="grain" id="grain" width="1040" height="585"></canvas>
+      <div class="bar" aria-hidden="true"><i id="bar"></i></div>
     </div>
     <div class="ctl">
       <button type="button" id="bPlay" aria-pressed="false">Play</button>
       <button type="button" id="bReplay">Replay</button>
       <button type="button" id="bSkip">Skip to the CV</button>
       <a class="file" href="showreel.mp4" target="_blank" rel="noopener">MP4</a>
-      <span class="meta">15 s · drawn live in the browser, frame by frame</span>
+      <span class="meta">Twenty seconds, eight years.</span>
     </div>
-    <p class="sr-only">Showreel in six scenes. One shoot, every format, nothing fake. A product stays locked while the frame changes through five formats. Skin texture restored: fidelity from 0.33 to 0.83 and 65 percent more micro-texture. A provenance passport that declares the AI. A line from the novel Golpe de estado. End card: Denno Gamboa, open to new projects.</p>
+    <p class="sr-only">Showreel. Look closer: a guilloché seal draws itself. Flawless: AI skin, smooth as wax. A gold scan line passes and the real skin comes back: fidelity from 0.33 to 0.83, 65 percent more micro-texture, face unchanged. Built: HERA Skin Lab scanning a face on a phone. Unchanged: a product stays locked while the frame changes through five formats. Signed: the provenance seal declares the AI. End card: Denno Gamboa, creative technologist, Madrid.</p>
   </section>
 
   <main class="sheet" id="cv">
-    <div class="slug" aria-hidden="true"><span>Proof · Denno_Gamboa_CV</span><span id="slugV">Luxury &amp; beauty</span><span>2026-10-06</span><span>sRGB IEC61966-2.1</span><span class="red">AI declared · see passport</span></div>
-    <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i><i class="reg l"></i><i class="reg r"></i>
+    <div class="slug" aria-hidden="true"><span>Plate I — Curriculum</span><span id="slugV">Luxury &amp; beauty</span><span>AI declared · see seal</span><span>HERA Studio — Madrid</span></div>
+    <i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i><i class="tick l"></i><i class="tick r"></i>
 
     <header class="head">
       <div>
-        <h1>Denno<br>Gamboa<i class="dot"></i></h1>
-        <p class="role"><span data-only="luxury">Creative Technologist · AI image lead · Luxury &amp; beauty</span><span data-only="studio">Creative Technologist · Generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
+        <p class="kick"><span data-only="luxury">Creative Technologist · AI image lead · Luxury &amp; beauty</span><span data-only="studio">Creative Technologist · Generative AI production</span><span data-only="ai">Creative Technologist · AI imaging</span></p>
+        <h1>Denno <em>Gamboa</em></h1>
+        <p class="thesis">
+          <span data-only="luxury">I turn one shoot into every version a campaign needs. The product stays untouched and the AI is declared.</span>
+          <span data-only="studio">I build image pipelines a production team can rerun tomorrow and get the same result.</span>
+          <span data-only="ai">I know why generated images look fake, and I build the tools that fix it.</span>
+        </p>
       </div>
-      <ul class="contact">
-        <li>Madrid · open to remote and EU relocation</li>
-        <li><a href="mailto:denno@heraaistudio.com">denno@heraaistudio.com</a></li>
-        <li class="print-only">+34 674 892 369</li>
-        <li data-only="luxury studio"><a href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app/studio</a></li>
-        <li data-only="ai"><a href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></li>
-        <li><a href="https://www.linkedin.com/in/dennoGS" target="_blank" rel="noopener">linkedin.com/in/dennoGS</a></li>
-      </ul>
+      <svg class="seal" id="headSeal" viewBox="-110 -110 220 220" role="img" aria-label="HERA seal: real skin, measured, signed"></svg>
     </header>
 
-    <p class="thesis">
-      <span data-only="luxury">I turn one shoot into every version a campaign needs. The product stays untouched and the AI is declared.</span>
-      <span data-only="studio">I build image pipelines a production team can rerun tomorrow and get the same result.</span>
-      <span data-only="ai">I know why generated images look fake, and I build the tools that fix it.</span>
-    </p>
+    <ul class="contact">
+      <li>Madrid · open to remote and EU relocation</li>
+      <li><a href="mailto:denno@heraaistudio.com">denno@heraaistudio.com</a></li>
+      <li class="print-only">+34 674 892 369</li>
+      <li data-only="luxury studio"><a href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app/studio</a></li>
+      <li data-only="ai"><a href="https://heraaistudio.com/" target="_blank" rel="noopener">heraaistudio.com</a></li>
+      <li><a href="https://www.linkedin.com/in/dennoGS" target="_blank" rel="noopener">linkedin.com/in/dennoGS</a></li>
+    </ul>
 
     <dl class="nums" aria-label="In numbers">
-      <div class="n-lvmh" data-only="luxury studio"><dt><span class="circle">2 days</span></dt><dd>to deliver the test, final round of an LVMH maison pitch</dd></div>
-      <div class="n-skin"><dt>0.33<small>→</small>0.83</dt><dd>skin fidelity with HERA Skin Lab, measured on a test bench</dd><span class="hand red tag" data-only="luxury studio">real numbers</span></div>
+      <div class="n-lvmh" data-only="luxury studio"><dt>2 days</dt><dd>to deliver the test, final round of an LVMH maison pitch</dd></div>
+      <div class="n-skin"><dt>0.33<small>→</small>0.83</dt><dd>skin fidelity with HERA Skin Lab, measured on a test bench</dd></div>
       <div class="n-65" data-only="ai"><dt>+65%</dt><dd>micro-texture reaching the photo, same bench</dd></div>
       <div class="n-mkts" data-only="luxury studio"><dt>30+</dt><dd>markets served with product imagery at Inditex</dd></div>
       <div class="n-48" data-only="luxury studio"><dt>48 h</dt><dd>from one approved master to every format, at HERA Studio</dd></div>
@@ -433,30 +397,30 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     <p class="brands"><span class="k">Worked with</span>Inditex <i>/</i> Mango <i>/</i> Carolina Herrera <i>/</i> Purificación García <i>/</i> Warner Bros. <i>/</i> Hogarth <i>·</i> WPP <i>/</i> Locco</p>
 
     <section class="what">
-          <h2>What I do</h2>
-          <div class="caps">
-            <div class="cap" data-only="luxury"><span class="k">Versioning</span><h3>One shoot, every format.</h3><p>A master you already own becomes every format, market and duration, without rebuilding the set.</p></div>
-            <div class="cap" data-only="luxury"><span class="k">Product fidelity</span><h3>The product stays untouched.</h3><p>Shape, setting and stitching locked to the real piece in every version. Skin and colour finished by hand.</p></div>
-            <div class="cap" data-only="luxury"><span class="k">Provenance</span><h3>AI declared, never hidden.</h3><p>Deliveries built for Article 50 of the EU AI Act: AI use declared, provenance traceable, confidential by default.</p></div>
+      <h2><span>I</span>What I do</h2>
+      <div class="caps">
+        <div class="cap" data-only="luxury"><span class="k">Versioning</span><h3>One shoot, every format.</h3><p>A master you already own becomes every format, market and duration, without rebuilding the set.</p></div>
+        <div class="cap" data-only="luxury"><span class="k">Product fidelity</span><h3>The product stays untouched.</h3><p>Shape, setting and stitching locked to the real piece in every version. Skin and colour finished by hand.</p></div>
+        <div class="cap" data-only="luxury"><span class="k">Provenance</span><h3>AI declared, never hidden.</h3><p>Deliveries built for Article 50 of the EU AI Act: AI use declared, provenance traceable, confidential by default.</p></div>
 
-            <div class="cap" data-only="studio"><span class="k">Pipelines</span><h3>Repeatable by design.</h3><p>Every run prints its alignment, fidelity and processing time, so a result can be rerun and defended in review.</p></div>
-            <div class="cap" data-only="studio"><span class="k">Post-production</span><h3>Finished by hand.</h3><p>Retouching and colour grading learned in luxury studios. Skin and fabric corrected by eye after the AI pass.</p></div>
-            <div class="cap" data-only="studio"><span class="k">Compliance</span><h3>Safe to ship.</h3><p>AI use declared per asset under the EU AI Act, NDA-grade confidentiality and provenance that travels with the file.</p></div>
+        <div class="cap" data-only="studio"><span class="k">Pipelines</span><h3>Repeatable by design.</h3><p>Every run prints its alignment, fidelity and processing time, so a result can be rerun and defended in review.</p></div>
+        <div class="cap" data-only="studio"><span class="k">Post-production</span><h3>Finished by hand.</h3><p>Retouching and colour grading learned in luxury studios. Skin and fabric corrected by eye after the AI pass.</p></div>
+        <div class="cap" data-only="studio"><span class="k">Compliance</span><h3>Safe to ship.</h3><p>AI use declared per asset under the EU AI Act, NDA-grade confidentiality and provenance that travels with the file.</p></div>
 
-            <div class="cap" data-only="ai"><span class="k">Diagnosis</span><h3>Why an image reads as fake.</h3><p>Six measurable signatures, from identical detail in all three colour channels to flat grain. Prompting fixes none of them.</p></div>
-            <div class="cap" data-only="ai"><span class="k">Tool building</span><h3>Shipped and live.</h3><p>Web apps on Vercel and Cloud Run that call Gemini and Replicate models, built with Claude Code under my direction.</p></div>
-            <div class="cap" data-only="ai"><span class="k">Client side</span><h3>Luxury brief to live demo.</h3><p>I can sit with a brand committee and with engineers in the same week. Pitch-tested with an LVMH maison.</p></div>
-          </div>
+        <div class="cap" data-only="ai"><span class="k">Diagnosis</span><h3>Why an image reads as fake.</h3><p>Six measurable signatures, from identical detail in all three colour channels to flat grain. Prompting fixes none of them.</p></div>
+        <div class="cap" data-only="ai"><span class="k">Tool building</span><h3>Shipped and live.</h3><p>Web apps on Vercel and Cloud Run that call Gemini and Replicate models, built with Claude Code under my direction.</p></div>
+        <div class="cap" data-only="ai"><span class="k">Client side</span><h3>Luxury brief to live demo.</h3><p>I can sit with a brand committee and with engineers in the same week. Pitch-tested with an LVMH maison.</p></div>
+      </div>
     </section>
 
     <div class="cols">
       <div>
         <section>
-          <h2>Experience</h2>
+          <h2><span>II</span>Experience</h2>
           <ol class="xp">
             <li class="cur"><time datetime="2026-05">2026 – now</time><div><h3>Founder &amp; Creative Director <span>· HERA Studio, Madrid</span></h3>
               <p>AI image production for luxury: campaign versioning, product-faithful retouching and a HERA Passport with every asset. Final round of an LVMH maison pitch for Holiday 2026.</p></div></li>
-            <li class="cur"><time datetime="2025-08">2025 – now</time><div><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span></h3>
+            <li><time datetime="2025-08">2025 – 2026</time><div><h3>Photo &amp; Digital Graphic Designer <span>· Locco, Madrid</span></h3>
               <p>Photography, retouching and design for davidlocco.com, social and the Asia campaign.</p></div></li>
             <li><time datetime="2018-06">2018 – 2025</time><div><h3>Freelance Retoucher &amp; Creative Director <span>· denno, Madrid</span></h3>
               <p>Retouching, creative direction and grading for fashion and lifestyle brands.</p></div></li>
@@ -478,7 +442,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
         </section>
 
         <section>
-          <h2>Built &amp; shipped</h2>
+          <h2><span>III</span>Built &amp; shipped</h2>
           <div class="tools">
             <article class="tool t-studio" data-only="studio">
               <h3>HERA Studio</h3><a class="u" href="https://hera-vercel.vercel.app/studio" target="_blank" rel="noopener">hera-vercel.vercel.app<wbr>/studio</a>
@@ -557,8 +521,8 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     </div>
 
     <footer class="foot">
-      <div><code class="mrz" id="mrz"></code><span class="hand">&larr; this CV carries its own passport</span></div>
-      <div class="foot-r"><div class="checker" aria-hidden="true"></div><p class="decl">Facts checked by me · Layout and code made with Claude (AI) under my direction · No generated images</p></div>
+      <code class="mrz" id="mrz"></code>
+      <div class="foot-r"><svg class="band" id="band" viewBox="0 0 620 52" preserveAspectRatio="none" aria-hidden="true"></svg><p class="decl">Facts checked by me · Layout and code made with Claude (AI) under my direction · No generated images on this page</p></div>
     </footer>
   </main>
 </div>
@@ -567,113 +531,170 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
 (() => {
   const root = document.documentElement;
   const $ = id => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
 
   /* versions */
   const V = { luxury: 'Luxury & beauty', studio: 'Production studios', ai: 'AI companies' };
   function setV(h) {
     const v = V[h] ? h : 'luxury';
     root.dataset.v = v;
-    document.querySelectorAll('.versions a').forEach(a => a.setAttribute('aria-current', String(a.dataset.v === v)));
+    document.querySelectorAll('.versions a[data-v]').forEach(a => a.setAttribute('aria-current', String(a.dataset.v === v)));
     $('slugV').textContent = V[v];
     $('pdfLink').href = { luxury: 'Denno_Gamboa_CV.pdf', studio: 'Denno_Gamboa_CV_studio.pdf', ai: 'Denno_Gamboa_CV_ai.pdf' }[v];
   }
   setV(location.hash.slice(1));
   addEventListener('hashchange', () => setV(location.hash.slice(1)));
 
-  /* facts only Denno has */
-  const fills = document.querySelectorAll('.sheet .fill').length;
-  if (fills) { $('todo').hidden = false; $('todoN').textContent = fills; }
-
-  /* ColorChecker Classic, sRGB */
-  const CC = ['#735244','#C29682','#627A9D','#576C43','#8580B1','#67BDAA','#D67E2C','#505BA6','#C15A63','#5E3C6C','#9DBC40','#E0A32E','#383D96','#469449','#AF363C','#E7C71F','#BB5695','#0885A1','#F3F3F2','#C8C8C8','#A0A0A0','#7A7A79','#555555','#343434'];
-  document.querySelectorAll('.checker').forEach(el => {
-    el.innerHTML = CC.map((c, i) => `<i style="background:${c}"${i < 2 ? ` title="${i ? 'light skin' : 'dark skin'}"` : ''}></i>`).join('');
-  });
-
-  const MRZ = 'P<HRAGAMBOA<<DENNO'.padEnd(44, '<') + '\nCREATIVE<TECHNOLOGIST<<AI<DECLARED<MAD261005';
+  const MRZ = 'P<HRAGAMBOA<<DENNO'.padEnd(44, '<') + '\nCREATIVE<TECHNOLOGIST<<AI<DECLARED<MAD261010';
   $('mrz').textContent = MRZ;
+
+  /* ---------- guilloché: banknote engraving, drawn as math ---------- */
+  function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.append(e); return e; }
+  // a band of phase-shifted waves round a circle; their overlap is the moiré of an engraved seal
+  function band(g, r0, amp, k, copies, w, op) {
+    for (let i = 0; i < copies; i++) {
+      let d = '';
+      for (let s = 0; s <= 720; s++) {
+        const th = s / 720 * Math.PI * 2, r = r0 + amp * Math.sin(k * th + i / copies * Math.PI * 2);
+        d += (s ? 'L' : 'M') + (r * Math.cos(th)).toFixed(2) + ' ' + (r * Math.sin(th)).toFixed(2);
+      }
+      el('path', { d, class: 'g d', 'stroke-width': w, 'stroke-opacity': op, pathLength: 1 }, g);
+    }
+  }
+  function ring(g, r, w, op, dash) { // a dashed ring keeps its real length, so the dashes stay dots all the way round
+    return el('circle', dash ? { r, class: 'g', 'stroke-width': w, 'stroke-opacity': op, 'stroke-dasharray': dash } : { r, class: 'g d', 'stroke-width': w, 'stroke-opacity': op, pathLength: 1 }, g);
+  }
+  function ringText(g, id, r, txt, size, ls, op = 1) {
+    el('path', { id, d: `M0 ${r}A${r} ${r} 0 1 1 0 ${-r}A${r} ${r} 0 1 1 0 ${r}`, fill: 'none' }, g);
+    const t = el('text', { 'font-family': 'Syne, Arial, sans-serif', 'font-size': size, 'letter-spacing': ls, 'font-weight': 500, opacity: op }, g);
+    // the words run exactly once round the ring, spaced to close the circle
+    const tp = el('textPath', { href: '#' + id, textLength: (Math.PI * 2 * r - ls).toFixed(1), lengthAdjust: 'spacing' }, t); tp.textContent = txt;
+    return t;
+  }
+  let sid = 0;
+  function seal(svg, { text = 'DENNO GAMBOA · RETOUCH · ART DIRECTION · CREATIVE TECHNOLOGY · ', micro = 'ALICANTE · MADRID · SINCE 2018 · ', center = 'DG', sub = 'MADRID', ticks = true } = {}) {
+    svg.innerHTML = ''; const n = 's' + (++sid);
+    const outer = el('g', { class: 'outer' }, svg), bandA = el('g', { class: 'bandA' }, svg), bandB = el('g', { class: 'bandB' }, svg), core = el('g', { class: 'core' }, svg);
+    if (ticks) for (const [x1, y1, x2, y2] of [[0, -108, 0, -100], [0, 100, 0, 108], [-108, 0, -100, 0], [100, 0, 108, 0]]) el('line', { x1, y1, x2, y2, class: 'g d', 'stroke-width': .4, 'stroke-opacity': .7, pathLength: 1 }, outer);
+    ring(outer, 99, .3, .5, '.6 2.2');
+    ring(outer, 95, .45, .9);
+    ringText(outer, n + 'a', 86.5, text, 7.4, 2.4);
+    ring(outer, 79, .45, .9);
+    band(bandA, 67, 7.5, 40, 16, .22, .55);
+    ring(bandA, 57.5, .3, .6); ring(bandA, 55, .3, .6);
+    band(bandB, 44, 6, 30, 12, .22, .6);
+    ring(core, 35, .45, .9);
+    ringText(core, n + 'b', 31, micro + micro, 2.6, .6, .8);
+    ring(core, 28, .3, .7);
+    const c = el('text', { 'text-anchor': 'middle', y: 6, 'font-family': 'Syne, Arial, sans-serif', 'font-weight': 800, 'font-size': 21, fill: '#F5F5F3' }, core); c.textContent = center;
+    const s = el('text', { 'text-anchor': 'middle', y: 17, 'font-family': 'Syne, Arial, sans-serif', 'font-size': 4.2, 'letter-spacing': 2.2 }, core); s.textContent = sub;
+    return { outer, bandA, bandB, core, lines: [...svg.querySelectorAll('.d')], words: [...svg.querySelectorAll('text')] };
+  }
+  function guil(svg) { // a large rosette for backgrounds
+    svg.innerHTML = '';
+    const g = el('g', {}, svg);
+    band(g, 90, 10, 60, 24, .18, .7); band(g, 66, 9, 44, 20, .18, .7); band(g, 42, 7, 30, 14, .18, .7);
+    return g;
+  }
+  seal($('headSeal'));
+  (() => { // footer band: a straight guilloché strip
+    const s = $('band');
+    for (let i = 0; i < 8; i++) {
+      let d = '';
+      for (let x = 0; x <= 620; x += 2) d += (x ? 'L' : 'M') + x + ' ' + (26 + 20 * Math.sin(x / 620 * Math.PI * 2 * 9 + i / 8 * Math.PI * 2)).toFixed(2);
+      el('path', { d, fill: 'none', stroke: '#FFFFFF', 'stroke-width': .4, 'stroke-opacity': .5, 'vector-effect': 'non-scaling-stroke' }, s);
+    }
+  })();
 
   /* ---------- reel ---------- */
   const stage = $('stage');
   if (!stage) return;
   const RENDER = !!window.__REEL_RENDER__;
   if (RENDER) root.classList.add('render');
-  const DUR = 15, FPS = 30;
+  const DUR = 20, FPS = 30, OFF = 5; // OFF: the path scene pushes everything after the first scene back
   const cl = (x, a = 0, b = 1) => x < a ? a : x > b ? b : x;
   const P = (t, a, b) => cl((t - a) / (b - a));
   const L = (a, b, p) => a + (b - a) * p;
   const o3 = p => 1 - Math.pow(1 - p, 3);
   const io3 = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-  const back = p => { const c = 1.70158; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
 
-  const SC = [[0, 2.4], [2.4, 5.4], [5.4, 8.6], [8.6, 11], [11, 12.9], [12.9, 15]];
-  const NM = ['01 title', '02 versioning', '03 skin', '04 passport', '05 story', '06 end card'];
+  const SC = [[0, 2.2], [2.2, 5.6], [5.6, 8.1], [8.1, 10.5], [10.5, 12.5], [12.5, 15]];
+  const FIG = ['Fig. I — Look', 'Fig. III — Skin', 'Fig. IV — Tool', 'Fig. V — Product', 'Fig. VI — Seal', 'Fig. VII — Signature'];
   const scenes = SC.map((_, i) => $('s' + (i + 1)));
   function show(i, t) {
     const [a, b] = SC[i];
-    const o = (i ? P(t, a, a + .16) : 1) * (i < 5 ? 1 - P(t, b - .16, b) : 1);
+    const o = (i ? P(t, a, a + .3) : 1) * (i < 5 ? 1 - P(t, b - .3, b) : 1);
     scenes[i].style.opacity = o;
     scenes[i].style.visibility = o > 0 ? 'visible' : 'hidden';
     return o;
   }
-  // a handwritten note is "written" left to right
-  function note(el, t, a) {
-    const p = o3(P(t, a, a + .38));
-    el.style.opacity = p > 0 ? 1 : 0;
-    el.style.clipPath = `inset(-30% ${(1 - p) * 100}% -30% -10%)`;
+  // a word arrives out of focus and settles, the way a macro lens racks
+  function word(e, t, a, b) {
+    const pi = o3(P(t, a, a + .7)), po = b ? io3(P(t, b - .45, b)) : 0, p = pi * (1 - po);
+    e.style.opacity = p;
+    e.style.filter = `blur(${((1 - pi) * 1.4 + po * 1) * stage.clientWidth / 100}px)`;
+    e.style.letterSpacing = `${L(.14, -.03, pi) + po * .06}em`;
+    e.style.fontWeight = Math.round(L(400, 700, pi) + po * 100); // the type gains weight as it lands
+    e.style.transform = `translateY(${(1 - pi) * .12 - po * .06}em)`;
   }
-  function split(el) {
-    const s = el.textContent;
-    el.textContent = '';
-    return [...s].map(c => {
-      const n = document.createElement('span');
-      n.className = 'ch';
-      n.textContent = c === ' ' ? ' ' : c;
-      el.append(n);
-      return n;
+  function draw(lines, p, stagger = .6) {
+    const n = lines.length;
+    lines.forEach((l, i) => { const q = cl((p - i / n * stagger) / (1 - stagger)); l.style.strokeDasharray = '1'; l.style.strokeDashoffset = 1 - q; });
+  }
+
+  // film grain: one noise tile, shifted every frame
+  const gc = $('grain'), gx = gc.getContext('2d');
+  (() => { const d = gx.createImageData(gc.width, gc.height); let s = 7; for (let i = 0; i < d.data.length; i += 4) { s = (s * 16807) % 2147483647; const v = 128 + ((s % 256) - 128) * .8; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } gx.putImageData(d, 0, 0); })();
+  function grain(t) { const f = Math.floor(t * FPS); gc.style.transform = `translate(${(f * 37 % 7) - 3}%,${(f * 53 % 7) - 3}%)`; }
+
+  // 01 · look closer: the seal engraves itself, then the lens pushes into it
+  const S1 = seal($('s1seal'));
+  function s1(t) {
+    if (show(0, t) <= 0) return;
+    draw(S1.lines, io3(P(t, 0, 1.5)));
+    S1.words.forEach(w => w.style.opacity = o3(P(t, .9, 1.4)));
+    const z = L(1, 1.16, io3(P(t, .4, 2.2)));
+    $('s1seal').style.transform = `translate(-50%,-50%) scale(${z}) rotate(${t * 4}deg)`;
+    word($('w1'), t, .95, 2.2);
+  }
+
+  // 02 · path: eight years engraved as rings, one per chapter, from the centre out
+  const CH = ['2018 · DENNO · FREELANCE RETOUCH · MADRID · ', '2021 · TEMPE · INDITEX · RETOUCHER · ALICANTE · ', '2023 · WARNER BROS. ENTERTAINMENT · ASSISTANT ART DIRECTOR · ', '2024 · HOGARTH · WPP · CREATIVE TECHNOLOGIST · MADRID · ', '2025 · LOCCO · PHOTO & DIGITAL GRAPHIC DESIGNER · MADRID · ', '2026 · HERA STUDIO · FOUNDER & CREATIVE DIRECTOR · MADRID · '];
+  const ROSE = $('s7r'), CT = CH.map((_, i) => 2.45 + i * .72), RINGS = [];
+  (() => {
+    const core = el('g', {}, ROSE);
+    ring(core, 13, .45, .9);
+    const c = el('text', { 'text-anchor': 'middle', y: 5, 'font-family': 'Syne, Arial, sans-serif', 'font-weight': 800, 'font-size': 14, fill: '#F5F5F3' }, core); c.textContent = 'DG';
+    CH.forEach((txt, i) => {
+      const r = 24 + i * 14, g = el('g', {}, ROSE), size = 2.5 + i * .14;
+      band(g, r - 4.6, 2.6, 18 + i * 8, 6 + i, .2, .6); // each chapter has its own wave count, its own moiré
+      ring(g, r - 1, .3, .7);
+      const reps = Math.max(1, Math.floor(Math.PI * 2 * (r + 1.6) / (txt.length * size * .86)));
+      const w = ringText(g, 'ch' + i + 'p', r + 1.6, txt.repeat(reps), size, .5);
+      for (let k = 0; k < 4; k++) { const a = k * Math.PI / 2 + i * .3; el('line', { x1: Math.cos(a) * (r - 1), y1: Math.sin(a) * (r - 1), x2: Math.cos(a) * (r + 4.5), y2: Math.sin(a) * (r + 4.5), class: 'g d', 'stroke-width': .35, 'stroke-opacity': .8, pathLength: 1 }, g); }
+      RINGS.push({ g, lines: [...g.querySelectorAll('.d')], w });
+    });
+    ring(ROSE, 107, .3, .5, '.6 2.2');
+  })();
+  const IX = [...$('s7ix').children];
+  function s7(t) {
+    const [a, b] = [2.2, 2.2 + OFF], o = P(t, a, a + .3) * (1 - P(t, b - .3, b));
+    $('s7').style.opacity = o; $('s7').style.visibility = o > 0 ? 'visible' : 'hidden';
+    if (o <= 0) return;
+    ROSE.style.transform = `translateY(-50%) scale(${L(.92, 1, io3(P(t, a, b)))}) rotate(${(t - a) * 3}deg)`;
+    RINGS.forEach((R, i) => {
+      draw(R.lines, io3(P(t, CT[i], CT[i] + .6)), .3);
+      R.w.style.opacity = o3(P(t, CT[i] + .25, CT[i] + .6));
+      R.g.style.transform = `rotate(${(i % 2 ? -1 : 1) * (t - CT[i]) * (2 + i)}deg)`;
+    });
+    CH.forEach((_, i) => {
+      const e = $('ch' + i), pi = o3(P(t, CT[i], CT[i] + .3)), po = i < CH.length - 1 ? P(t, CT[i + 1] - .05, CT[i + 1] + .15) : P(t, b - .4, b), p = pi * (1 - po);
+      e.style.opacity = p; e.style.filter = `blur(${(1 - pi + po) * .5}cqw)`; e.firstChild.style.fontWeight = Math.round(L(400, 800, pi)); e.style.transform = `translateY(${(1 - pi) * 1.2 - po * .8}cqw)`;
+      IX[i].classList.toggle('on', t >= CT[i]);
     });
   }
 
-  // 01 · title
-  const a1 = split($('s1a')), b1 = $('s1b'), c1 = split($('s1c')), pen = $('s1pen');
-  const PL = pen.getTotalLength();
-  pen.style.strokeDasharray = PL;
-  function s1(t) {
-    if (show(0, t) <= 0) return;
-    a1.forEach((c, i) => { const p = P(t, .1 + i * .045, .5 + i * .045); c.style.opacity = cl(p * 2.2); c.style.transform = `translateY(${(1 - back(p)) * .6}em)`; });
-    const p2 = P(t, .5, .72);
-    b1.style.opacity = p2;
-    b1.style.transform = `translateY(${(1 - o3(p2)) * .35}em)`;
-    b1.style.fontStretch = L(62, 125, io3(P(t, .8, 1.5))) + '%';
-    c1.forEach((c, i) => { const p = P(t, 1.25 + i * .022, 1.5 + i * .022); c.style.opacity = cl(p * 3); c.style.transform = `scale(${L(1.7, 1, back(p))})`; });
-    pen.style.strokeDashoffset = PL * (1 - io3(P(t, 1.62, 1.98)));
-    note($('s1n1'), t, 1.05);
-    note($('s1n2'), t, 1.72);
-  }
-
-  // 02 · versioning: the frame changes, the product does not move
-  const RT = [[56, 31.5, '16:9 · film'], [27, 33.75, '4:5 · feed'], [19, 33.8, '9:16 · story'], [32, 32, '1:1 · grid'], [62, 32.5, '1.91:1 · display']];
-  const KT = [2.55, 2.98, 3.52, 4.06, 4.6];
-  function s2(t) {
-    if (show(1, t) <= 0) return;
-    let w = RT[0][0], h = RT[0][1], k = 0;
-    for (let i = 1; i < RT.length; i++) {
-      if (t < KT[i]) break;
-      const p = io3(P(t, KT[i], KT[i] + .26));
-      w = L(RT[i - 1][0], RT[i][0], p); h = L(RT[i - 1][1], RT[i][1], p); k = p < .5 ? i - 1 : i;
-    }
-    const pin = o3(P(t, 2.5, 2.78)), f = $('s2f');
-    f.style.width = w + 'cqw'; f.style.height = h + 'cqw'; f.style.opacity = pin;
-    f.style.transform = `translate(-50%,-50%) scale(${L(.94, 1, pin)})`;
-    $('s2lab').textContent = RT[k][2];
-    $('s2n').textContent = `v0${k + 1} / 05`;
-    $('s2b').style.opacity = o3(P(t, 2.45, 2.7));
-    $('s2x').style.opacity = P(t, 2.7, 2.9) * .9;
-    note($('s2n1'), t, 3.2);
-    note($('s2n2'), t, 4.15);
-  }
-
-  // 03 · skin: procedural macro skin, the AI pass against the graft
+  // 03 · skin: the AI pass (wax) and, behind a gold scan, the real skin
   function rng(s) { return () => { s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
   function vn(W, H, cell, r) {
     const gw = Math.ceil(W / cell) + 2, gh = Math.ceil(H / cell) + 2, g = new Float32Array(gw * gh);
@@ -711,7 +732,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     return c;
   }
   function makeSkin(W, H) {
-    const r = rng(4120), k = W / 1600, N = W * H, A = N / 1.44e6;
+    const Z = 2.6, r = rng(4120), k = W / 1600 * Z, N = W * H, A = N / 1.44e6 / (Z * Z); // Z: macro zoom, features Z times larger
     const lo = vn(W, H, Math.max(24, 300 * k), r), mi = vn(W, H, Math.max(8, 52 * k), r);
     const fi = vn(W, H, Math.max(1.2, 2.4 * k), r), de = vn(W, H, Math.max(24, 420 * k), r);
     const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
@@ -720,7 +741,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     const pr = new Float32Array(N), pg = new Float32Array(N), pb = new Float32Array(N);
     for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
       const sh = 1 + .11 * (.5 - (x / W * .62 + y / H * .38)), bl = lo[i] - .5, m = mi[i] - .5;
-      const R = (214 + 18 * bl + 6 * m) * sh, G = (166 - 7 * bl + 6 * m) * sh, B = (139 - 9 * bl + 5 * m) * sh;
+      const R = (206 + 18 * bl + 6 * m) * sh, G = (156 - 7 * bl + 6 * m) * sh, B = (128 - 9 * bl + 5 * m) * sh;
       const h = (fi[i] - .5) * 1.6 + (r() - .5) * .9, j = i * 4;
       // real skin: red light scatters under the surface, so red carries less fine detail than green
       a[j] = R + h * 9 * .62; a[j + 1] = G + h * 9; a[j + 2] = B + h * 9 * .88; a[j + 3] = 255;
@@ -746,7 +767,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     px.fillStyle = g; px.fillRect(0, 0, W, H);
 
     rx.lineCap = 'round';
-    for (let n = 0, c = N / 700; n < c; n++) {
+    for (let n = 0, c = N / 700 / (Z * Z); n < c; n++) {
       const x = r() * W, y = r() * H, i = (y | 0) * W + (x | 0);
       const ang = (r() < .5 ? .62 : -.7) + (lo[i] - .5) * .9 + (r() - .5) * .35, l = (7 + r() * 16) * k;
       const dx = Math.cos(ang) * l, dy = Math.sin(ang) * l;
@@ -756,7 +777,7 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     }
     const pore = sprite(32, [[0, 'rgba(78,38,30,.9)'], [.35, 'rgba(104,54,42,.55)'], [.7, 'rgba(140,80,62,.12)'], [1, 'rgba(0,0,0,0)']]);
     const rim = sprite(32, [[0, 'rgba(255,242,232,.3)'], [1, 'rgba(255,242,232,0)']]);
-    for (let n = 0, c = N / 150; n < c; n++) {
+    for (let n = 0, c = N / 150 / (Z * Z); n < c; n++) {
       const x = r() * W, y = r() * H, i = (y | 0) * W + (x | 0);
       if (r() > .25 + .75 * de[i]) continue; // open pores where density is high, fine elsewhere
       const s = (1.6 + r() * 2.8) * k * (.7 + de[i] * .9);
@@ -784,93 +805,105 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
       rx.drawImage(gl, W * .34 + Math.cos(ang) * rad - s / 2, H * .36 + Math.sin(ang) * rad * .7 - s / 2, s, s);
     }
     rx.globalAlpha = 1;
-    [rx, px].forEach(c => {
-      const v = c.createRadialGradient(W / 2, H / 2, H * .35, W / 2, H / 2, W * .62);
-      v.addColorStop(0, 'rgba(20,10,8,0)'); v.addColorStop(1, 'rgba(20,10,8,.42)');
-      c.fillStyle = v; c.fillRect(0, 0, W, H);
-    });
     return { real, plastic };
   }
-  const shot = $('s3shot'), sk = $('skin'), sx = sk.getContext('2d'), lp = $('loupe'), lx = lp.getContext('2d'), lw = $('s3l');
-  let SK = null, kpx = 1, LP = 1;
+  const shot = $('s2shot'), ca = $('skin'), cb = $('skinR'), xa = ca.getContext('2d'), xb = cb.getContext('2d');
+  let SK = null;
   function sizeSkin() {
     const r = shot.getBoundingClientRect();
     if (!r.width) return;
     const dpr = RENDER ? 1 : Math.min(2, devicePixelRatio || 1);
     const W = Math.round(Math.min(1920, r.width * dpr)), H = Math.round(W * r.height / r.width);
-    if (sk.width !== W || sk.height !== H || !SK) { sk.width = W; sk.height = H; SK = makeSkin(W, H); }
-    kpx = W / r.width;
-    LP = Math.max(1, Math.round(lw.offsetWidth * dpr));
-    lp.width = lp.height = LP;
+    if (ca.width !== W || ca.height !== H || !SK) {
+      ca.width = cb.width = W; ca.height = cb.height = H; SK = makeSkin(W, H);
+      xa.drawImage(SK.plastic, 0, 0); xb.drawImage(SK.real, 0, 0);
+    }
   }
-  function s3(t) {
-    const o = show(2, t);
-    stage.classList.toggle('dark', o > .5);
-    if (o <= 0 || !SK) return;
-    const x = L(.9, .36, io3(P(t, 5.85, 7.5))), W = sk.width, H = sk.height, bx = Math.round(W * x);
-    sx.drawImage(SK.plastic, 0, 0);
-    sx.save(); sx.beginPath(); sx.rect(bx, 0, W - bx, H); sx.clip(); sx.drawImage(SK.real, 0, 0); sx.restore();
-    $('s3w').style.left = x * 100 + '%';
-    const pr = o3(P(t, 5.9, 7.5));
+  const RET = $('s2ret');
+  (() => { // the Skin Lab reticle: a ring of ticks, like the app's scan
+    el('circle', { r: 92, fill: 'none', stroke: '#FFFFFF', 'stroke-width': .5, 'stroke-opacity': .9 }, RET);
+    for (let i = 0; i < 120; i++) { const a = i / 120 * Math.PI * 2, l = i % 10 ? 4 : 9; el('line', { x1: Math.cos(a) * 96, y1: Math.sin(a) * 96, x2: Math.cos(a) * (96 + l), y2: Math.sin(a) * (96 + l), stroke: '#FFFFFF', 'stroke-width': .5, 'stroke-opacity': i % 10 ? .5 : .95 }, RET); }
+  })();
+  function s2(t) {
+    if (show(1, t) <= 0 || !SK) return;
+    const z = L(1.14, 1.0, o3(P(t, 2.2, 5.6))), dof = (1 - o3(P(t, 2.2, 3.0))) * 6;
+    shot.style.transform = `scale(${z})`;
+    shot.style.filter = `blur(${dof}px)`;
+    const x = io3(P(t, 3.55, 4.45));
+    cb.style.clipPath = `inset(0 ${(1 - x) * 100}% 0 0)`;
+    const sc = $('s2scan'); sc.style.left = x * 100 + '%'; sc.style.opacity = x > 0 && x < 1 ? 1 : 0;
+    word($('w2a'), t, 2.45, 3.6);
+    word($('w2b'), t, 4.35, 5.6);
+    const pr = o3(P(t, 3.55, 4.45));
     $('r1').textContent = L(.33, .83, pr).toFixed(2);
     $('r2').textContent = '+' + Math.round(65 * pr) + '%';
-    $('r3w').style.opacity = P(t, 7.2, 7.45);
-    const lo = o3(P(t, 6.6, 6.9)), cx = x + (1 - x) / 2;
-    lw.style.opacity = lo;
-    lw.style.left = cx * 100 + '%';
-    lw.style.transform = `translate(-50%,-50%) scale(${L(.7, 1, lo)})`;
-    if (lo > 0) { const side = lw.offsetWidth / 3 * kpx; lx.drawImage(SK.real, W * cx - side / 2, H * .46 - side / 2, side, side, 0, 0, LP, LP); }
-    note($('s3n1'), t, 6.0);
-    note($('s3n2'), t, 7.15);
+    $('s2read').style.opacity = o3(P(t, 3.4, 3.7)) * (1 - P(t, 5.2, 5.5));
+    const rp = o3(P(t, 4.5, 5.0));
+    RET.style.opacity = rp * .9; RET.style.transform = `translate(-50%,-50%) scale(${L(1.25, 1, rp)}) rotate(${t * 6}deg)`;
   }
 
-  // 04 · passport
-  const PASS = ['asset ......... campaign_master_v05.tif', 'product ....... untouched · geo-lock', 'skin, colour .. retouched by hand', 'AI use ........ declared, per asset', 'checked by .... D. Gamboa'].join('\n');
+  // 04 · built: the real app, on a phone
+  const G3 = guil($('s3g')), vid = $('s3v');
+  function s3(t) {
+    const o = show(2, t);
+    if (o <= 0) { if (!RENDER && !vid.paused) vid.pause(); return; }
+    $('s3g').style.transform = `translateY(-50%) rotate(${t * -5}deg)`;
+    const lt = cl(t - SC[2][0], 0, 2.39);
+    if (RENDER) { if (Math.abs(vid.currentTime - lt) > .001) vid.currentTime = lt; }
+    else if (playing && vid.paused) { vid.currentTime = lt; vid.play().catch(() => 0); }
+    else if (!playing) vid.currentTime = lt;
+    word($('w3'), t, 5.85, 8.0);
+    const m = o3(P(t, 6.3, 6.8)); $('s3m').style.opacity = m; $('s3m').style.transform = `translateY(${(1 - m) * .8}cqw)`;
+  }
+
+  // 05 · unchanged: the frame changes five times, the product never moves
+  const RT = [[56, 31.5, '16:9 · film'], [26, 32.5, '4:5 · feed'], [18.3, 32.5, '9:16 · story'], [31, 31, '1:1 · grid'], [60, 31.4, '1.91:1 · display']];
+  const KT = [8.3, 8.75, 9.2, 9.65, 10.05];
   function s4(t) {
     if (show(3, t) <= 0) return;
-    const pc = o3(P(t, 8.62, 8.95)), card = $('s4p');
-    card.style.opacity = pc; card.style.transform = `translateY(${(1 - pc) * 4}cqw)`;
-    $('s4t').textContent = PASS.slice(0, Math.round(PASS.length * P(t, 8.95, 9.85)));
-    $('s4m').textContent = MRZ.slice(0, Math.round(MRZ.length * P(t, 10.05, 10.6)));
-    const ps = P(t, 9.9, 10.22), st = $('s4s');
-    st.style.opacity = ps > 0 ? .92 : 0;
-    st.style.transform = `rotate(-12deg) scale(${L(1.9, 1, back(ps))})`;
-    note($('s4n1'), t, 10.3);
+    let w = RT[0][0], h = RT[0][1], k = 0;
+    for (let i = 1; i < RT.length; i++) {
+      if (t < KT[i]) break;
+      const p = io3(P(t, KT[i], KT[i] + .24));
+      w = L(RT[i - 1][0], RT[i][0], p); h = L(RT[i - 1][1], RT[i][1], p); k = p < .5 ? i - 1 : i;
+    }
+    const f = $('s4f'), pin = o3(P(t, 8.15, 8.5));
+    f.style.width = w + 'cqw'; f.style.height = h + 'cqw'; f.style.opacity = pin;
+    $('s4lab').textContent = RT[k][2]; $('s4n').textContent = `v0${k + 1}/05`;
+    word($('w4'), t, 8.55, 10.5);
   }
 
-  // 05 · story
-  const LINE = 'Three men run together every morning for forty-six days.';
+  // 06 · signed: the seal is struck, the passport line prints
+  const S5 = seal($('s5seal'), { text: 'AI DECLARED · SIGNED BY DENNO GAMBOA · MADRID · ', micro: 'EU AI ACT ART. 50 · PROVENANCE · ', sub: 'SIGNED' });
+  draw(S5.lines, 1, 0);
   function s5(t) {
     if (show(4, t) <= 0) return;
-    const n = Math.round(LINE.length * P(t, 11.12, 12.2));
-    $('s5a').textContent = LINE.slice(0, n);
-    $('s5b').textContent = LINE.slice(n);
-    $('s5c').style.opacity = n < LINE.length || Math.floor(t * 4) % 2 ? 1 : 0;
-    $('s5d').textContent = String(Math.max(1, Math.round(L(1, 46, o3(P(t, 11.05, 12.45)))))).padStart(2, '0');
-    $('s5y').style.opacity = o3(P(t, 12.15, 12.4));
-    note($('s5n'), t, 12.3);
+    const p = P(t, 10.55, 10.95), st = o3(p);
+    $('s5seal').style.opacity = st;
+    $('s5seal').style.transform = `translate(-50%,-50%) scale(${L(1.7, 1, st)}) rotate(${L(-14, 0, st)}deg)`;
+    S5.outer.style.transform = `rotate(${t * 3}deg)`; S5.bandA.style.transform = `rotate(${t * -6}deg)`; S5.bandB.style.transform = `rotate(${t * 9}deg)`;
+    word($('w5'), t, 10.9, 12.5);
+    $('s5m').textContent = MRZ.slice(0, Math.round(MRZ.length * P(t, 11.2, 12.1)));
   }
 
-  // 06 · end card
-  const d6 = [...split($('s6a')), ...split($('s6b'))], cc6 = [...document.querySelectorAll('#s6c i')];
+  // 07 · signature
+  const G6 = guil($('s6g')), S6 = seal($('s6seal'));
   function s6(t) {
     if (show(5, t) <= 0) return;
-    d6.forEach((c, i) => { const p = P(t, 12.95 + i * .035, 13.4 + i * .035); c.style.opacity = cl(p * 2.5); c.style.transform = `translateY(${(1 - back(p)) * -.5}em)`; });
-    $('s6d').style.transform = `scale(${back(P(t, 13.45, 13.75))})`;
-    $('s6r').style.opacity = o3(P(t, 13.55, 13.85));
-    cc6.forEach((c, i) => { const p = o3(P(t, 13.2 + i * .025, 13.5 + i * .025)); c.style.opacity = p; c.style.transform = `scale(${L(.4, 1, p)})`; });
-    $('s6w').style.opacity = o3(P(t, 14.1, 14.4));
-    note($('s6n'), t, 14.0);
+    $('s6g').style.transform = `translate(-50%,-50%) rotate(${t * 2}deg)`;
+    draw(S6.lines, io3(P(t, 12.5, 13.6)));
+    S6.words.forEach(w => w.style.opacity = o3(P(t, 13.2, 13.6)));
+    word($('s6n'), t, 12.85);
+    const r = o3(P(t, 13.5, 13.9)); $('s6r').style.opacity = r;
+    $('s6w').style.opacity = o3(P(t, 13.85, 14.25));
   }
 
   function hud(t) {
-    const f = Math.min(DUR * FPS - 1, Math.floor(t * FPS));
-    $('tc').textContent = `00:00:${String(Math.floor(f / FPS)).padStart(2, '0')}:${String(f % FPS).padStart(2, '0')}`;
-    let i = SC.findIndex(([, b]) => t < b); if (i < 0) i = 5;
-    $('hudS').textContent = NM[i];
-    $('tlh').style.left = t / DUR * 100 + '%';
+    let i = SC.findIndex(([, b]) => (t < 2.2 ? t : t - OFF) < b); if (i < 0) i = 5;
+    $('fig').textContent = t >= 2.2 && t < 2.2 + OFF ? 'Fig. II — Path' : FIG[i];
+    $('bar').style.width = t / DUR * 100 + '%';
   }
-  function render(t) { s1(t); s2(t); s3(t); s4(t); s5(t); s6(t); hud(t); }
+  function render(t) { const u = t - OFF; s1(t); s7(t); s2(u); s3(u); s4(u); s5(u); s6(u); hud(t); grain(t); }
 
   let playing = false, t0 = 0, cur = 0;
   const bP = $('bPlay');
@@ -888,23 +921,34 @@ html.render .stage{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;bo
     t0 = performance.now() - cur * 1000;
     playing = true; setBtn(); requestAnimationFrame(loop);
   }
-  function pause() { playing = false; setBtn(); }
+  function pause() { playing = false; vid.pause(); setBtn(); }
   bP.addEventListener('click', () => playing ? pause() : play());
   $('bReplay').addEventListener('click', () => play(0));
   $('bSkip').addEventListener('click', () => { pause(); cur = DUR; render(DUR); setBtn(); $('cv').scrollIntoView({ behavior: 'smooth' }); });
 
+  // in the render, wait for each video seek so the frame is the right one
+  async function renderAt(t) {
+    render(t);
+    if (scenes[2].style.visibility === 'visible') {
+      if (vid.seeking) await new Promise(r => vid.addEventListener('seeked', r, { once: true }));
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))); // let the decoded frame reach the screen
+    }
+  }
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fonts = document.fonts
-    ? Promise.all(['900 20px Archivo', 'italic 400 20px "Bodoni Moda"', '500 12px "IBM Plex Mono"', '400 20px Kalam'].map(f => document.fonts.load(f).catch(() => 0))).then(() => document.fonts.ready)
+    ? Promise.all(['400 20px Syne', '800 20px Syne', '600 12px Syne', '400 12px "IBM Plex Mono"', '600 12px Archivo'].map(f => document.fonts.load(f).catch(() => 0))).then(() => document.fonts.ready)
     : Promise.resolve();
-  const ready = fonts.then(() => {
+  const vReady = new Promise(r => { if (vid.readyState >= 2) r(); else { vid.addEventListener('loadeddata', r, { once: true }); vid.addEventListener('error', r, { once: true }); setTimeout(r, 4000); } });
+  if (RENDER) vid.load();
+  const ready = Promise.all([fonts, RENDER ? vReady : 0]).then(() => {
     sizeSkin();
     if (RENDER) { render(0); return; }
     if (reduce) { cur = DUR; render(DUR); setBtn(); } else play(0);
   });
   let rt;
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { sizeSkin(); render(cur); }, 200); });
-  window.__reel = { render, ready, DUR, FPS };
+  window.__reel = { render: renderAt, ready, DUR, FPS };
 })();
 </script>
 <!-- artifact:end -->

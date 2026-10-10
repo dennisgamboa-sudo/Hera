@@ -45,14 +45,12 @@ const stages = [
     title: 'GEO-LOCK',
     subtitle: 'MOTOR DE ANÁLISIS GEOMÉTRICO',
     description:
-      'Escaneo y bloqueo de datos geométricos del producto. Este motor analiza 145,000 vértices con precisión del 99.6%, generando una malla 3D ultra densa que captura cada detalle microscópico de la geometría.',
+      'Escaneo y bloqueo de datos geométricos del producto. El motor fija forma, proporción y detalle de la pieza para que nada cambie en las fases siguientes.',
     icon: Layers,
     color: 'from-blue-500/20 to-cyan-500/20',
     engineData: {
-      precision: '99.6%',
-      vertices: '145K',
-      scanType: '3A',
-      meshDensity: 'Ultra',
+      lock: 'Shape',
+      detail: 'Preserved',
     },
   },
   {
@@ -60,13 +58,12 @@ const stages = [
     title: 'ATMOSPHERE',
     subtitle: 'MOTOR DE CAPAS ATMOSFÉRICAS',
     description:
-      'Construcción del mundo alrededor del producto. El motor genera múltiples capas atmosféricas que envuelven la pieza, simulando iluminación volumétrica avanzada con índice de refracción 1.52 para lograr realismo fotográfico.',
+      'Construcción del mundo alrededor del producto. El motor genera múltiples capas atmosféricas que envuelven la pieza con luz volumétrica para lograr realismo fotográfico.',
     icon: Sparkles,
     color: 'from-amber-500/20 to-orange-500/20',
     engineData: {
       layers: 'Multi',
       lighting: 'Volumetric',
-      ior: '1.52',
       depth: 'Advanced',
     },
   },
