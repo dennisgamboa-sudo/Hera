@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Denno Gamboa CV</title>
 <meta name="robots" content="noindex">
-<!-- Any mistyped link (/CV, /cv/x, a trailing dot pasted from a bio) lands on the CV instead of a dead page. -->
-<meta http-equiv="refresh" content="0; url=/cv/">
+<!-- Any mistyped link lands on the CV instead of a dead page. In-app browsers (Instagram) can send
+     /cv/#studio as /cv/%23studio, so a version named after an encoded # is kept. -->
+<noscript><meta http-equiv="refresh" content="0; url=/cv/"></noscript>
 <link rel="canonical" href="https://hera-lab3.vercel.app/cv/">
-<script>location.replace('/cv/')</script>
+<script>
+var p=location.pathname,v='';try{p=decodeURIComponent(p)}catch(e){}
+var m=p.match(/#([a-z]+)/i);if(m)v=m[1].toLowerCase();else if(location.hash)v=location.hash.slice(1);
+location.replace('/cv/'+location.search+(/^(luxury|studio|ai)$/.test(v)?'#'+v:''));
+</script>
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0A0A0A;color:#F5F5F3;font:16px/1.4 system-ui,sans-serif}a{color:inherit}</style>
 </head>
 <body><a href="/cv/">Denno Gamboa · CV</a></body>
