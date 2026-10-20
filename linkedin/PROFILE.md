@@ -48,7 +48,7 @@ Otras opciones, según la empresa a la que apuntes:
 > • Product fidelity. Shape, setting and stitching stay locked to the real piece.
 > • Provenance. AI use is declared on every asset, ready for Article 50 of the EU AI Act.
 >
-> Tools: Photoshop, Lightroom, Midjourney, Gemini (Nano Banana), Google AI Studio and Flow, Replicate and Claude Code. I ship my own apps on Vercel and Cloud Run.
+> Client work runs on a declared stack: Photoshop, Google Flow (model training off), Magnific, Claude and Proton for encrypted files. Originals stay local, and every asset ships with a HERA Passport that records how it was made. I ship my own apps on Vercel and Cloud Run.
 >
 > I also write. My first novel, Golpe de estado, is a literary thriller about three men who run together every morning for forty-six days.
 >
