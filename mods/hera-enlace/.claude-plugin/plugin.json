@@ -1,0 +1,20 @@
+{
+  "name": "hera-enlace",
+  "version": "0.1.0",
+  "description": "Hera anuncia sus cambios en NOVEDADES.json y los demás proyectos los leen al abrir sesión.",
+  "author": { "name": "Denno Gamboa" },
+  "userConfig": {
+    "hub": {
+      "type": "string",
+      "title": "Feed de HERA",
+      "description": "URL raw de NOVEDADES.json en la rama principal del repo central",
+      "default": "https://raw.githubusercontent.com/dennisgamboa-sudo/Hera/HEAD/NOVEDADES.json"
+    },
+    "hubRepo": {
+      "type": "string",
+      "title": "Repo central",
+      "description": "owner/repo que emite las novedades; en cualquier otro repo el mod escucha",
+      "default": "dennisgamboa-sudo/Hera"
+    }
+  }
+}

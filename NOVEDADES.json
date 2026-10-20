@@ -1,0 +1,28 @@
+{
+  "hub": "https://raw.githubusercontent.com/dennisgamboa-sudo/Hera/HEAD/NOVEDADES.json",
+  "actualizado": "2026-10-19T16:23:01.875Z",
+  "entradas": [
+    {
+      "id": "2026-10-19-520cbc7",
+      "fecha": "2026-10-19",
+      "sha": "520cbc7ccc10264cbff5913df88b2a3b19ffeece",
+      "areas": [
+        "cv-linkedin",
+        "lab"
+      ],
+      "cambios": [
+        "cv: retouch the AirPods out of the portrait",
+        "Add Denno's portrait to the CV header, black and white, with his seal struck on the corner",
+        "Dashed rings keep their real length so they close as dotted circles",
+        "Black and white palette and a modern variable grotesk (Syne) that gains weight as it lands",
+        "Reel tells Denno's path 2018-2026 in guilloche rings; seal is his own mark, Locco now 2025-2026",
+        "CV and showreel redesign in the HERA line; drop invented HERA Studio figures",
+        "CV: live share links and a one-column job-portal version (#3)",
+        "fix(linkedin): match the CV's name, email and Inditex role",
+        "fix(cv): LinkedIn handle, one Inditex role and HERA Studio since 2026",
+        "feat(cv): redesigned sheet with a numbers band and a dated timeline"
+      ],
+      "nota": "Primer anuncio: Hera empieza a avisar a los demás proyectos (mod hera-enlace)."
+    }
+  ]
+}
