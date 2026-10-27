@@ -1,0 +1,14 @@
+{
+  "name": "hera-enlace",
+  "version": "0.3.1",
+  "description": "Cada hilo de Claude empieza sabiendo cómo están tus proyectos y qué los une, y lo que decides vuelve al panel Una cosa a la vez.",
+  "author": { "name": "Denno Gamboa" },
+  "userConfig": {
+    "panel": {
+      "type": "string",
+      "title": "Panel Una cosa a la vez",
+      "description": "URL del artifact cuyo panel guarda los proyectos (panel/info), los hilos (panel/hilos), el progreso (plan/progreso) y el Cerebro (cerebro/memoria)",
+      "default": "https://claude.ai/artifact/HGA7i5nSaiXkbdVj42Kjem"
+    }
+  }
+}
