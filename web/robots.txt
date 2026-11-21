@@ -1,0 +1,5 @@
+# HERA Studio. Abierta a buscadores y a asistentes de IA: queremos que nos encuentren y nos citen.
+User-agent: *
+Allow: /
+
+Sitemap: https://heraaistudio.com/sitemap.xml
