@@ -97,6 +97,29 @@
     addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; }, { passive: true });
   }
 
+  // Lupa sobre la obra real: amplía 2,4x el detalle bajo el cursor
+  if (fine) document.querySelectorAll('[data-loupe]').forEach((box) => {
+    const img = box.querySelector('img');
+    const lens = document.createElement('span');
+    lens.className = 'loupe'; lens.setAttribute('aria-hidden', 'true');
+    box.appendChild(lens);
+    const Z = 2.4;
+    const move = (e) => {
+      const r = box.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const w = lens.offsetWidth / 2;
+      lens.style.left = x + 'px'; lens.style.top = y + 'px';
+      lens.style.backgroundSize = (r.width * Z) + 'px ' + (r.height * Z) + 'px';
+      lens.style.backgroundPosition = (w - x * Z) + 'px ' + (w - y * Z) + 'px';
+    };
+    box.addEventListener('pointerenter', (e) => {
+      lens.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")';
+      lens.classList.add('is-on'); move(e);
+    });
+    box.addEventListener('pointermove', move);
+    box.addEventListener('pointerleave', () => lens.classList.remove('is-on'));
+  });
+
   // Reel: arranca al verse, se para al salir, y nunca para quien pide menos movimiento
   const reel = $('#reel'), play = $('#reel-play');
   if (reel && play) {
