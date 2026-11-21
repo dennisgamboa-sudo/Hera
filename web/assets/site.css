@@ -92,9 +92,12 @@ em{font-family:var(--f-display);font-style:italic;font-weight:400}
 .work{padding-block:clamp(6rem,14vw,12rem) 0}
 .work__head{display:grid;gap:1.2rem;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
 .work__lead{color:var(--bone-2);max-width:40ch}
-.work__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(3rem,6vw,6rem) clamp(1.2rem,3vw,3rem)}
-.obra{display:grid;gap:1rem;min-width:0}
-.obra--wide{grid-column:1/-1}
+.work__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(3rem,6vw,6rem) clamp(1.2rem,3vw,3rem);align-items:start}
+.obra{display:grid;gap:1rem;min-width:0;grid-column:span 12}
+.obra--7{grid-column:span 7}.obra--6{grid-column:span 6}.obra--5{grid-column:span 5}
+.obra--5.obra--video{align-self:stretch}
+.obra__img--tall{aspect-ratio:9/16;max-height:82svh;justify-self:center;width:100%}
+.obra__img video{width:100%;height:100%;object-fit:cover;display:block}
 .obra__img{position:relative;overflow:hidden;background:var(--night-2)}
 .obra__img img{width:100%;height:auto;transition:transform 1.4s var(--ease)}
 .obra:hover .obra__img img{transform:scale(1.015)}
@@ -107,7 +110,7 @@ em{font-family:var(--f-display);font-style:italic;font-weight:400}
 .loupe::after{content:"";position:absolute;left:50%;top:-40vh;bottom:-40vh;width:1px;background:rgb(255 255 255/.75)}
 [data-loupe]{cursor:none}
 @media (pointer:coarse){[data-loupe]{cursor:auto}}
-@media (max-width:760px){.work__grid{grid-template-columns:1fr}}
+@media (max-width:760px){.obra--7,.obra--6,.obra--5{grid-column:span 12}.obra__img--tall{max-width:22rem}}
 
 /* SERVICIOS · lista editorial con vista previa flotante */
 .svc{padding-block:clamp(6rem,14vw,12rem) clamp(4rem,10vw,9rem);position:relative}

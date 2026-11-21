@@ -131,6 +131,13 @@
     }, { threshold: 0.35 }).observe(reel);
   }
 
+  // Vídeos de la obra: arrancan al verse y se paran al salir
+  if (!quiet) document.querySelectorAll('video[data-autoplay]').forEach((v) => {
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+    }, { threshold: 0.4 }).observe(v);
+  });
+
   // Botón magnético del correo
   const mail = $('#mail');
   if (mail && fine && !quiet) {
