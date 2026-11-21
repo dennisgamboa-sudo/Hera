@@ -27,15 +27,30 @@ La web de HERA Studio para `heraaistudio.com`. Es estática: HTML, CSS y JS prop
 
 ## Pasar el dominio de la web GEO a esta
 
-El dominio sirve hoy la web GEO de Netlify, y además lleva el correo `denno@heraaistudio.com`. **No toques los registros MX, SPF, DKIM ni DMARC**, o dejarás de recibir correo.
+El dominio se compró en Netlify (registrador Name.com) y su DNS está en Netlify (servidores `dns1`–`dns4.p07.nsone.net`). Se gestiona en Netlify → Domains → heraaistudio.com.
 
-1. En el proyecto nuevo de Vercel → **Settings → Domains** → añade `heraaistudio.com` y `www.heraaistudio.com` (que `www` redirija al dominio sin `www`).
-2. En Netlify → sitio `radiant-sprite-512b2b` → **Domain management** → quita `heraaistudio.com` y `www`. La web GEO sigue viva en `radiant-sprite-512b2b.netlify.app`.
-3. Donde gestiones el DNS del dominio, cambia **solo** el registro `A` de `@` y el `CNAME` de `www` por los valores que te enseñe Vercel en la pantalla de Domains. Si el DNS lo lleva Netlify, se cambia en Netlify → **Domains → heraaistudio.com → DNS records**.
-4. Espera a que Vercel marque el dominio como válido y emita el certificado.
-5. Comprueba: la web abre en `https://heraaistudio.com`, te llega un correo de prueba a `denno@heraaistudio.com`, y `https://radiant-sprite-512b2b.netlify.app` sigue funcionando.
+**No cambies los servidores DNS ni toques estos registros, o deja de funcionar `denno@heraaistudio.com` (iCloud+):**
 
-En la web GEO, cambia cualquier referencia a `heraaistudio.com` (canonical, enlaces, textos) por su dirección de Netlify.
+| Tipo | Nombre | Valor |
+|---|---|---|
+| MX | @ | mx01.mail.icloud.com (10) |
+| MX | @ | mx02.mail.icloud.com (10) |
+| TXT | @ | v=spf1 include:icloud.com ~all |
+| TXT | @ | apple-domain=VOxsvWWmiphwFBqz |
+| CNAME | sig1._domainkey | sig1.dkim.heraaistudio.com.at.icloudmailadmin.com |
+
+**Los informes ya enviados (`heraaistudio.com/r/...`) siguen funcionando:** `vercel.json` los redirige a la misma ruta en `radiant-sprite-512b2b.netlify.app`, donde siguen alojados.
+
+Pasos:
+
+1. Vercel → proyecto `hera-studio` → Settings → Domains: `heraaistudio.com` (Production) y `www.heraaistudio.com` (redirige a `heraaistudio.com`).
+2. Netlify → sitio `radiant-sprite-512b2b` → Domain management: quita `heraaistudio.com` y `www.heraaistudio.com` como dominios del sitio.
+3. Netlify → Domains → heraaistudio.com → DNS records:
+   - Borra solo los registros de la web: los de tipo `NETLIFY` (o `A`/`ALIAS`) para `heraaistudio.com` y `www`.
+   - Añade `A` · nombre vacío o `@` · `216.198.79.1`.
+   - Añade `CNAME` · `www` · el valor que muestre Vercel para `www` (normalmente `cname.vercel-dns.com`).
+4. Espera a que Vercel marque los dos dominios como válidos y emita el certificado (de minutos a unas horas).
+5. Comprueba: `https://heraaistudio.com` abre la web nueva, un enlace `/r/...` antiguo abre su informe, y te llega un correo de prueba a `denno@heraaistudio.com`.
 
 ## Seguridad
 
