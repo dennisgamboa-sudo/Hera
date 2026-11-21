@@ -1,6 +1,6 @@
 # HERA Studio · web
 
-La web de HERA Studio para `heraaistudio.com`. Es estática: HTML, CSS y JS propios, sin dependencias ni compilación.
+La web de HERA Studio para `heraaistudio.com`. Es estática: HTML, CSS y JS propios, sin compilación. La portada es una superficie de piel en WebGL (`assets/skin.js`) con una lupa; el scroll suave usa Lenis, alojado en `assets/vendor/`.
 
 ## Qué hay
 
@@ -39,7 +39,7 @@ En la web GEO, cambia cualquier referencia a `heraaistudio.com` (canonical, enla
 
 ## Seguridad
 
-- CSP estricta: solo carga recursos del propio dominio, sin scripts en línea ni terceros, y con Trusted Types.
+- CSP estricta: solo carga recursos del propio dominio, sin scripts en línea ni terceros, y con Trusted Types. Lenis y las fuentes están alojados aquí.
 - HSTS de un año con subdominios. Cuando lleves unas semanas sin problemas, puedes añadir `preload` y darlo de alta en hstspreload.org (cuesta revertirlo).
 - Sin cookies, sin analítica, sin formularios: el contacto es por correo.
 - Fuentes alojadas aquí, sin Google Fonts (evita enviar la IP de cada visita a Google).
