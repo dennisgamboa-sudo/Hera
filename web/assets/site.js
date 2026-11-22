@@ -97,7 +97,7 @@
     addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; }, { passive: true });
   }
 
-  // Lupa sobre la obra real: amplía 2,4x el detalle bajo el cursor
+  // Lupa sobre la obra real: amplía 2,4x el detalle bajo el cursor (respeta el recorte del encuadre)
   if (fine) document.querySelectorAll('[data-loupe]').forEach((box) => {
     const img = box.querySelector('img');
     const lens = document.createElement('span');
@@ -107,10 +107,13 @@
     const move = (e) => {
       const r = box.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;
+      const nw = img.naturalWidth || r.width, nh = img.naturalHeight || r.height;
+      const sc = Math.max(r.width / nw, r.height / nh);
+      const rw = nw * sc, rh = nh * sc, ox = (r.width - rw) / 2, oy = (r.height - rh) / 2;
       const w = lens.offsetWidth / 2;
       lens.style.left = x + 'px'; lens.style.top = y + 'px';
-      lens.style.backgroundSize = (r.width * Z) + 'px ' + (r.height * Z) + 'px';
-      lens.style.backgroundPosition = (w - x * Z) + 'px ' + (w - y * Z) + 'px';
+      lens.style.backgroundSize = (rw * Z) + 'px ' + (rh * Z) + 'px';
+      lens.style.backgroundPosition = (w - (x - ox) * Z) + 'px ' + (w - (y - oy) * Z) + 'px';
     };
     box.addEventListener('pointerenter', (e) => {
       lens.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")';
@@ -120,15 +123,20 @@
     box.addEventListener('pointerleave', () => lens.classList.remove('is-on'));
   });
 
-  // Reel: arranca al verse, se para al salir, y nunca para quien pide menos movimiento
-  const reel = $('#reel'), play = $('#reel-play');
-  if (reel && play) {
-    play.addEventListener('click', () => { reel.paused ? reel.play().catch(() => {}) : reel.pause(); });
-    reel.addEventListener('play', () => { play.textContent = 'Pausar'; play.setAttribute('aria-pressed', 'true'); });
-    reel.addEventListener('pause', () => { play.textContent = 'Reproducir'; play.setAttribute('aria-pressed', 'false'); });
-    if (!quiet) new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { reel.preload = 'auto'; reel.play().catch(() => {}); } else reel.pause();
-    }, { threshold: 0.35 }).observe(reel);
+  // Comparador cera / piel real
+  const ba = $('#ba'), range = $('#ba-range');
+  if (ba && range) {
+    const set = (v) => { ba.style.setProperty('--x', v + '%'); };
+    range.addEventListener('input', () => set(range.value));
+    if (!quiet && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return; io.disconnect();
+        const t0 = performance.now();
+        const step = (t) => { const k = Math.min(1, (t - t0) / 1600); const v = 50 + 32 * Math.sin(k * Math.PI) * (1 - k * 0.3); set(v.toFixed(1)); range.value = v; if (k < 1) requestAnimationFrame(step); else { set(50); range.value = 50; } };
+        requestAnimationFrame(step);
+      }, { threshold: 0.6 });
+      io.observe(ba);
+    }
   }
 
   // Vídeos de la obra: arrancan al verse y se paran al salir
