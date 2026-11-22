@@ -16,7 +16,8 @@ Archivos: `banner.png` (portada), `why-ai-skin-looks-like-wax.pdf` (carrusel), `
 7. **Foto.** El traje con corbata roja parece de banco y no de alguien que hace imagen de lujo. Hazte un retrato tú mismo: luz natural suave, fondo neutro, sin corbata, mirada a cámara.
 8. **URL.** Ya es `linkedin.com/in/dennoGS`, la misma que lleva el CV.
 9. **Open to work.** Visible solo para reclutadores, sin el marco verde en la foto.
-   - Puestos: Creative Technologist, AI Creative, Generative AI Artist, AI Content Producer, Senior Retoucher.
+   - Puestos: Art Director, Senior Art Director, Senior Retoucher, Digital Art Director, Post-production Supervisor.
+   - Fuera de la lista: "AI Content Creator", "Generative AI Designer" y parecidos en tecnológicas. Social Discovery Group, Puffy, Moon Active, Bending Spoons y Fever cortaron en el CV en días; la única entrevista (Findasense) fue de Director de Arte en agencia.
    - Ubicaciones: Madrid, Barcelona y remoto.
    - Tipo: jornada completa y contrato.
 10. **Información de contacto.** Añade `heraaistudio.com` (Portfolio), `heraskinlab.com` (Company website) y tu email.
@@ -25,15 +26,15 @@ Archivos: `banner.png` (portada), `why-ai-skin-looks-like-wax.pdf` (carrusel), `
 
 ## 1. Headline
 
-Usa este:
+Usa este (22 nov: el mercado responde a dirección de arte y retoque, no a "Creative Technologist"):
 
-> Creative Technologist · AI image production for luxury & beauty · Ex Hogarth (WPP), Inditex, Warner Bros. · Builder of HERA Skin Lab
+> Art Director & Senior Retoucher · Beauty and luxury campaigns, concept to final retouch · Ex Hogarth (WPP), Inditex, Warner Bros. · heraaistudio.com
 
 Otras opciones, según la empresa a la que apuntes:
 
-> Creative Technologist · I fix why AI images look fake · Retoucher for Inditex and Carolina Herrera · Built HERA Skin Lab
+> Senior Retoucher · Skin, fabric and product finish for Inditex, Mango, Carolina Herrera · AI image and video supervision
 
-> Creative Technologist · Generative AI pipelines for brand production · Retouch, colour and versioning · Ex Hogarth (WPP)
+> Art Director · AI imaging with a retoucher's eye · Ex Hogarth (WPP) · Built HERA Skin Lab
 
 ---
 
@@ -52,8 +53,8 @@ Otras opciones, según la empresa a la que apuntes:
 >
 > I also write. My first novel, Golpe de estado, is a literary thriller about three men who run together every morning for forty-six days.
 >
-> Open to creative technologist and AI image roles in luxury, beauty and AI companies. Madrid, remote, or EU relocation.
-> denno@heraaistudio.com
+> Open to art director and senior retoucher roles in beauty, luxury and agencies. Madrid, remote, or EU relocation.
+> heraaistudio.com · denno@heraaistudio.com
 
 ---
 
@@ -66,10 +67,10 @@ Copia el título, la descripción y las aptitudes. Las fechas déjalas como est�
 > • Campaign versioning: one shoot becomes every format, market and duration.
 > • Product-faithful retouching: shape, setting and stitching locked to the real piece.
 > • HERA Passport: a provenance record shipped with every asset, with AI use declared.
-> • The studio's own tools: HERA Skin Lab (skin realism engine) and HERA Studio (campaign app).
+> • The studio's own tools: HERA Skin Lab (skin realism engine) and heraaistudio.com, the studio site.
 
-Aptitudes: Creative Direction · Generative AI · Image Retouching · Creative Technology · Content Production
-Multimedia: heraskinlab.com · showreel · enlace al CV
+Aptitudes: Art Direction · Creative Direction · Image Retouching · Generative AI · Content Production
+Multimedia: heraaistudio.com · heraskinlab.com · showreel · enlace al CV
 
 **Photo & Digital Graphic Designer · Locco** · Full-time · Madrid (on-site)
 > Photography, retouching and digital design for Locco's website, social channels and campaigns, including the Asia campaign.
@@ -129,13 +130,14 @@ Aptitudes: International Project Management · E-commerce · Product Photography
 1. **Showreel.** Publícalo como post de vídeo (`showreel.mp4`) y después márcalo como destacado.
 2. **Carrusel.** Publica `why-ai-skin-looks-like-wax.pdf` como documento y destácalo.
 3. **Enlace al CV.** `https://hera-lab3.vercel.app/cv/`
-4. **Enlace** a `heraskinlab.com`.
+4. **Enlace** a `heraaistudio.com` (la web del estudio, con la obra).
+5. **Enlace** a `heraskinlab.com`.
 
 ---
 
 ## 5. Aptitudes
 
-Fija estas 5 arriba: Creative Technology · Generative AI · Image Retouching · Color Grading · Art Direction
+Fija estas 5 arriba: Art Direction · Image Retouching · Creative Direction · Color Grading · Generative AI
 
 El resto: Adobe Photoshop · Adobe Lightroom · Midjourney · Prompt Engineering · AI Image Generation · Content Production · Creative Direction · Visual Storytelling · Fashion Photography · Product Photography · E-commerce · Digital Illustration · Graphic Design · Video Editing
 
