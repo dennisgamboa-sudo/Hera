@@ -163,6 +163,7 @@ void main(){
     document.documentElement.classList.add('lens-used');
   }
   const stage = canvas.parentElement;
+  stage.addEventListener('pointerenter', (e) => { point(e.clientX, e.clientY); state.mx = state.tx; state.my = state.ty; }, { passive: true });
   stage.addEventListener('pointermove', (e) => point(e.clientX, e.clientY), { passive: true });
   stage.addEventListener('pointerdown', (e) => point(e.clientX, e.clientY), { passive: true });
 
@@ -178,7 +179,7 @@ void main(){
       const w = canvas.width, h = canvas.height;
       state.tx = w * (.62 + .2 * Math.sin(t * .23)); state.ty = h * (.5 + .18 * Math.sin(t * .37));
     }
-    const k = quiet ? 1 : .12;
+    const k = quiet ? 1 : (state.user && now - state.lastMove < 6000 ? .32 : .1);
     state.mx += (state.tx - state.mx) * k; state.my += (state.ty - state.my) * k;
     gl.uniform2f(U.uRes, canvas.width, canvas.height);
     gl.uniform1f(U.uTime, quiet ? 0 : t);
