@@ -17,6 +17,8 @@ import {
 
 type Opciones = { panel: string }
 
+const RELEER_MS = 10 * 60 * 1000
+
 // Estado del módulo: un reload lo rehace, y session.start vuelve a dispararse.
 const s = {
   panel: '',
@@ -25,6 +27,7 @@ const s = {
   notas: [] as Nota[],
   avisos: [] as Aviso[],
   leido: false,
+  leidoEn: 0,
   fallo: '',
   listo: Promise.resolve() as Promise<void>,
 }
@@ -60,6 +63,7 @@ async function leerPanel($: EngineInterface) {
     s.leido = false
     s.fallo = String(err)
   }
+  s.leidoEn = await $.clock.now() // también si falla: no se reintenta en cada mensaje
   $.ui.status(s.avisos.length ? `HERA · ${s.avisos.map(a => a.corto).join(' · ')}` : undefined)
 }
 
@@ -83,6 +87,8 @@ export const register: Register = (on, options) => {
   // Informar: cada hilo empieza sabiendo cómo están los proyectos y qué los une.
   on('prompt.compose', async ($, e, next) => {
     await s.listo
+    // Otros hilos escriben en el panel: si la foto tiene más de 10 min, se relee.
+    if ((await $.clock.now()) - s.leidoEn > RELEER_MS) await leerPanel($)
     const r = await next(e)
     const text = s.leido
       ? contexto({ panel: s.panel, proyectos: s.proyectos, hilos: s.hilos, avisos: s.avisos, notas: s.notas })
