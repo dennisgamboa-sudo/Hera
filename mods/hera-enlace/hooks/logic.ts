@@ -103,8 +103,9 @@ export const contexto = (o: {
   const sabe = loQueSabe(o.notas ?? [])
   return [
     '# Los proyectos de Denno, en vivo',
-    `Fuente: el panel «Una cosa a la vez» (${o.panel}), leído al abrir este hilo. Es la fuente viva y manda sobre ESTADO.md y la bitácora del repo.`,
+    `Fuente: el panel «Una cosa a la vez» (${o.panel}), releído cada 10 minutos porque otros hilos también escriben en él. Es la fuente viva y manda sobre ESTADO.md y la bitácora del repo.`,
     'Regla: el hilo es donde se piensa; lo que se decide aquí tiene que quedar en el panel.',
+    'Regla: antes de proponer una candidatura, un envío o escribir a alguien, lee el donde y el historial de ese proyecto en panel/info y el plan reciente en plan/dias, y busca la empresa y la persona. Si ya consta, no lo propongas. Si no puedes comprobarlo, dilo («sin comprobar») y pregunta una sola vez, con la lista entera.',
     ...(o.avisos.length ? ['Avisos:', ...o.avisos.map(a => `- ${a.texto}`)] : []),
     '',
     '## Proyectos (nombre [veredicto] · estado · siguiente paso · cifra)',
