@@ -1,0 +1,6 @@
+{
+  "name": "hera",
+  "owner": { "name": "Denno Gamboa" },
+  "description": "Mods de HERA para Claude Code",
+  "plugins": [{ "name": "hera-enlace", "source": "./mods/hera-enlace" }]
+}

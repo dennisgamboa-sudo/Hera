@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html manifest="app.manifest">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EYEHERA Control">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230a0a0a' width='180' height='180'/><text x='90' y='95' font-size='80' fill='%23c9a96a' text-anchor='middle' font-family='serif' font-weight='bold'>H</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230a0a0a' width='180' height='180'/><text x='90' y='95' font-size='80' fill='%23c9a96a' text-anchor='middle' font-family='serif' font-weight='bold'>H</text></svg>">
+<title>EYEHERA Control Center</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+html, body { height: 100%; width: 100%; overflow: hidden; }
+body { background: #0a0a0a; color: #f2f2f2; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; display: flex; flex-direction: column; }
+.content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; max-width: 680px; margin: 0 auto; width: 100%; }
+header { padding: 20px 0 10px 0; border-bottom: 1px solid #262626; margin-bottom: 15px; }
+h1 { font-size: 24px; margin-bottom: 2px; }
+.subtitle { color: #8a8a8a; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.card { background: #141414; border: 1px solid #262626; border-radius: 12px; padding: 16px; margin: 12px 0; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #262626; }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { color: #8a8a8a; font-size: 13px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin: 8px 0; -webkit-appearance: none; appearance: none; }
+.btn-gold { background: #c9a96a; color: #1a1408; }
+.btn-dark { background: #262626; color: #f2f2f2; }
+.btn:active { opacity: 0.8; }
+input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; background: #1c1c1c; border: 1px solid #262626; color: #f2f2f2; border-radius: 8px; font-family: inherit; font-size: 16px; -webkit-appearance: none; appearance: none; }
+label { display: block; font-size: 12px; color: #8a8a8a; margin: 12px 0 5px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.section-title { font-size: 12px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; margin: 20px 0 10px 0; font-weight: 600; }
+.tab { display: none; }
+.tab.active { display: block; }
+.modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 999; align-items: flex-end; justify-content: center; }
+.modal.open { display: flex; }
+.modal-content { background: #141414; width: 100%; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; border-radius: 20px 20px 0 0; }
+.modal-content h2 { margin-bottom: 15px; }
+nav { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background: #0a0a0a; border-top: 1px solid #262626; display: flex; max-width: 680px; margin: 0 auto; padding-bottom: env(safe-area-inset-bottom); }
+nav button { flex: 1; padding: 12px 4px; background: none; border: none; color: #8a8a8a; font-size: 12px; cursor: pointer; -webkit-appearance: none; appearance: none; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+nav button.active { color: #c9a96a; }
+.nav-icon { font-size: 18px; }
+.empty { text-align: center; color: #5a5a5a; padding: 30px 20px; }
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #c9a96a; color: #1a1408; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; opacity: 0; transition: opacity 0.2s; z-index: 9999; pointer-events: none; }
+.toast.show { opacity: 1; }
+.list-item { padding: 12px 0; border-bottom: 1px solid #262626; display: flex; justify-content: space-between; align-items: center; }
+.list-item:last-child { border-bottom: none; }
+.list-item-content { flex: 1; }
+.list-item-title { font-weight: 600; font-size: 14px; }
+.list-item-sub { font-size: 12px; color: #8a8a8a; margin-top: 2px; }
+.btn-delete { background: none; border: none; color: #e06a5c; font-size: 18px; cursor: pointer; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<div class="content">
+<header>
+<h1>👁 EYEHERA</h1>
+<div class="subtitle">Control Center</div>
+</header>
+
+<div id="tab-home" class="tab active">
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Seguidores</div>
+<div class="stat-value" id="stat-followers">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Vistas (30d)</div>
+<div class="stat-value" id="stat-views">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Engagement</div>
+<div class="stat-value" id="stat-engagement">0%</div>
+</div>
+</div>
+
+<div class="section-title">Acciones rápidas</div>
+<button class="btn btn-gold" onclick="openModal('log-modal')">+ Registrar día</button>
+<button class="btn btn-dark" onclick="openModal('post-modal')">+ Nuevo post</button>
+<button class="btn btn-dark" onclick="openModal('creator-modal')">+ Creador</button>
+</div>
+
+<div id="tab-tracker" class="tab">
+<div class="section-title">Historial de registros</div>
+<div id="logs-list" class="card"></div>
+</div>
+
+<div id="tab-posts" class="tab">
+<div class="section-title">Mis posts</div>
+<div id="posts-list" class="card"></div>
+</div>
+
+<div id="tab-creators" class="tab">
+<div class="section-title">Creadores (<span id="creator-count">0</span>/100)</div>
+<div id="creators-list" class="card"></div>
+</div>
+
+<div id="tab-settings" class="tab">
+<div class="section-title">Datos y respaldo</div>
+<div class="card">
+<button class="btn btn-dark" onclick="exportData()">⬇ Exportar datos</button>
+<button class="btn btn-dark" onclick="document.getElementById('import-file').click()">⬆ Importar datos</button>
+<input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+<button class="btn btn-gold" onclick="loadSeedData()">✦ Cargar datos iniciales</button>
+</div>
+</div>
+</div>
+
+<nav>
+<button class="active" onclick="switchTab(0)"><span class="nav-icon">◎</span><span>Hoy</span></button>
+<button onclick="switchTab(1)"><span class="nav-icon">📈</span><span>Tracker</span></button>
+<button onclick="switchTab(2)"><span class="nav-icon">🎬</span><span>Posts</span></button>
+<button onclick="switchTab(3)"><span class="nav-icon">👥</span><span>Creators</span></button>
+<button onclick="switchTab(4)"><span class="nav-icon">⚙️</span><span>Datos</span></button>
+</nav>
+
+<!-- LOG MODAL -->
+<div id="log-modal" class="modal">
+<div class="modal-content">
+<h2>Registrar día</h2>
+<label>Fecha</label>
+<input type="date" id="log-date">
+<label>Seguidores</label>
+<input type="number" id="log-followers" placeholder="22">
+<label>Vistas (30 días)</label>
+<input type="number" id="log-views" placeholder="9597">
+<label>Engagement %</label>
+<input type="number" step="0.1" id="log-engagement" placeholder="6.2">
+<label>Comentarios</label>
+<input type="number" id="log-comments" placeholder="0">
+<label>Nota (opcional)</label>
+<input id="log-note" placeholder="Publiqué reel">
+<button class="btn btn-gold" onclick="saveLog()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('log-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- POST MODAL -->
+<div id="post-modal" class="modal">
+<div class="modal-content">
+<h2>Nuevo post</h2>
+<label>Título</label>
+<input id="post-title" placeholder="LUCKY — reel">
+<label>Tipo</label>
+<select id="post-type">
+<option value="reel">🎬 Reel</option>
+<option value="image">📷 Imagen</option>
+<option value="carousel">🖼 Carrusel</option>
+</select>
+<label>Fecha</label>
+<input type="date" id="post-date">
+<label>Vistas</label>
+<input type="number" id="post-views" placeholder="326">
+<label>Saves</label>
+<input type="number" id="post-saves" placeholder="0">
+<label>Comentarios</label>
+<input type="number" id="post-comments" placeholder="0">
+<button class="btn btn-gold" onclick="savePost()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('post-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- CREATOR MODAL -->
+<div id="creator-modal" class="modal">
+<div class="modal-content">
+<h2>Añadir creador</h2>
+<label>@usuario</label>
+<input id="creator-handle" placeholder="@mattsoria">
+<label>Nicho</label>
+<select id="creator-niche">
+<option>Fotógrafo conceptual</option>
+<option>Curador / editorial</option>
+<option>Cineasta</option>
+<option>Arte surreal</option>
+<option>Moda menswear</option>
+<option>Otro</option>
+</select>
+<label>Seguidores (aprox)</label>
+<input type="number" id="creator-followers" placeholder="15000">
+<button class="btn btn-gold" onclick="saveCreator()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('creator-modal')">Cancelar</button>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY = 'eyehera_data_v2';
+let DATA = { logs: [], posts: [], creators: [] };
+
+function load() {
+  try { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : DATA; } catch(e) { return DATA; }
+}
+
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(DATA)); } catch(e) {}
+  render();
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function switchTab(n) {
+  document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', i === n));
+  const tabs = document.querySelectorAll('.tab');
+  if (tabs[n]) tabs[n].classList.add('active');
+}
+
+function saveLog() {
+  const date = document.getElementById('log-date').value || new Date().toISOString().split('T')[0];
+  DATA.logs.push({
+    date,
+    followers: +document.getElementById('log-followers').value || 0,
+    views: +document.getElementById('log-views').value || 0,
+    engagement: +document.getElementById('log-engagement').value || 0,
+    comments: +document.getElementById('log-comments').value || 0,
+    note: document.getElementById('log-note').value
+  });
+  DATA.logs.sort((a, b) => b.date.localeCompare(a.date));
+  save();
+  closeModal('log-modal');
+  document.getElementById('log-date').value = '';
+  document.getElementById('log-followers').value = '';
+  document.getElementById('log-views').value = '';
+  document.getElementById('log-engagement').value = '';
+  document.getElementById('log-comments').value = '';
+  document.getElementById('log-note').value = '';
+  toast('✓ Día registrado');
+}
+
+function savePost() {
+  DATA.posts.push({
+    id: Date.now(),
+    title: document.getElementById('post-title').value,
+    type: document.getElementById('post-type').value,
+    date: document.getElementById('post-date').value,
+    views: +document.getElementById('post-views').value || 0,
+    saves: +document.getElementById('post-saves').value || 0,
+    comments: +document.getElementById('post-comments').value || 0
+  });
+  save();
+  closeModal('post-modal');
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-views').value = '';
+  document.getElementById('post-saves').value = '';
+  document.getElementById('post-comments').value = '';
+  toast('✓ Post guardado');
+}
+
+function saveCreator() {
+  const h = document.getElementById('creator-handle').value;
+  if (!h) { toast('Pon @usuario'); return; }
+  DATA.creators.push({
+    id: Date.now(),
+    handle: h,
+    niche: document.getElementById('creator-niche').value,
+    followers: +document.getElementById('creator-followers').value || 0
+  });
+  save();
+  closeModal('creator-modal');
+  document.getElementById('creator-handle').value = '';
+  document.getElementById('creator-followers').value = '';
+  toast('✓ Creador guardado');
+}
+
+function deleteLog(date) { DATA.logs = DATA.logs.filter(l => l.date !== date); save(); }
+function deletePost(id) { DATA.posts = DATA.posts.filter(p => p.id !== id); save(); }
+function deleteCreator(id) { DATA.creators = DATA.creators.filter(c => c.id !== id); save(); }
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eyehera-backup.json';
+  a.click();
+  toast('✓ Descargado');
+}
+
+function importData(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { try { DATA = JSON.parse(r.result); save(); toast('✓ Datos importados'); } catch { toast('Error: archivo inválido'); } };
+  r.readAsText(f);
+}
+
+function loadSeedData() {
+  if (confirm('¿Cargar datos iniciales? (22 seg, 9,597 vistas)')) {
+    const today = new Date().toISOString().split('T')[0];
+    DATA.logs.push({ date: today, followers: 22, views: 9597, engagement: 0, comments: 0, note: 'Baseline' });
+    ['@mattsoria', '@brandon_breault', '@soren_blakemiller', '@lucidhoto', '@brandonli_photography', '@matthewlloydsmith', '@javierflores.photo', '@davidhunterphoto', '@paulmsardelis', '@oliverstrauss'].forEach(h => {
+      DATA.creators.push({ id: Date.now() + Math.random(), handle: h, niche: 'Fotógrafo conceptual', followers: 0 });
+    });
+    save();
+    toast('✓ Datos iniciales cargados');
+  }
+}
+
+function render() {
+  const last = DATA.logs[0];
+  document.getElementById('stat-followers').textContent = last ? last.followers : 0;
+  document.getElementById('stat-views').textContent = last ? last.views : 0;
+  document.getElementById('stat-engagement').textContent = (last ? last.engagement : 0) + '%';
+  document.getElementById('creator-count').textContent = DATA.creators.length;
+
+  const logsHtml = DATA.logs.length ? DATA.logs.map(l => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${l.date}</div><div class="list-item-sub">${l.followers} seg · ${l.views} views · ${l.engagement}% eng</div></div><button class="btn-delete" onclick="deleteLog('${l.date}')">✕</button></div>`).join('') : '<div class="empty">Sin registros</div>';
+  document.getElementById('logs-list').innerHTML = logsHtml;
+
+  const postsHtml = DATA.posts.length ? DATA.posts.map(p => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${p.title}</div><div class="list-item-sub">${p.type} · ${p.date} · ${p.views} views</div></div><button class="btn-delete" onclick="deletePost(${p.id})">✕</button></div>`).join('') : '<div class="empty">Sin posts</div>';
+  document.getElementById('posts-list').innerHTML = postsHtml;
+
+  const creatorsHtml = DATA.creators.length ? DATA.creators.map(c => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${c.handle}</div><div class="list-item-sub">${c.niche}</div></div><button class="btn-delete" onclick="deleteCreator(${c.id})">✕</button></div>`).join('') : '<div class="empty">Sin creadores</div>';
+  document.getElementById('creators-list').innerHTML = creatorsHtml;
+}
+
+// Init
+DATA = load();
+document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+render();
+</script>
+</body>
+</html>

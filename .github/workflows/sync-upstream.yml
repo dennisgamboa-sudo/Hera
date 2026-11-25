@@ -1,0 +1,26 @@
+# Se ejecuta EN EL FORK (dennisgamboa-sudo/Hera): cada 30 min trae los últimos
+# commits del repo principal y los fusiona solo — adiós al botón "Sync fork".
+name: Auto-sync con el repo principal
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.repository == 'dennisgamboa-sudo/Hera'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/instagram-growth-strategy-kWtSQ
+          fetch-depth: 0
+      - name: Merge upstream y push
+        run: |
+          git config user.name "hera-auto-sync"
+          git config user.email "actions@users.noreply.github.com"
+          git remote add upstream https://github.com/holadennogamboa-art/Hera.git
+          git fetch upstream claude/instagram-growth-strategy-kWtSQ
+          git merge --no-edit upstream/claude/instagram-growth-strategy-kWtSQ || exit 0
+          git push origin claude/instagram-growth-strategy-kWtSQ

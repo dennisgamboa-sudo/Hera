@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EYEHERA Growth">
+<meta name="theme-color" content="#0a0a0a">
+<title>EYEHERA Growth Toolkit</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;width:100%;overflow:hidden}body{background:#0a0a0a;color:#f2f2f2;font-family:system-ui,sans-serif;font-size:14px;display:flex;flex-direction:column}
+.header{background:#141414;border-bottom:1px solid #262626;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:18px;font-weight:700}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 16px 80px}
+.tab{display:none}.tab.active{display:block}
+.card{background:#141414;border:1px solid #262626;border-radius:10px;padding:12px;margin:8px 0}
+.stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #262626}.stat:last-child{border:0}
+.stat-val{font-size:20px;font-weight:700;color:#c9a96a}
+.btn{width:100%;padding:12px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin:6px 0;background:#262626;color:#f2f2f2}
+.btn-gold{background:#c9a96a;color:#1a1408}
+.checkbox{width:100%;text-align:left;padding:10px;border:1px solid #262626;border-radius:8px;margin:6px 0;display:flex;align-items:center;background:#141414;cursor:pointer}
+.checkbox input{margin-right:10px;width:16px;height:16px;cursor:pointer}
+.checkbox.done{background:#262626;opacity:0.6}
+.task-day{margin:16px 0;padding:12px;border-left:3px solid #c9a96a;background:#141414}
+.task-day .time{font-size:12px;color:#8a8a8a;text-transform:uppercase;font-weight:600}
+.task-day .title{font-size:14px;font-weight:600;margin:6px 0}
+input[type=number]{width:100%;padding:8px;margin:6px 0;background:#1c1c1c;border:1px solid #262626;color:#f2f2f2;border-radius:6px;font-size:13px}
+label{display:block;font-size:11px;color:#8a8a8a;margin:10px 0 4px;text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+.section{font-size:12px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px;font-weight:600}
+.account{padding:8px 0;border-bottom:1px solid #262626;display:flex;justify-content:space-between;align-items:center;font-size:12px}.account:last-child{border:0}
+.handle{color:#c9a96a;font-weight:600}
+.category{color:#8a8a8a;font-size:11px}
+textarea{width:100%;padding:8px;margin:6px 0;background:#1c1c1c;border:1px solid #262626;color:#f2f2f2;border-radius:6px;font-size:12px;font-family:inherit;min-height:60px}
+.script{background:#1c1c1c;padding:10px;border-radius:6px;border-left:2px solid #c9a96a;margin:6px 0;font-size:12px;white-space:pre-wrap;font-family:monospace}
+.copy-btn{font-size:11px;color:#c9a96a;background:none;border:none;cursor:pointer;padding:4px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:1px solid #262626;display:flex;width:100%}
+.nav-btn{flex:1;padding:10px;background:none;border:none;color:#8a8a8a;font-size:11px;cursor:pointer;text-align:center}
+.nav-btn.active{color:#c9a96a}
+.progress-bar{width:100%;height:6px;background:#262626;border-radius:4px;margin:6px 0}
+.progress-fill{height:100%;background:#c9a96a;border-radius:4px;transition:width 0.3s}
+.meta{color:#8a8a8a;font-size:11px;margin-top:4px}
+.empty{text-align:center;color:#5a5a5a;padding:20px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:999;align-items:flex-end;justify-content:center}
+.modal.open{display:flex}
+.modal-content{background:#141414;width:100%;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;border-radius:18px 18px 0 0}
+.modal h2{margin-bottom:10px;font-size:16px}
+.toggle{display:flex;align-items:center;gap:8px;padding:10px;background:#1c1c1c;border:1px solid #262626;border-radius:6px;margin:6px 0;cursor:pointer}
+.toggle input{width:16px;height:16px}
+.accordion{border:1px solid #262626;border-radius:8px;margin:6px 0;background:#141414;overflow:hidden}
+.accordion-header{padding:12px;background:#1c1c1c;border-bottom:1px solid #262626;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px}
+.accordion-header.open{background:#262626;border-bottom:0}
+.accordion-content{padding:12px;display:none;background:#141414;font-size:12px}
+.accordion-content.open{display:block}
+.accordion-content .script{background:#0a0a0a;padding:10px;border-radius:6px;margin:6px 0;font-size:11px}
+.caption-option{margin:8px 0;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a;border-radius:4px}
+.caption-option strong{display:block;color:#c9a96a;margin-bottom:4px}
+.caption-option p{font-size:11px;line-height:1.4;margin:4px 0}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>👁 EYEHERA Growth</h1>
+<span style="font-size:11px;color:#8a8a8a">Toolkit Execution</span>
+</div>
+
+<div class="content">
+<!-- METRICS TAB -->
+<div id="metrics" class="tab active">
+<div class="card">
+<div class="stat"><span>Seguidores</span><span class="stat-val" id="mf">22</span></div>
+<div class="stat"><span>Vistas (30d)</span><span class="stat-val" id="mv">9597</span></div>
+<div class="stat"><span>Reproducciones</span><span class="stat-val" id="mr">12157</span></div>
+<div class="stat"><span>Cuentas alcanzadas</span><span class="stat-val" id="ma">4219</span></div>
+</div>
+
+<div class="section">Semana 1 - Objetivos</div>
+<div class="card">
+<div class="stat"><span>Followers (meta: 500-1500)</span><span class="stat-val" id="wf">0</span></div>
+<div class="progress-bar"><div class="progress-fill" id="pfill" style="width:0%"></div></div>
+<div class="meta" id="pmeta">0 / 1000</div>
+</div>
+
+<div class="card">
+<div class="stat"><span>Engagement (meta: 5-15%)</span><span class="stat-val" id="meng">0%</span></div>
+<div class="stat"><span>Comentarios dejados (meta: 100+)</span><span class="stat-val" id="mcom">0</span></div>
+<div class="stat"><span>DMs enviados (meta: 20+)</span><span class="stat-val" id="mdms">0</span></div>
+<div class="stat"><span>Respuestas DM (meta: 90%+)</span><span class="stat-val" id="mresp">0%</span></div>
+</div>
+
+<div class="section">Actualizar métricas</div>
+<div class="card">
+<label>Seguidores actuales</label><input type="number" id="in_f" value="22">
+<label>Vistas (30d)</label><input type="number" id="in_v" value="9597">
+<label>Reproducciones</label><input type="number" id="in_r" value="12157">
+<label>Engagement %</label><input type="number" id="in_e" step="0.1" value="0">
+<button class="btn btn-gold" onclick="updateMetrics()">Guardar</button>
+</div>
+</div>
+
+<!-- PLAN TAB -->
+<div id="plan" class="tab">
+<div class="task-day">
+<div class="time">DÍA 1 - MAÑANA (6-8 AM)</div>
+<div class="title">📱 POST 1: Foto del modelo</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar foto (6-8 AM)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios (primeras 2h)</span></div>
+<button class="btn" onclick="openModal('caption1')">Ver caption</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 1 - TARDE (5-7 PM)</div>
+<div class="title">💬 ENGAGEMENT: 15 comentarios</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en @mattsoria</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en @brandon_breault</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en 13 cuentas más</span></div>
+<button class="btn" onclick="openModal('comments')">Ver scripts de comentarios</button>
+<button class="btn" onclick="openModal('accounts')">Ver cuentas a targetear</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 2 - MAÑANA (9 AM)</div>
+<div class="title">🖼 POST 2: Carrusel editorial</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar carrusel (9 AM)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><span>Responder comentarios</span></div>
+<button class="btn" onclick="openModal('caption2')">Ver caption</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 2 - TARDE (5-7 PM)</div>
+<div class="title">📨 DMs: 5 fotógrafos</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a @thisiscoelevated</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a @brandon_breault</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a 3 cuentas más</span></div>
+<button class="btn" onclick="openModal('dms')">Ver scripts DM</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 3 - MAÑANA (8 AM)</div>
+<div class="title">🎬 POST 3: The Worlds reel</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar The Worlds</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios</span></div>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 3 - TARDE (5-7 PM)</div>
+<div class="title">💬 ENGAGEMENT: 20 comentarios</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>20 comentarios en cuentas nuevas</span></div>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 4-7</div>
+<div class="title">📋 Continúa el plan (leer documento completo)</div>
+<button class="btn" onclick="openModal('fullplan')">Plan completo DÍA 4-7</button>
+</div>
+</div>
+
+<!-- ENGAGEMENT TAB -->
+<div id="engagement" class="tab">
+<div class="section">Hoy - Contador de tareas</div>
+<div class="card">
+<div class="stat"><span>Comentarios dejados</span><span class="stat-val" id="ecom">0</span></div>
+<div class="stat"><span>Meta: 30 comentarios/día</span><span style="font-size:12px;color:#8a8a8a">En el plan agresivo</span></div>
+<input type="number" id="comentarios_count" value="0" placeholder="Cuántos dejaste hoy">
+<button class="btn" onclick="updateEng()">+1</button>
+</div>
+
+<div class="card">
+<div class="stat"><span>DMs enviados</span><span class="stat-val" id="edms">0</span></div>
+<input type="number" id="dms_count" value="0">
+<button class="btn" onclick="updateDMS()">+1</button>
+</div>
+
+<div class="card">
+<div class="stat"><span>Respuestas DM recibidas</span><span class="stat-val" id="eresp">0</span></div>
+<input type="number" id="resp_count" value="0">
+<button class="btn" onclick="updateResp()">+1</button>
+</div>
+
+<div class="section">Scripts de comentarios rápidos</div>
+<div class="card">
+<div class="toggle" onclick="copyText('script1')">
+<span>✓</span>
+<span style="flex:1">the way you've framed the negative space...</span>
+</div>
+<div class="script" id="script1">the way you've framed the negative space here is incredible. the subject becomes secondary to the environment itself. this is where fashion photography becomes art.</div>
+
+<div class="toggle" onclick="copyText('script2')">
+<span>✓</span>
+<span style="flex:1">the color grading in this is so restrained...</span>
+</div>
+<div class="script" id="script2">the color grading in this is so restrained—everything breathes. how long did you spend getting the palette exactly right?</div>
+
+<div class="toggle" onclick="copyText('script3')">
+<span>✓</span>
+<span style="flex:1">this feels like a frame from a film...</span>
+</div>
+<div class="script" id="script3">this feels like a frame from a film i haven't seen yet. the stillness of it. there's so much quiet power here.</div>
+
+<div class="toggle" onclick="copyText('script4')">
+<span>✓</span>
+<span style="flex:1">the composition draws the eye exactly...</span>
+</div>
+<div class="script" id="script4">the composition draws the eye exactly where you want it. nothing is accidental here. you can feel the intentionality.</div>
+
+<div class="toggle" onclick="copyText('script5')">
+<span>✓</span>
+<span style="flex:1">the juxtaposition between the subject...</span>
+</div>
+<div class="script" id="script5">the juxtaposition between the subject and the landscape is haunting. it's fashion but it doesn't feel like fashion—it feels like cinema.</div>
+
+<button class="btn" onclick="openModal('allcomments')">Ver todos los 30 scripts</button>
+</div>
+</div>
+
+<!-- ACCOUNTS TAB -->
+<div id="accounts" class="tab">
+<div class="section">Categoría A: Fotógrafos conceptuales (10-100k)</div>
+<div class="card">
+<div class="account"><span class="handle">@mattsoria</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@brandon_breault</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@soren_blakemiller</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@lucidhoto</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@brandonli_photography</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@matthewlloydsmith</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@javierflores.photo</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@davidhunterphoto</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@paulmsardelis</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@oliverstrauss</span><span class="category">Fotos</span></div>
+</div>
+
+<div class="section">Categoría B: Curadores editorial (15-200k)</div>
+<div class="card">
+<div class="account"><span class="handle">@thisiscoelevated</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@artconcept__</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@visualfashionart</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@conceptualcreative</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@editorialfashion.concept</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@fashionconceptart</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@darkaesthetic_</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@editorialfashionmag</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@fashionvisuals.</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@moodboard.inspo</span><span class="category">Curator</span></div>
+</div>
+
+<div class="section">Categoría C: Cine/A24 (20-300k)</div>
+<div class="card">
+<div class="account"><span class="handle">@a24</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@arthouse.cinema</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinematic.visuals</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@filmfashion_</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinephile.aesthetics</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@slowcinema</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@filmpoetry_</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinematography.daily</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@darkcinema</span><span class="category">Cine</span></div>
+</div>
+
+<div class="section">Categoría D: Arte surreal (5-100k)</div>
+<div class="card">
+<div class="account"><span class="handle">@surrealart.daily</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@digitalart.collective</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@conceptualart_</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@darkestheticart</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@surrealism.art</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@artconceptual</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@visualstorytelling</span><span class="category">Arte</span></div>
+</div>
+
+<div class="section">Categoría E: Fashion especial (10-150k)</div>
+<div class="card">
+<div class="account"><span class="handle">@fashionphotography.daily</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@editorialfashionphoto</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@fashionphotog</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@portraiture.lab</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@menstyle.blog</span><span class="category">Menswear</span></div>
+<div class="account"><span class="handle">@mensfashionjournal</span><span class="category">Menswear</span></div>
+<div class="account"><span class="handle">@thepacman82</span><span class="category">Menswear</span></div>
+</div>
+</div>
+
+<!-- CAMPAIGN TAB -->
+<div id="campaign" class="tab">
+<div class="card" style="background:linear-gradient(135deg, #c9a96a20, #262626);border:1px solid #c9a96a40;margin-bottom:16px">
+<div style="font-size:16px;font-weight:700;color:#c9a96a">EL VERANO MUERE JOVEN</div>
+<div style="font-size:12px;color:#c9a96a;margin:4px 0">Summer Dies Young · Campaña de temporada · Verano 2026</div>
+<div style="font-size:11px;color:#8a8a8a;margin:8px 0;line-height:1.4">Inspirada en "Estoy Amándote Tan Fuerte" — TRISTÁN!, Guitarricadelafuente</div>
+</div>
+
+<!-- ESTRATEGIA -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📍 Estrategia de publicación</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Secuencia de lanzamiento:</p>
+<p style="margin:6px 0;font-size:11px">• <strong>Reel:</strong> Viernes 12:00 CET (apertura de temporada)</p>
+<p style="margin:6px 0;font-size:11px">• <strong>Carrusel:</strong> Domingo 19:30 CET (cuando audiencia lee historias)</p>
+<p style="margin:8px 0;color:#8a8a8a;font-size:11px;border-top:1px solid #262626;padding-top:8px"><strong>Tácticas:</strong></p>
+<p style="margin:4px 0;font-size:11px">✓ Fijar (pin) ambos posts al perfil durante todo el verano</p>
+<p style="margin:4px 0;font-size:11px">✓ Crear highlight "VERANO" con stories (no caducan a 24h)</p>
+<p style="margin:4px 0;font-size:11px">✓ El Capítulo I es la siembra: si funciona, capítulos heredan paleta y tipografía</p>
+</div>
+</div>
+
+<!-- CAPTIONS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>✍️ Captions (4 opciones)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="caption-option">
+<strong>A · Corto ES (impacto)</strong>
+<p>el verano muere joven. ámalo más fuerte. capítulo I — una historia de @theeyeofhera ♪ Estoy Amándote Tan Fuerte — TRISTÁN!, Guitarricadelafuente</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('el verano muere joven. ámalo más fuerte. capítulo I — una historia de @theeyeofhera ♪ Estoy Amándote Tan Fuerte — TRISTÁN!, Guitarricadelafuente')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>B · Corto EN</strong>
+<p>summer dies young. love it harder. chapter I — a story by @theeyeofhera</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('summer dies young. love it harder. chapter I — a story by @theeyeofhera')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>C · Largo ES (editorial)</strong>
+<p>Hay veranos que se miden en meses y veranos que se miden en lo que tarda un vilano en tocar el suelo. Esta historia va del segundo: un verano bello, breve, irrepetible. Por eso se ama más fuerte. EL VERANO MUERE JOVEN · capítulo I Basada en "Estoy Amándote Tan Fuerte" de TRISTÁN! y Guitarricadelafuente. Escucha con sonido. Producción visual: @theeyeofhera · HERA — Hybrid Visual Architecture</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('Hay veranos que se miden en meses y veranos que se miden en lo que tarda un vilano en tocar el suelo. Esta historia va del segundo: un verano bello, breve, irrepetible. Por eso se ama más fuerte. EL VERANO MUERE JOVEN · capítulo I Basada en \"Estoy Amándote Tan Fuerte\" de TRISTÁN! y Guitarricadelafuente. Escucha con sonido. Producción visual: @theeyeofhera · HERA — Hybrid Visual Architecture')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>D · Bilingüe ES/EN</strong>
+<p>el verano muere joven. ámalo más fuerte. summer dies young. love it harder. capítulo I / chapter I — @theeyeofhera ♪ TRISTÁN!, Guitarricadelafuente — Estoy Amándote Tan Fuerte</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('el verano muere joven. ámalo más fuerte. summer dies young. love it harder. capítulo I / chapter I — @theeyeofhera ♪ TRISTÁN!, Guitarricadelafuente — Estoy Amándote Tan Fuerte')">Copiar</button>
+</div>
+</div>
+</div>
+
+<!-- HASHTAGS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🏷️ Hashtags</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Set Principal (caption):</p>
+<div class="script">#ElVeranoMuereJoven #SummerDiesYoung #HERA #theeyeofhera #HybridVisualArchitecture #historiavisual #visualstory #cinematic #filmlook #cortometraje #verano2026 #summer2026 #dientedeleon #dandelion #moodfilm #editorial #reels</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('#ElVeranoMuereJoven #SummerDiesYoung #HERA #theeyeofhera #HybridVisualArchitecture #historiavisual #visualstory #cinematic #filmlook #cortometraje #verano2026 #summer2026 #dientedeleon #dandelion #moodfilm #editorial #reels')">Copiar Principal</button>
+
+<p style="margin:12px 0 8px;color:#c9a96a;font-weight:600">Set Nicho (primer comentario):</p>
+<div class="script">#Guitarricadelafuente #TRISTAN #EstoyAmandoteTanFuerte #indieespanol #spanishindie #fashionfilm #visualpoetry #analogmood #a24vibes</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('#Guitarricadelafuente #TRISTAN #EstoyAmandoteTanFuerte #indieespanol #spanishindie #fashionfilm #visualpoetry #analogmood #a24vibes')">Copiar Nicho</button>
+</div>
+</div>
+
+<!-- STORIES -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📖 Stories (3 frames)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 1 · Teaser (día antes del reel)</p>
+<p style="font-size:11px;margin:6px 0">Clip de las semillas al viento (sin título), con canción de fondo + sticker "mañana empieza el verano". El misterio es el gancho.</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 2 · Historia (día del carrusel)</p>
+<p style="font-size:11px;margin:6px 0">Cenital del chico en la hierba + caja de preguntas: "¿qué harías distinto si supieras que este verano no vuelve?"</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 3 · CTA</p>
+<p style="font-size:11px;margin:6px 0">Portada del carrusel + sticker de enlace + texto: "la historia completa, en el feed. capítulo I ya disponible."</p>
+</div>
+</div>
+</div>
+
+<!-- AUDIO -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🎵 Audio & Sincronía</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Audio oficial:</p>
+<p style="font-size:12px;margin:6px 0;font-weight:600">"Estoy Amándote Tan Fuerte" — TRISTÁN!, Guitarricadelafuente</p>
+<p style="font-size:11px;color:#8a8a8a;margin:8px 0">• Añade desde selector de audio de Instagram (no incrustada)</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Post aparecerá en página del audio → descubrimiento</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Sincronía sugerida: estribillo entra cuando se forma logo HERA (≈18s)</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Comprueba si tiene insignia de "tendencia" antes de publicar</p>
+</div>
+</div>
+
+<!-- CARRUSEL -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🎬 Orden del carrusel (6 imgs + reel)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="display:grid;gap:8px">
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">01_portada.jpg</strong><br>Cenital en la hierba, título completo</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">02_soplo.jpg</strong><br>Diente de león intacto</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">03_semillas.jpg</strong><br>Las semillas en el viento</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">04_nota.jpg</strong><br>Nota de concepto: "todo lo que vuela, cae"</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">05_hera.jpg</strong><br>Logo HERA en vilanos, marco de cine</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">06_cierre.jpg</strong><br>Créditos y CTA</p>
+</div>
+<p style="font-size:11px;color:#8a8a8a;margin-top:10px;border-top:1px solid #262626;padding-top:8px">📹 Reel separado: 00_reel_teaser.mp4 (27s, 4:5) — no lo metas en el carrusel</p>
+</div>
+</div>
+
+<!-- CRONOGRAMA -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📅 Cronograma & Horarios</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px">
+<p style="color:#c9a96a;font-weight:600;margin-bottom:6px">REEL: Viernes</p>
+<p style="font-size:12px;font-weight:700">12:00–13:00 CET</p>
+<p style="font-size:11px;color:#8a8a8a">Scroll mediodía, mejor ventana para apertura de temporada</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px">
+<p style="color:#c9a96a;font-weight:600;margin-bottom:6px">CARRUSEL: Domingo</p>
+<p style="font-size:12px;font-weight:700">19:00–21:00 CET</p>
+<p style="font-size:11px;color:#8a8a8a">Audiencia lee historias por tarde-noche</p>
+</div>
+
+<p style="font-size:11px;color:#8a8a8a;margin-top:10px;padding-top:10px;border-top:1px solid #262626">Evita: madrugada y primera hora mañana (a menos Insights muestre audiencia americana)</p>
+</div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>✅ Checklist de publicación</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin-top:10px">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Elegir caption (A, B, C o D)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Copiar hashtags (Principal + Nicho)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Preparar 6 imágenes carrusel + reel</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Reel: sincronía estribillo (≈18s)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Crear stories 3 frames (teaser, historia, CTA)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>VIERNES: Publicar reel 12:00-13:00 CET</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>VIERNES: Crear highlight "VERANO"</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DOMINGO: Publicar carrusel 19:00-21:00 CET</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Fijar (pin) reel al perfil</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Fijar (pin) carrusel al perfil</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios primeras 2h</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Monitorear audiencia con Insights</span></div>
+</div>
+</div>
+</div>
+
+<!-- NOTAS INTERNAS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📝 Notas internas</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;margin:6px 0"><strong>Cuenta:</strong> @theeyeofhera (sin colaboradores en este capítulo)</p>
+<p style="font-size:11px;margin:6px 0"><strong>Voz:</strong> HERA — arquitectura visual, precisa, minúsculas, sin exclamaciones</p>
+<p style="font-size:11px;margin:6px 0"><strong>Resolución:</strong> Master clips en 1280x720 — para impresiones grandes, regenerar desde proyecto original</p>
+<p style="font-size:11px;margin:6px 0"><strong>Objetivo:</strong> Feed marcado por la campaña todo el verano. Reel abre temporada, carrusel la fija como bandera visual.</p>
+</div>
+</div>
+</div>
+
+<!-- IDEAS TAB -->
+<div id="ideas" class="tab">
+<div class="card" style="background:linear-gradient(135deg, #c9a96a20, #262626);border:1px solid #c9a96a40;margin-bottom:12px">
+<div style="font-size:15px;font-weight:700;color:#c9a96a">💡 Ideas de feed</div>
+<div style="font-size:11px;color:#8a8a8a;margin-top:4px;line-height:1.4">Basadas en TUS views reales cruzadas con los formatos de mayor tracción en 2026.</div>
+</div>
+
+<!-- UNIVERSO -->
+<div class="card" style="background:linear-gradient(135deg, #3a2e10, #1c1608);border:1px solid #c9a96a;margin-bottom:4px">
+<div style="font-size:16px;font-weight:700;color:#c9a96a">🌍 EL UNIVERSO</div>
+<div style="font-size:13px;font-weight:600;margin:6px 0 2px">"LO QUE EL TRIGO GUARDA"</div>
+<div style="font-size:12px;font-style:italic;color:#d9c49a;line-height:1.5">algo en este campo sabe cómo sostenerte, aunque tú ya no estés.</div>
+<div style="font-size:11px;color:#8a8a8a;margin-top:8px">3 actos + 1 portada, 1 solo día (mediodía → atardecer), en el trigal dorado — pivote desde el desierto tras revisar referencias de campaña reales.</div>
+</div>
+
+<!-- HILOS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🧵 Los hilos que lo unen</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Poema partido:</strong> cada acto cierra con un fragmento. Solo viendo los 3 se lee la frase completa.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Ciclo de un día:</strong> mediodía dorado → tarde fría/técnica → atardecer azul-teal — la luz cuenta el tiempo.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">El trigal:</strong> mismo campo en los 3, distinta relación con él.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Camiseta blanca mojada:</strong> constante de vestuario — identidad instantánea.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">El iris HERA:</strong> cierre de marca SOLO en el Acto III — el final se gana, no se repite.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Energía de cámara:</strong> handheld caótico (I) → trípode preciso (II) → drift lento (III)</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Regla anti-plano:</strong> todo elemento surreal se oculta en sombra + tiene profundidad de campo real — nunca queda pegado/plano</p>
+</div>
+</div>
+
+<!-- PORTADA -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🏆 PORTADA · Key visual de campaña</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;color:#8a8a8a">Formato de "cover" tipo Jacquemus — el wordmark y crédito sí, la energía grupal festiva no (tu data: grupo B&N = 283 views, solo siempre gana)</p>
+<p style="font-size:12px;margin:8px 0">Ancla visual de todo el universo. Se publica primero o se usa como imagen de perfil/highlight cover.</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt:</p>
+<div class="script">Editorial campaign cover photograph, a young man lying back in a golden wheat field at magic hour, wet white t-shirt, one arm raised, grass blurred with motion around him, warm amber backlight flare. Bold clean sans-serif wordmark "HERA" placed in the upper-left corner of frame, small credit line in lower-left: "hybrid visual architecture · a visual campaign · @theeyeofhera". Confident, elevated campaign photography grade — polished but still filmic, shallow depth of field, warm saturated highlights. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Editorial campaign cover photograph, a young man lying back in a golden wheat field at magic hour, wet white t-shirt, one arm raised, grass blurred with motion around him, warm amber backlight flare. Bold clean sans-serif wordmark \'HERA\' placed in the upper-left corner of frame, small credit line in lower-left: \'hybrid visual architecture · a visual campaign · @theeyeofhera\'. Confident, elevated campaign photography grade — polished but still filmic, shallow depth of field, warm saturated highlights. Vertical 3:4.')">Copiar prompt</button>
+<div class="checkbox" onclick="toggleTask(this)" style="margin-top:10px"><input type="checkbox"><span>Publicada — Portada</span></div>
+</div>
+</div>
+
+<!-- ACTO I -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🔴 ACTO I · El Forcejeo</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;color:#8a8a8a">Categoría A — movimiento humano real</p>
+<p style="font-size:12px;margin:8px 0">Corre por el trigal dorado, tropieza de verdad (no "se protege del sol"), cae, se aferra al suelo. Caos cinético, handheld, motion blur real.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Grade:</strong> dorado/ámbar cálido, contraluz de hora mágica</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Texto de cierre:</strong> "algo en este campo —"</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt 1 · tropiezo (plano principal):</p>
+<div class="script">Cinematic campaign photograph, motion blur, a young man in a wet white t-shirt loses his footing mid-stride in a golden wheat field, body twisting off-balance, one leg buckling, arms flailing outward instinctively rather than posed. Backlit warm sunset flare, wheat blurring around him from the fall. Raw, uncontrolled, imperfect motion — not graceful. 35mm grain, shallow focus. No text, no logos. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Cinematic campaign photograph, motion blur, a young man in a wet white t-shirt loses his footing mid-stride in a golden wheat field, body twisting off-balance, one leg buckling, arms flailing outward instinctively rather than posed. Backlit warm sunset flare, wheat blurring around him from the fall. Raw, uncontrolled, imperfect motion — not graceful. 35mm grain, shallow focus. No text, no logos. Vertical 3:4.')">Copiar prompt</button>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt 2 · macro manos en el trigo:</p>
+<div class="script">Extreme close-up, a young man's hands gripping golden wheat stalks and dry earth beneath, fingers pressing into the ground, wheat bending around his wrists. Warm backlit golden-hour light, shallow depth of field, motion blur on loose wheat strands caught by wind. Cinematic campaign grade, 35mm grain. No text, no logos. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Extreme close-up, a young man\'s hands gripping golden wheat stalks and dry earth beneath, fingers pressing into the ground, wheat bending around his wrists. Warm backlit golden-hour light, shallow depth of field, motion blur on loose wheat strands caught by wind. Cinematic campaign grade, 35mm grain. No text, no logos. Vertical 3:4.')">Copiar prompt</button>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt 3 · quietud posterior (cierre):</p>
+<div class="script">Cinematic campaign photograph, a young man lies still on his back in a golden wheat field, wet white t-shirt, chest rising with breath, eyes closed, wheat surrounding his body like a nest. Warm honey-gold light, soft and settled — no motion blur, camera steady on tripod. Quiet after the motion. 35mm grain, shallow depth of field. No text, no logos. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Cinematic campaign photograph, a young man lies still on his back in a golden wheat field, wet white t-shirt, chest rising with breath, eyes closed, wheat surrounding his body like a nest. Warm honey-gold light, soft and settled — no motion blur, camera steady on tripod. Quiet after the motion. 35mm grain, shallow depth of field. No text, no logos. Vertical 3:4.')">Copiar prompt</button>
+<p style="font-size:11px;color:#8a8a8a;margin-top:8px">Los 3 planos arman el arco: tropiezo → detalle de manos → quietud. Evita repetir el mismo gesto 7 veces.</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Caption:</p>
+<div class="script">algo en este campo — capítulo I / @theeyeofhera</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('algo en este campo — capítulo I / @theeyeofhera')">Copiar caption</button>
+<div class="checkbox" onclick="toggleTask(this)" style="margin-top:10px"><input type="checkbox"><span>Publicado — Acto I</span></div>
+</div>
+</div>
+
+<!-- ACTO II -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>⚙️ ACTO II · El Método</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;color:#8a8a8a">Categoría B — técnica/revelación (el "¿cómo hicieron eso?")</p>
+<p style="font-size:12px;margin:8px 0">Su rostro reemplazado por un racimo de trigo dorado que crece de su cuello — la transición se oculta en sombra dura, con profundidad de campo real (no un ramo pegado y plano).</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Grade:</strong> fondo teal-a-negro profundo, contraste complementario contra el trigo cálido</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Texto de cierre:</strong> "— sabe cómo sostenerte —"</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt (corregido: sombra + profundidad real):</p>
+<div class="script">Surreal editorial photograph, a young man's head is completely replaced by a dense cluster of golden wheat stalks growing directly from his neck, stalks pointing in varied organic directions as if wind-blown, not symmetrical or bouquet-like. Shallow depth of field: some wheat stalks sharp in the foreground, others soft and blurred receding into the background, creating real volume and depth. Hard directional side light casts deep shadow across the neck and collar, hiding the transition in near-total silhouette — the join between body and wheat is concealed in shadow, not visible. He wears a simple wet white t-shirt, shoulders lit softly. Background: a deep teal-to-near-black gradient sky, dusk atmosphere, creating strong complementary contrast against the warm golden wheat. Sharp studio-grade editorial photography with real lens optics, 35mm grain, dramatic and uncanny yet grounded and photoreal — not a flat cutout. No text, no logos. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Surreal editorial photograph, a young man\'s head is completely replaced by a dense cluster of golden wheat stalks growing directly from his neck, stalks pointing in varied organic directions as if wind-blown, not symmetrical or bouquet-like. Shallow depth of field: some wheat stalks sharp in the foreground, others soft and blurred receding into the background, creating real volume and depth. Hard directional side light casts deep shadow across the neck and collar, hiding the transition in near-total silhouette — the join between body and wheat is concealed in shadow, not visible. He wears a simple wet white t-shirt, shoulders lit softly. Background: a deep teal-to-near-black gradient sky, dusk atmosphere, creating strong complementary contrast against the warm golden wheat. Sharp studio-grade editorial photography with real lens optics, 35mm grain, dramatic and uncanny yet grounded and photoreal — not a flat cutout. No text, no logos. Vertical 3:4.')">Copiar prompt</button>
+<p style="font-size:11px;color:#8a8a8a;margin-top:8px">Las 3 claves si sale plano otra vez: (1) sombra dura ocultando el cuello (2) trigo con profundidad de campo variable, no todo nítido (3) fondo teal oscuro real, no degradado genérico.</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Caption:</p>
+<div class="script">— sabe cómo sostenerte — capítulo II / @theeyeofhera</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('— sabe cómo sostenerte — capítulo II / @theeyeofhera')">Copiar caption</button>
+<div class="checkbox" onclick="toggleTask(this)" style="margin-top:10px"><input type="checkbox"><span>Publicado — Acto II (4 días después del I)</span></div>
+</div>
+</div>
+
+<!-- ACTO III -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🌫️ ACTO III · Lo Que Queda</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;color:#8a8a8a">Categoría C — cámara sobre ambiente, sin figura</p>
+<p style="font-size:12px;margin:8px 0">Ya no está. La cámara se desliza sobre el trigal y encuentra el trigo aplastado donde alguien estuvo tumbado, enderezándose lento con el viento. Cierra disolviendo en el iris HERA.</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Grade:</strong> ámbar fundiéndose con azul-teal de atardecer — el día muriendo</p>
+<p style="font-size:11px;margin:6px 0"><strong style="color:#c9a96a">Texto de cierre:</strong> "— aunque tú ya no estés."</p>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Prompt video:</p>
+<div class="script">Cinematic film scene, slow camera drift low across a golden wheat field at dusk, no human figure present. A patch of flattened, parted wheat shows the faint impression where someone once lay, stalks slowly springing back upright in the wind. Warm amber light fading into a cool blue-teal dusk gradient at the horizon. Camera glides forward and tilts up toward a darkening sky. Soft ambient light, 35mm grain, subtle film halation. Quiet, melancholic, contemplative. Final frame slowly dissolves into a close-up of a human iris. No text except the closing brand mark. Vertical 3:4.</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('Cinematic film scene, slow camera drift low across a golden wheat field at dusk, no human figure present. A patch of flattened, parted wheat shows the faint impression where someone once lay, stalks slowly springing back upright in the wind. Warm amber light fading into a cool blue-teal dusk gradient at the horizon. Camera glides forward and tilts up toward a darkening sky. Soft ambient light, 35mm grain, subtle film halation. Quiet, melancholic, contemplative. Final frame slowly dissolves into a close-up of a human iris. No text except the closing brand mark. Vertical 3:4.')">Copiar prompt</button>
+<p style="margin:10px 0 4px;color:#c9a96a;font-weight:600;font-size:12px">Caption:</p>
+<div class="script">— aunque tú ya no estés. capítulo III / @theeyeofhera</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="copy('— aunque tú ya no estés. capítulo III / @theeyeofhera')">Copiar caption</button>
+<div class="checkbox" onclick="toggleTask(this)" style="margin-top:10px"><input type="checkbox"><span>Publicado — Acto III (viernes sig. al II)</span></div>
+</div>
+</div>
+
+<!-- CALENDARIO UNIVERSO -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📅 Calendario de lanzamiento</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Lunes — Portada: publicar como key visual / fijar al perfil</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Viernes — Acto I: publicar</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Martes sig. — Acto II: publicar (4 días de intriga entre I y II)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Viernes sig. — Acto III: publicar + poema completo en caption</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Domingo sig. — Carrusel "códex": los 3 frames finales + poema completo</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Crear highlight "TRIGO" — portada + 3 actos + BTS en stories (no caduca)</span></div>
+</div>
+</div>
+
+<!-- FÓRMULA GANADORA -->
+<div class="card" style="border:1px solid #c9a96a">
+<div style="font-size:12px;color:#c9a96a;font-weight:700;margin-bottom:6px">🎯 LA FÓRMULA GANADORA</div>
+<div style="font-size:12px;font-style:italic;line-height:1.5">un cuerpo · un paisaje · luz de cine · una emoción quieta · el ojo como firma</div>
+<div style="font-size:11px;color:#8a8a8a;margin-top:8px">Tu post del desierto hizo 7.312 views. La portada con texto grande, 30. La data manda.</div>
+</div>
+
+<!-- REGLA DE ORO -->
+<div class="card" style="border:1px solid #b04a3a;background:#2a1510">
+<div style="font-size:12px;color:#e07a5f;font-weight:700">⚠️ REGLA DE ORO</div>
+<div style="font-size:11px;margin-top:4px;line-height:1.4">Portada = SIEMPRE imagen fuerte, nunca texto grande. Un solo cuerpo. Grade cálido/terroso o pastel. Cierra en el ojo. Locación natural real.</div>
+</div>
+
+<!-- LECTURA DEL FEED -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📊 Lo que dice tu feed (data real)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="stat"><span>🏜 Hombre en desierto</span><span class="stat-val">7312</span></div>
+<div class="stat"><span>Torso campo dorado</span><span class="stat-val">809</span></div>
+<div class="stat"><span>Grass shirtless (verano)</span><span class="stat-val">206</span></div>
+<div class="stat"><span>Camisa mojada rosa</span><span class="stat-val">193</span></div>
+<div class="stat"><span>Perfil tank top</span><span class="stat-val">174</span></div>
+<div class="stat"><span>Ojo surreal / glitch</span><span class="stat-val">122</span></div>
+<div class="stat"><span>Grupo B&N</span><span class="stat-val">283</span></div>
+<div class="stat"><span>Correr en niebla (lavado)</span><span class="stat-val">86</span></div>
+<div class="stat"><span>⚠️ Portada texto grande</span><span class="stat-val" style="color:#e07a5f">30</span></div>
+<p style="font-size:11px;color:#8a8a8a;margin-top:10px">Lección: figura sola + paisaje + grade cálido gana. Texto en portada, grupo, B&N y lavados pierden.</p>
+</div>
+</div>
+
+<!-- BLOQUE 1 -->
+<div class="section">Bloque 1 · Doblar lo que ya explotó</div>
+<div class="card">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>1 · Reel "tierra" — cuerpo en desierto/campo, grade terroso, slow-mo (réplica del 7.312)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>2 · Carrusel 6 slides cuerpo/paisaje — portada SIN texto grande</span></div>
+</div>
+
+<!-- BLOQUE 2 -->
+<div class="section">Bloque 2 · Moda aspiracional (tu tono)</div>
+<div class="card">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>3 · Reel "tejido mojado" — slow-mo tela húmeda al cuerpo, luz natural</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>4 · Reel contrast interrupt "desnudo → vestido" al beat</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>5 · Carrusel "una prenda, tres luces" (amanecer/mediodía/atardecer)</span></div>
+</div>
+
+<!-- BLOQUE 3 -->
+<div class="section">Bloque 3 · El ojo = firma de marca</div>
+<div class="card">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>6 · Reel "CONTEXT / el ojo" — cada reel colapsa en el iris</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>7 · Carrusel "lo que vio el ojo" — 5 frames cerrando en iris HERA</span></div>
+</div>
+
+<!-- BLOQUE 4 -->
+<div class="section">Bloque 4 · Continuidad de campaña</div>
+<div class="card">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>8 · Próximo capítulo estacional — hereda de VERANO, portada = imagen limpia</span></div>
+</div>
+
+<!-- PASO A PASO -->
+<div class="section">🛠 Paso a paso — crear cada pieza</div>
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🎬 Crear un REEL (7 pasos)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>1 · Elige la idea (marca arriba una casilla de bloque)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>2 · Genera/consigue el material: 1 cuerpo + paisaje natural, luz lateral</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>3 · Edita 12-18s, 4:5: HOOK 0-2s (plano cerrado) → corte al beat</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>4 · Aplica grade cálido/terroso + grano de película</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>5 · Cierra en el ojo/iris HERA (firma)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>6 · Añade audio desde selector de Instagram (no incrustado)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>7 · Copia caption + hashtags (pestaña Campaña) y publica</span></div>
+<p style="font-size:11px;color:#8a8a8a;margin-top:8px">Herramientas: CapCut / Premiere para editar · VSCO / Lightroom para el grade.</p>
+</div>
+</div>
+
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🖼 Crear un CARRUSEL (6 pasos)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>1 · Elige idea de carrusel arriba</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>2 · Reúne 5-8 imágenes (nunca menos de 5)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>3 · SLIDE 1 = tu imagen más potente, CERO texto grande</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>4 · Cada slide una idea/plano; grade consistente en todos</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>5 · Último slide = iris HERA + CTA suave</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>6 · Caption con set principal + set nicho en 1er comentario</span></div>
+<p style="font-size:11px;color:#8a8a8a;margin-top:8px">Los carruseles de 5-8 slides logran 3.4x más saves que una foto suelta.</p>
+</div>
+</div>
+
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📅 Ritmo semanal (publicar)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;margin:6px 0">3-5 piezas/semana. Alterna en el grid:</p>
+<div class="script">cuerpo/paisaje → moda aspiracional → ojo/firma → (repite)</div>
+<p style="font-size:11px;margin:6px 0"><strong>Reel:</strong> viernes 12:00-13:00 CET</p>
+<p style="font-size:11px;margin:6px 0"><strong>Carrusel:</strong> domingo 19:00-21:00 CET</p>
+<p style="font-size:11px;color:#8a8a8a;margin-top:6px">Prioriza watch time y saves sobre likes.</p>
+</div>
+</div>
+
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📊 Por qué funciona (evidencia 2026)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;margin:6px 0">• <strong>Tu propia data:</strong> figura+paisaje+cálido = 7.312 vs texto en portada = 30</p>
+<p style="font-size:11px;margin:6px 0">• <strong>Contrast interrupt:</strong> señala al algoritmo contenido de alta utilidad</p>
+<p style="font-size:11px;margin:6px 0">• <strong>Carrusel 5-8 slides:</strong> 3.4x más saves, 2.1x más shares que foto suelta</p>
+<p style="font-size:11px;margin:6px 0">• <strong>Retrato conceptual:</strong> fórmula de 22M vistas en 1 semana (Roberto Luís)</p>
+<p style="font-size:11px;margin:6px 0">• <strong>Slow-mo de tejido en luz natural:</strong> lo mejor en premium/lujo</p>
+<p style="font-size:11px;margin:6px 0">• <strong>Series por capítulos:</strong> heredan paleta y construyen marca (ya validado)</p>
+</div>
+</div>
+</div>
+
+<!-- MODALS -->
+<div id="modal" class="modal">
+<div class="modal-content" id="modal-content"></div>
+</div>
+</div>
+
+<nav>
+<button class="nav-btn active" onclick="tab('metrics')">📊 Métricas</button>
+<button class="nav-btn" onclick="tab('plan')">📋 Plan</button>
+<button class="nav-btn" onclick="tab('engagement')">💬 Eng</button>
+<button class="nav-btn" onclick="tab('accounts')">👥 Cuentas</button>
+<button class="nav-btn" onclick="tab('campaign')">📸 Camp</button>
+<button class="nav-btn" onclick="tab('ideas')">💡 Ideas</button>
+</nav>
+
+<script>
+let DATA={metrics:{f:22,v:9597,r:12157,a:4219,e:0,wf:0,mcom:0,mdms:0,mresp:0},tasks:{}};
+function load(){const d=localStorage.getItem('GDATA');return d?JSON.parse(d):DATA}
+function save(){localStorage.setItem('GDATA',JSON.stringify(DATA))}
+function tab(t){document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');document.querySelector(`[onclick="tab('${t}')"]`).classList.add('active');window.scrollTo(0,0)}
+function updateMetrics(){DATA.metrics.f=+document.getElementById('in_f').value;DATA.metrics.v=+document.getElementById('in_v').value;DATA.metrics.r=+document.getElementById('in_r').value;DATA.metrics.e=+document.getElementById('in_e').value;save();render()}
+function updateEng(){DATA.metrics.mcom++;save();render()}
+function updateDMS(){DATA.metrics.mdms++;save();render()}
+function updateResp(){DATA.metrics.mresp=+((DATA.metrics.mresp||0)+1);save();render()}
+function render(){document.getElementById('mf').textContent=DATA.metrics.f;document.getElementById('mv').textContent=DATA.metrics.v;document.getElementById('mr').textContent=DATA.metrics.r;document.getElementById('ma').textContent=DATA.metrics.a;document.getElementById('meng').textContent=DATA.metrics.e+'%';document.getElementById('mcom').textContent=DATA.metrics.mcom;document.getElementById('mdms').textContent=DATA.metrics.mdms;document.getElementById('ecom').textContent=DATA.metrics.mcom;document.getElementById('edms').textContent=DATA.metrics.mdms;const pct=Math.min(100,(DATA.metrics.wf/1000)*100);document.getElementById('pfill').style.width=pct+'%';document.getElementById('pmeta').textContent=DATA.metrics.wf+' / 1000'}
+function openModal(id){const content={caption1:'<h2>POST 1: Foto del modelo</h2><p style="font-size:12px;color:#8a8a8a;margin:8px 0">Imagen: Portrait con lienzo blanco en desierto</p><div class="script">the frame is the portal.\nthe subject becomes the landscape.\nthe landscape becomes the subject.\n\nwhat do you see when you look? 👁\n\nfirst chapter of something bigger.\n\n#theeyeofhera #fashionphotography #editorialfashion \n#surrealart #a24style #cinematicfashion</div><p style="font-size:11px;color:#8a8a8a;margin-top:8px">Hashtags: #conceptualfashion #fashionfilm #visualartist #mensfashion #artdirection</p>',caption2:'<h2>POST 2: Carrusel editorial</h2><div class="script">behind the worlds.\nthe process becomes the portrait.\nthe portrait becomes the obsession.\n\n4 frames. 1 vision. infinite interpretations.\n\nwhat\'s the thread connecting them? 👁</div>',comments:'<h2>30 Scripts de comentarios</h2><div style="font-size:12px;margin:8px 0"><strong>GRUPO 1: ENGAGEMENT GENUINO</strong><div class="script" style="margin:6px 0;font-size:11px">the way you\'ve framed the negative space here is incredible. the subject becomes secondary to the environment itself. this is where fashion photography becomes art.</div><div class="script" style="margin:6px 0;font-size:11px">the color grading in this is so restrained—everything breathes. how long did you spend getting the palette exactly right?</div><div class="script" style="margin:6px 0;font-size:11px">this feels like a frame from a film i haven\'t seen yet. the stillness of it. there\'s so much quiet power here.</div></div><button class="btn" onclick="closeModal()">Cerrar</button>',dms:'<h2>Scripts DM personalizables</h2><strong>Para fotógrafos:</strong><div class="script">hey [name],\n\nsaw your latest work on [describe element].\nthe way you\'re thinking about negative space is exactly where i\'m heading.\n\njust launched visual project mixing editorial fashion + surreal direction.\n\n@eyeofhera if interested.\n\ncheers!</div><strong>Para curadores:</strong><div class="script">hi [name],\n\nyour curation style is unmatched.\njust started a body of work (@eyeofhera)—fashion photography meets surreal cinema.\n\nwould be honored to be featured.\n\n[name]</div><button class="btn" onclick="closeModal()">Cerrar</button>',accounts:'<h2>50+ Cuentas a targetear</h2><p style="font-size:11px;color:#8a8a8a;margin:8px 0">Scroll por categorías en la pestaña Cuentas</p><button class="btn" onclick="closeModal()">Ir a Cuentas</button>',allcomments:'<h2>30 Scripts (muestra parcial)</h2><p style="font-size:11px;margin:8px 0">En la pestaña Engagement tienes acceso a todos los scripts rápidos. Copiar y modificar para cada cuenta.</p><button class="btn" onclick="closeModal()">Cerrar</button>',fullplan:'<h2>Plan Completo DÍA 4-7</h2><p style="font-size:12px;margin:8px 0"><strong>DÍA 4:</strong> POST carrusel Joshua Trees + 30 comentarios engagement masivo</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 5:</strong> Stories live (15-20 min) + DMs fase 2 (5 cuentas)</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 6:</strong> POST The Witness reel + Teaser capítulo 3 + DMs a 3 cuentas grandes</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 7:</strong> POST Manifesto/Philosophy + Engagement final (15 comentarios)</p><p style="font-size:11px;color:#8a8a8a;margin-top:12px;font-weight:600">OBJETIVO SEMANA 1: 500-1500 nuevos followers, 5-10 colaboraciones en conversación</p><button class="btn" onclick="closeModal()">Cerrar</button>'};document.getElementById('modal-content').innerHTML=content[id]||'';document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function toggleTask(el){el.classList.toggle('done');el.querySelector('input').checked=!el.querySelector('input').checked}
+function copyText(id){const t=document.getElementById(id).textContent;navigator.clipboard?.writeText(t).then(()=>{alert('Copiado ✓')})}
+function toggleAccordion(header){const content=header.nextElementSibling;const isOpen=content.classList.contains('open');document.querySelectorAll('.accordion-content.open').forEach(c=>{c.classList.remove('open');c.previousElementSibling.classList.remove('open')});if(!isOpen){content.classList.add('open');header.classList.add('open')}}
+function copy(text){navigator.clipboard?.writeText(text).then(()=>{alert('✓ Copiado al portapapeles')})}
+DATA=load();render()
+</script>
+</body>
+</html>

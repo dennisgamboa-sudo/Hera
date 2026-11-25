@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EYEHERA Control Center</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: #f2f2f2; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; padding-bottom: 100px; }
+.container { max-width: 680px; margin: 0 auto; padding: 20px; }
+header { padding: 20px 0; border-bottom: 1px solid #262626; margin-bottom: 20px; }
+h1 { font-size: 24px; margin-bottom: 5px; }
+.subtitle { color: #8a8a8a; font-size: 12px; }
+.card { background: #141414; border: 1px solid #262626; border-radius: 12px; padding: 16px; margin: 12px 0; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #262626; }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { color: #8a8a8a; font-size: 14px; }
+.stat-value { font-size: 20px; font-weight: bold; }
+.btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin: 8px 0; }
+.btn-gold { background: #c9a96a; color: #1a1408; }
+.btn-dark { background: #262626; color: #f2f2f2; }
+.btn:active { opacity: 0.8; }
+input, select, textarea { width: 100%; padding: 10px; margin: 8px 0; background: #1c1c1c; border: 1px solid #262626; color: #f2f2f2; border-radius: 8px; font-family: inherit; font-size: 16px; }
+label { display: block; font-size: 12px; color: #8a8a8a; margin: 12px 0 4px 0; font-weight: 600; }
+.section-title { font-size: 12px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.1em; margin: 20px 0 10px 0; font-weight: 600; }
+.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 999; align-items: flex-end; justify-content: center; }
+.modal.open { display: flex; }
+.modal-content { background: #141414; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; border-radius: 20px 20px 0 0; }
+nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0a0a0a; border-top: 1px solid #262626; display: flex; max-width: 680px; margin: 0 auto; }
+nav button { flex: 1; padding: 12px 4px; background: none; border: none; color: #8a8a8a; font-size: 12px; cursor: pointer; }
+nav button.active { color: #c9a96a; }
+.empty { text-align: center; color: #5a5a5a; padding: 30px 20px; }
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #c9a96a; color: #1a1408; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; opacity: 0; transition: opacity 0.2s; }
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>👁 EYEHERA</h1>
+<div class="subtitle">Control Center · Personal Dashboard</div>
+</header>
+
+<!-- HOME TAB -->
+<div id="tab-home">
+<div class="section-title">Hoy</div>
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Seguidores</div>
+<div class="stat-value" id="stat-followers">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Vistas (30d)</div>
+<div class="stat-value" id="stat-views">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Engagement</div>
+<div class="stat-value" id="stat-engagement">0%</div>
+</div>
+</div>
+
+<div class="section-title">Acciones rápidas</div>
+<button class="btn btn-gold" onclick="openModal('log-modal')">+ Registrar día</button>
+<button class="btn btn-dark" onclick="openModal('post-modal')">+ Nuevo post</button>
+<button class="btn btn-dark" onclick="openModal('creator-modal')">+ Añadir creador</button>
+</div>
+
+<!-- TRACKER TAB -->
+<div id="tab-tracker" style="display:none">
+<div class="section-title">Historial</div>
+<div class="card" id="log-list">
+<div class="empty">Sin registros. Toca "+ Registrar día".</div>
+</div>
+</div>
+
+<!-- POSTS TAB -->
+<div id="tab-posts" style="display:none">
+<div class="section-title">Mis posts</div>
+<div class="card" id="post-list">
+<div class="empty">Sin posts. Toca "+ Nuevo post".</div>
+</div>
+</div>
+
+<!-- CREATORS TAB -->
+<div id="tab-creators" style="display:none">
+<div class="section-title">Creadores (<span id="creator-count">0</span>/100)</div>
+<div class="card" id="creator-list">
+<div class="empty">Sin creadores. Toca "+ Añadir creador".</div>
+</div>
+</div>
+
+<!-- SETTINGS TAB -->
+<div id="tab-settings" style="display:none">
+<div class="section-title">Datos</div>
+<div class="card">
+<button class="btn btn-dark" onclick="exportData()">⬇ Exportar datos</button>
+<button class="btn btn-dark" onclick="document.getElementById('import-input').click()">⬆ Importar datos</button>
+<input type="file" id="import-input" accept=".json" style="display:none" onchange="importData(event)">
+<button class="btn btn-gold" onclick="loadSeedData()">✦ Cargar datos iniciales</button>
+</div>
+</div>
+</div>
+
+<!-- LOG MODAL -->
+<div id="log-modal" class="modal">
+<div class="modal-content">
+<h2 style="margin-bottom:20px">Registrar día</h2>
+<label>Fecha</label>
+<input type="date" id="log-date">
+<label>Seguidores</label>
+<input type="number" id="log-followers" placeholder="22">
+<label>Vistas (30 días)</label>
+<input type="number" id="log-views" placeholder="9597">
+<label>Engagement %</label>
+<input type="number" step="0.1" id="log-engagement" placeholder="6.2">
+<label>Comentarios recibidos</label>
+<input type="number" id="log-comments" placeholder="0">
+<label>Nota (opcional)</label>
+<input id="log-note" placeholder="Publiqué LUCKY reel">
+<button class="btn btn-gold" onclick="saveLog()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('log-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- POST MODAL -->
+<div id="post-modal" class="modal">
+<div class="modal-content">
+<h2 style="margin-bottom:20px">Nuevo post</h2>
+<label>Título</label>
+<input id="post-title" placeholder="LUCKY — reel principal">
+<label>Tipo</label>
+<select id="post-type"><option value="reel">🎬 Reel</option><option value="image">📷 Imagen</option><option value="carousel">🖼 Carrusel</option></select>
+<label>Fecha</label>
+<input type="date" id="post-date">
+<label>Vistas</label>
+<input type="number" id="post-views" placeholder="326">
+<label>Saves</label>
+<input type="number" id="post-saves" placeholder="0">
+<label>Comentarios</label>
+<input type="number" id="post-comments" placeholder="0">
+<button class="btn btn-gold" onclick="savePost()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('post-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- CREATOR MODAL -->
+<div id="creator-modal" class="modal">
+<div class="modal-content">
+<h2 style="margin-bottom:20px">Añadir creador</h2>
+<label>@usuario</label>
+<input id="creator-handle" placeholder="@mattsoria">
+<label>Nicho</label>
+<select id="creator-niche"><option>Fotógrafo conceptual</option><option>Curador / editorial</option><option>Cineasta</option><option>Arte surreal</option><option>Moda menswear</option><option>Otro</option></select>
+<label>Seguidores (aprox)</label>
+<input type="number" id="creator-followers" placeholder="15000">
+<label>Último contacto</label>
+<input type="date" id="creator-date">
+<button class="btn btn-gold" onclick="saveCreator()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('creator-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav>
+<button class="active" onclick="switchTab('home')">🏠 Hoy</button>
+<button onclick="switchTab('tracker')">📈 Tracker</button>
+<button onclick="switchTab('posts')">🎬 Posts</button>
+<button onclick="switchTab('creators')">👥 Creators</button>
+<button onclick="switchTab('settings')">⚙️ Datos</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY = 'eyehera_data_v1';
+let DATA = {
+  logs: [],
+  posts: [],
+  creators: []
+};
+
+function load() { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : DATA; }
+function save() { localStorage.setItem(KEY, JSON.stringify(DATA)); render(); }
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1500); }
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function switchTab(tab) {
+  document.querySelectorAll('[id^="tab-"]').forEach(e => e.style.display = 'none');
+  document.getElementById('tab-' + tab).style.display = 'block';
+  document.querySelectorAll('nav button').forEach((b, i) => b.classList.toggle('active', ['home','tracker','posts','creators','settings'][i] === tab));
+}
+
+function saveLog() {
+  const date = document.getElementById('log-date').value || new Date().toISOString().split('T')[0];
+  const entry = {
+    date,
+    followers: +document.getElementById('log-followers').value || 0,
+    views: +document.getElementById('log-views').value || 0,
+    engagement: +document.getElementById('log-engagement').value || 0,
+    comments: +document.getElementById('log-comments').value || 0,
+    note: document.getElementById('log-note').value
+  };
+  DATA.logs = DATA.logs.filter(l => l.date !== date);
+  DATA.logs.push(entry);
+  save();
+  closeModal('log-modal');
+  document.getElementById('log-date').value = '';
+  document.getElementById('log-followers').value = '';
+  document.getElementById('log-views').value = '';
+  document.getElementById('log-engagement').value = '';
+  document.getElementById('log-comments').value = '';
+  document.getElementById('log-note').value = '';
+  toast('✓ Día registrado');
+}
+
+function savePost() {
+  const post = {
+    id: Date.now(),
+    title: document.getElementById('post-title').value,
+    type: document.getElementById('post-type').value,
+    date: document.getElementById('post-date').value,
+    views: +document.getElementById('post-views').value || 0,
+    saves: +document.getElementById('post-saves').value || 0,
+    comments: +document.getElementById('post-comments').value || 0
+  };
+  DATA.posts.push(post);
+  save();
+  closeModal('post-modal');
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-views').value = '';
+  document.getElementById('post-saves').value = '';
+  document.getElementById('post-comments').value = '';
+  toast('✓ Post guardado');
+}
+
+function saveCreator() {
+  const creator = {
+    id: Date.now(),
+    handle: document.getElementById('creator-handle').value,
+    niche: document.getElementById('creator-niche').value,
+    followers: +document.getElementById('creator-followers').value || 0,
+    lastContact: document.getElementById('creator-date').value
+  };
+  if (!creator.handle) { toast('Pon un @usuario'); return; }
+  DATA.creators.push(creator);
+  save();
+  closeModal('creator-modal');
+  document.getElementById('creator-handle').value = '';
+  document.getElementById('creator-followers').value = '';
+  document.getElementById('creator-date').value = '';
+  toast('✓ Creador guardado');
+}
+
+function render() {
+  const last = DATA.logs[DATA.logs.length - 1];
+  document.getElementById('stat-followers').textContent = last ? last.followers : 0;
+  document.getElementById('stat-views').textContent = last ? last.views : 0;
+  document.getElementById('stat-engagement').textContent = (last ? last.engagement : 0) + '%';
+  document.getElementById('creator-count').textContent = DATA.creators.length;
+
+  // Logs
+  const logHtml = DATA.logs.length ? DATA.logs.map(l => `<div class="stat-row"><div>${l.date} · ${l.followers} seg</div><button class="btn btn-dark" onclick="deleteLog('${l.date}')" style="width:auto;padding:4px 8px;margin:0">✕</button></div>`).join('') : '<div class="empty">Sin registros</div>';
+  document.getElementById('log-list').innerHTML = logHtml;
+
+  // Posts
+  const postHtml = DATA.posts.length ? DATA.posts.map(p => `<div class="stat-row"><div><strong>${p.title}</strong><br><small>${p.type} · ${p.date} · ${p.views} vistas</small></div><button class="btn btn-dark" onclick="deletePost('${p.id}')" style="width:auto;padding:4px 8px;margin:0">✕</button></div>`).join('') : '<div class="empty">Sin posts</div>';
+  document.getElementById('post-list').innerHTML = postHtml;
+
+  // Creators
+  const creatorHtml = DATA.creators.length ? DATA.creators.map(c => `<div class="stat-row"><div><strong>${c.handle}</strong><br><small>${c.niche}</small></div><button class="btn btn-dark" onclick="deleteCreator('${c.id}')" style="width:auto;padding:4px 8px;margin:0">✕</button></div>`).join('') : '<div class="empty">Sin creadores</div>';
+  document.getElementById('creator-list').innerHTML = creatorHtml;
+}
+
+function deleteLog(date) { DATA.logs = DATA.logs.filter(l => l.date !== date); save(); }
+function deletePost(id) { DATA.posts = DATA.posts.filter(p => p.id != id); save(); }
+function deleteCreator(id) { DATA.creators = DATA.creators.filter(c => c.id != id); save(); }
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'eyehera-backup.json';
+  a.click();
+  toast('✓ Descargado');
+}
+
+function importData(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      DATA = JSON.parse(reader.result);
+      save();
+      toast('✓ Datos importados');
+    } catch {
+      toast('Error: archivo inválido');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function loadSeedData() {
+  if (confirm('Cargar datos iniciales? (tu última log será: 22 seg, 9597 vistas)')) {
+    DATA.logs.push({ date: new Date().toISOString().split('T')[0], followers: 22, views: 9597, engagement: 0, comments: 0, note: 'Baseline' });
+    ['@mattsoria', '@brandon_breault', '@soren_blakemiller', '@lucidhoto', '@brandonli_photography', '@matthewlloydsmith', '@javierflores.photo', '@davidhunterphoto', '@paulmsardelis', '@oliverstrauss'].forEach(h => {
+      DATA.creators.push({ id: Date.now() + Math.random(), handle: h, niche: 'Fotógrafo conceptual', followers: 0, lastContact: '' });
+    });
+    save();
+    toast('✓ Datos iniciales cargados');
+  }
+}
+
+// Init
+document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('creator-date').value = new Date().toISOString().split('T')[0];
+DATA = load();
+render();
+</script>
+</body>
+</html>

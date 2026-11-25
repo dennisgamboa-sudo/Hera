@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd lab && npm install && npm run build",
+  "outputDirectory": "lab/dist",
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 30
+    }
+  }
+}
